@@ -1,0 +1,26 @@
+{
+  "name": "impactbot",
+  "version": "0.0.1",
+  "author": "SuperOP535",
+  "description": "A simple bot for the Impact Discord",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js#276109ed3c8ee990296af34e2ae0a6174e151c70",
+    "klasa": "github:dirigeants/klasa#ed9b98208d2e5fd45a466d331d6395b8243328dc"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://github.com/ImpactDevelopment/ImpactBot"
+  },
+  "license": "MIT",
+  "keywords": [
+    "impact",
+    "discord",
+    "bot"
+  ]
+}
