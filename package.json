@@ -8,8 +8,8 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "discord.js": "github:discordjs/discord.js#276109ed3c8ee990296af34e2ae0a6174e151c70",
-    "klasa": "github:dirigeants/klasa#ed9b98208d2e5fd45a466d331d6395b8243328dc"
+    "discord.js": "^11.3.2",
+    "klasa": "^0.4.0"
   },
   "engines": {
     "node": "8.x"
