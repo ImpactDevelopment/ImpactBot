@@ -15,13 +15,16 @@ module.exports = class extends Command {
       requiredConfigs: [],
       description: 'Sends an embed message for you',
       quotedStringSupport: true,
-      usage: '<title:str> <desc:str> <color:str>',
+      usage: '<title:str> [desc:str] [color:str]',
       usageDelim: ' ',
       extendedHelp: 'No extended help available.'
     });
   }
   
   async run(msg, [title, desc, color]) {
-    msg.send(new MessageEmbed().setTitle(title).setDescription(desc).setColor(color.toUpperCase()));
+    const embed = new MessageEmbed().setTitle(title);
+    if(desc) embed.setDescription(desc);
+    if(color) embed.setColor(color.toUpperCase());
+    msg.send(embed);
   }
 }
