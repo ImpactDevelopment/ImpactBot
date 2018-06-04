@@ -5,10 +5,11 @@
   "description": "A simple bot for the Impact Discord",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node -r \"dotenv/config\" index.js"
   },
   "dependencies": {
     "discord.js": "^11.3.2",
+    "dotenv": "^6.0.0",
     "klasa": "^0.4.0"
   },
   "engines": {
