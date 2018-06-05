@@ -7,7 +7,7 @@ module.exports = class extends Command {
       name: 'embed',
       enabled: true,
       runIn: ['text', 'dm', 'group'],
-      cooldown: 5,
+      cooldown: 3,
       bucket: 1,
       aliases: [],
       permLevel: 6,
