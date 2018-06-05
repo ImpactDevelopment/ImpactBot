@@ -1,7 +1,11 @@
 const { Client } = require('klasa');
 
+Client.defaultPermissionLevels
+	.add(9, (client, message) => client.options.owners.includes(message.author.id), { break: true })
+	.add(10, (client, message) => client.options.owners.includes(message.author.id));
+
 new Client({
-  ownerID: process.env.OWNER_ID,
+  owners: process.env.OWNER_ID.split(' '),
   clientOptions: {
     fetchAllMembers: false,
     disableEveryone: true,

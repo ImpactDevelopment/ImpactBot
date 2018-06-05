@@ -18,5 +18,5 @@ Using `.env` has the advantage of keeping your config seperate from your system 
 
 | Variable   | Description
 |:---        |:---
-| `OWNER_ID` | The discord id for the user the bot should respect as the owner.
+| `OWNER_ID` | The discord id for the user the bot should respect as the owner. Seperate by space to have multiple
 | `TOKEN`    | The OAuth token to use for authenticating with Discord's API.
