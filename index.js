@@ -1,7 +1,7 @@
 const { Client } = require('klasa');
 
 new Client({
-  ownerID: '188943534483701760',
+  ownerID: process.env.CLIENT_ID,
   clientOptions: {
     fetchAllMembers: false,
     disableEveryone: true,
