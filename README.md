@@ -18,5 +18,5 @@ Using `.env` has the advantage of keeping your config seperate from your system 
 
 | Variable   | Description
 |:---        |:---
-| `CLIENT_ID` | The Discord API Client ID associated with the bot.
+| `OWNER_ID` | The discord id for the user the bot should respect as the owner.
 | `TOKEN`    | The OAuth token to use for authenticating with Discord's API.
