@@ -2,7 +2,7 @@ const { Monitor } = require('klasa');
 const { MessageEmbed } = require('discord.js');
 
 const list = [
-  [/4\.3|forge|optifine|installer/, 'You\'ve mentioned an upcoming feature, check the faq and upcoming channels.', []],
+  [/4\.3|forge(?!hax)|optifine|installer/, 'You\'ve mentioned an upcoming feature, check the faq and upcoming channels.', []],
   [/(web)?(site|page)|donate|become ?a? don(at)?or/, 'Check out the [website](https://impactdevelopment.github.io/) :)', []],
   [/issue|bug|crash|error|suggestion|feature|enhancement/, 'Use the [GitHub repo](https://github.com/ImpactDevelopment/ImpactClient/issues) to report issues/suggestions!', []],
   [/help|support|assistance/, 'Switch to the help channel!', ['222120655594848256']],
