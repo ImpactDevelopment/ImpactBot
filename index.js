@@ -1,10 +1,16 @@
-const { Client } = require('klasa');
+const { Client, PermissionLevels } = require('klasa');
+const { Permissions, Permissions: { FLAGS } } = require('discord.js');
 
 Client.defaultPermissionLevels
-	.add(9, (client, message) => client.options.owners.includes(message.author.id), { break: true })
-	.add(10, (client, message) => client.options.owners.includes(message.author.id));
+
 
 new Client({
+  permissionLevels: new PermissionLevels()
+    	.add(0, () => true)
+      .add(6, (client, message) => message.guild && message.member.permissions.has(FLAGS.MANAGE_GUILD), { fetch: true })
+      .add(7, (client, message) => message.guild && message.member === message.guild.owner, { fetch: true })
+      .add(9, (client, message) => client.options.owners.includes(message.author.id), { break: true })
+      .add(10, (client, message) => client.options.owners.includes(message.author.id)),
   owners: process.env.OWNER_ID.split(' '),
   clientOptions: {
     fetchAllMembers: false,
