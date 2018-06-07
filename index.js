@@ -6,7 +6,7 @@ Client.defaultPermissionLevels
 
 new Client({
   permissionLevels: new PermissionLevels()
-    	.add(0, () => true)
+      .add(0, () => true)
       .add(6, (client, message) => message.guild && message.member.permissions.has(FLAGS.MANAGE_GUILD), { fetch: true })
       .add(7, (client, message) => message.guild && message.member === message.guild.owner, { fetch: true })
       .add(9, (client, message) => client.options.owners.includes(message.author.id), { break: true })

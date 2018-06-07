@@ -10,7 +10,7 @@ module.exports = class extends Command {
       cooldown: 3,
       bucket: 1,
       aliases: ['shiba', 'shibe'],
-      permLevel: 0,
+      permissionLevel: 0,
       botPerms: ['SEND_MESSAGES', 'ATTACH_FILES'],
       requiredConfigs: [],
       description: 'Sends a random doge image/gif in the channel 🐶',

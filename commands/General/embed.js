@@ -10,7 +10,7 @@ module.exports = class extends Command {
       cooldown: 3,
       bucket: 1,
       aliases: [],
-      permLevel: 6,
+      permissionLevel: 6,
       botPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
       requiredConfigs: [],
       description: 'Sends an embed message for you',
