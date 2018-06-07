@@ -11,7 +11,7 @@ module.exports = class extends Command {
       bucket: 1,
       aliases: [],
       permissionLevel: 6,
-      botPerms: ['SEND_MESSAGES', 'EMBED_LINKS'],
+      requiredPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'],
       requiredConfigs: [],
       description: 'Sends an embed message for you',
       quotedStringSupport: true,

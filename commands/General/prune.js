@@ -10,7 +10,7 @@ module.exports = class extends Command {
       bucket: 1,
       aliases: [],
       permissionLevel: 6,
-      botPerms: ['SEND_MESSAGES', 'MANAGE_MESSAGES'],
+      requiredPermissions: ['SEND_MESSAGES', 'MANAGE_MESSAGES'],
       requiredConfigs: [],
       description: 'Bulk-removes messages from the current channel',
       quotedStringSupport: false,
