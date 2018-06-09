@@ -25,7 +25,7 @@ module.exports = class extends Monitor {
   async run(msg) {
     const reply = replies
       .filter((e) => e[0].test(msg.content) && !e[2].includes(msg.channel.id))
-      .reduce((a, e) => a + e[1] + ' ');
+      .reduce((a, e) => a + e[1] + ' ', '');
 
     if(reply) {
       const m = await msg.send(new MessageEmbed().setDescription(reply));
