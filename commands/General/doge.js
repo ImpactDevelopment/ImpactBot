@@ -22,6 +22,8 @@ module.exports = class extends Command {
   }
   
   async run(msg, [...params]) {
+    if(!msg.member.hasPermission('ATTACH_FILES')) return msg.send('You don\'t have Attach Files permission!');
+
     var res = await snekfetch.get('http://shibe.online/api/shibes?count=1&urls=true');
 		msg.channel.send({files: [res.body[0]]});
   }
