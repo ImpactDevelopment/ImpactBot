@@ -22,6 +22,6 @@ new Client({
                      'USER_SETTINGS_UPDATE']
   },
   prefix: 'i!',
-  cmdEditing: true,
+  commandEditing: true,
   readyMessage: (client) => `${client.user.tag}, Ready to serve ${client.guilds.size} guilds and ${client.users.size} users`
 }).login(process.env.TOKEN);
