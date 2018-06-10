@@ -1,4 +1,4 @@
-# ImpactBot
+# ImpactBot [![Build Status](https://travis-ci.org/ImpactDevelopment/ImpactBot.svg?branch=master)](https://travis-ci.org/ImpactDevelopment/ImpactBot)
 A simple bot for the Impact Discord
 
 ## What does it do?
