@@ -1,0 +1,6 @@
+{
+  "name": "ImpactBot",
+  "description": "A simple bot for the Impact Discord",
+  "repository": "https://github.com/ImpactDevelopment/ImpactBot",
+  "keywords": ["impact", "discord", "bot"]
+}

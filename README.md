@@ -6,6 +6,8 @@ It answers to some common questions and provides 2 simple commands
 
 ## Running
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 Run using `npm start`. The `TOKEN` environment variable must be set or the bot will fail to connect (see [Configuration](#Configuration)).
 
 _You sholdn't use `node index.js` because we pass some custom arguments. See `package.json`._
