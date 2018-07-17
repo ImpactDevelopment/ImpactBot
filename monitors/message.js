@@ -1,5 +1,6 @@
 const { Monitor } = require('klasa');
 const { MessageEmbed } = require('discord.js');
+const client = require('../');
 
 const replies = [
   [/4\.3|forge|installer/, '<#398628237753843732> <#451094829393510420>.', []],
@@ -30,7 +31,8 @@ module.exports = class extends Monitor {
 
     if(reply && msg.channel.id in [ /* General */ '208753003996512258', /* Help */ '222120655594848256' ]) {
       const m = await msg.send(new MessageEmbed().setDescription(reply));
-      setTimeout(m.delete.bind(m), 15000);
+      if (!msg.isMentioned(client.user))
+        setTimeout(m.delete.bind(m), 15000);
     }
   }
 };
