@@ -4,7 +4,7 @@ const { Permissions, Permissions: { FLAGS } } = require('discord.js');
 Client.defaultPermissionLevels
 
 
-module.exports = new Client({
+new Client({
   permissionLevels: new PermissionLevels()
       .add(0, () => true)
       .add(6, (client, message) => message.guild && message.member.permissions.has(FLAGS.MANAGE_GUILD), { fetch: true })

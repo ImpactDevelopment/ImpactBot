@@ -1,14 +1,18 @@
 const { Monitor } = require('klasa');
 const { MessageEmbed } = require('discord.js');
-const client = require('../');
+
+const channels = {
+  general: '208753003996512258',
+  help: '222120655594848256'
+};
 
 const replies = [
   [/4\.3|forge|installer/, '<#398628237753843732> <#451094829393510420>.', []],
   [/(web)?(site|page)|donate|become ?a? don(at)?or/, '[Click here](https://impactdevelopment.github.io).', []],
   [/issue|bug|crash|error|suggest(ion)?|feature|enhancement/, 'Use the [GitHub repo](https://github.com/ImpactDevelopment/ImpactClient/issues) to report issues/suggestions!', []],
-  [/help|support|assistance/, 'Switch to the <#222120655594848256> channel!', [ /* Help */ '222120655594848256' ]],
+  [/help|support|assistance/, 'Switch to the <#222120655594848256> channel!', [ channels.help ]],
   [/franky/, 'It does exactly what you think it does.', []],
-  [/optifine/, '[4.0, 4.1](https://www.youtube.com/watch?v=o1LHq6L0ibk), 4.2: not compatible', []]
+  [/optifine/, '[4.0, 4.1](https://www.youtube.com/watch?v=o1LHq6L0ibk) | 4.2: not compatible', []]
 ];
 
 module.exports = class extends Monitor {
@@ -29,10 +33,12 @@ module.exports = class extends Monitor {
       .filter((e) => new RegExp('\\b(?:' + e[0].toString().slice(1, -1) + ')\\b', 'i').test(msg.content) && !e[2].includes(msg.channel.id))
       .reduce((a, e) => a + e[1] + ' ', '');
 
-    if(reply && msg.channel.id in [ /* General */ '208753003996512258', /* Help */ '222120655594848256' ]) {
+    if(reply && [channels.general, channels.help].includes(msg.channel.id)) {
       const m = await msg.send(new MessageEmbed().setDescription(reply));
-      if (!msg.isMentioned(client.user))
-        setTimeout(m.delete.bind(m), 15000);
+      if (!msg.isMentioned(this.client.user))
+        setTimeout(() => {
+          m.delete().catch(()=>{}); // prevent error if someone deleted message before the bot
+        }, 15000);
     }
   }
 };
