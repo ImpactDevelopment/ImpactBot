@@ -28,7 +28,12 @@ module.exports = [
   },
   {
     pattern: /optifine/,
-    message: '[4.0, 4.1](https://www.youtube.com/watch?v=o1LHq6L0ibk) | 4.2: not compatible | 4.3: <#' + channels.announcements + '>',
+    message: 'Optifine: [4.0, 4.1](https://www.youtube.com/watch?v=o1LHq6L0ibk) | 4.2: not compatible | 4.3: <#' + channels.announcements + '>',
+    exclude: []
+  },
+  {
+    pattern: /mediafire|direct (link|url|site|page)|adf\.?ly/,
+    message: 'Are you looking for a direct link? Choose your version: [4.3](http://www.mediafire.com/file/9ujvsouklxoq5hj/Impact+4.3+for+Minecraft+1.12.2.zip).',
     exclude: []
   }
 ];

@@ -25,9 +25,11 @@ module.exports = class extends Monitor {
 
     if(reply && [channels.general, channels.help].includes(msg.channel.id)) {
       const m = await msg.send(new MessageEmbed().setDescription(reply));
-      setTimeout(() => {
-        m.delete().catch(()=>{}); // prevent error if someone deleted message before the bot
-      }, 15000);
+      if(!msg.mentions.has(this.client.user)) {
+        setTimeout(() => {
+          m.delete().catch(()=>{}); // in case someone already deleted the message
+        }, 15000);
+      }
     }
   }
 };
