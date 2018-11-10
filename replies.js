@@ -28,7 +28,7 @@ module.exports = [
   },
   {
     pattern: /optifine/,
-    message: 'Optifine: [4.0, 4.1](https://www.youtube.com/watch?v=o1LHq6L0ibk) | 4.2: not compatible | 4.3: <#' + channels.announcements + '>',
+    message: 'Optifine can be installed with Impact 4.0 and up (except 4.2): [video](https://www.youtube.com/watch?v=o1LHq6L0ibk), [text](https://github.com/ImpactDevelopment/ImpactClient/blob/master/Optifine.md)',
     exclude: []
   },
   {
