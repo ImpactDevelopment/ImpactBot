@@ -3,37 +3,43 @@ const channels = require('./channels');
 module.exports = [
   {
     pattern: /forge|installer/,
-    message: '<#' + channels.faq + '> <#' + channels.upcoming + '>.',
-    exclude: []
+    message: 'Soon™ <#' + channels.faq + '> <#' + channels.upcoming + '>.'
+  },
+  {
+    pattern: /liteloader/,
+    message: '[Click here for an Impact + LiteLoader tutorial!](https://github.com/ImpactDevelopment/ImpactClient/blob/master/LiteLoader.md)',
   },
   {
     pattern: /(web)?(site|page)|donate|become ?a? don(at)?or/,
-    message: '[Click here](https://impactdevelopment.github.io).',
-    exclude: []
+    message: '[Click here to open the website](https://impactdevelopment.github.io).'
   },
   {
     pattern: /issue|bug|crash|error|suggest(ion)?s?|feature|enhancement/,
-    message: 'Use the [GitHub repo](https://github.com/ImpactDevelopment/ImpactClient/issues) to report issues/suggestions!',
-    exclude: []
+    message: 'Use the [GitHub repo](https://github.com/ImpactDevelopment/ImpactClient/issues) to report issues/suggestions!'
   },
   {
     pattern: /help|support|assistance/,
-    message: 'Switch to the <#222120655594848256> channel!',
+    message: 'Switch to the <#' + channels.help + '> channel!',
     exclude: [channels.help]
   },
   {
     pattern: /franky/,
-    message: 'It does exactly what you think it does.',
-    exclude: []
+    message: 'It does exactly what you think it does.'
   },
   {
     pattern: /optifine/,
-    message: 'Optifine: [4.0, 4.1](https://www.youtube.com/watch?v=o1LHq6L0ibk) | 4.2: not compatible | 4.3: <#' + channels.announcements + '>',
-    exclude: []
+    message: 'Optifine can be installed with Impact 4.0 and up (except 4.2): [video](https://www.youtube.com/watch?v=o1LHq6L0ibk), [text](https://github.com/ImpactDevelopment/ImpactClient/blob/master/Optifine.md)'
   },
   {
     pattern: /mediafire|direct (link|url|site|page)|adf\.?ly/,
-    message: 'Are you looking for a direct link? Choose your version: [4.3](http://www.mediafire.com/file/9ujvsouklxoq5hj/Impact+4.3+for+Minecraft+1.12.2.zip).',
-    exclude: []
+    message: 'Direct links: [4.2](http://www.mediafire.com/file/ziqx4m44zkgj1ye/Impact+4.2+for+Minecraft+1.12.2.zip) | [4.3](http://www.mediafire.com/file/9ujvsouklxoq5hj/Impact+4.3+for+Minecraft+1.12.2.zip).'
+  },
+  {
+    pattern: /macros/,
+    message: '[Manually creating macros](https://github.com/ImpactDevelopment/ImpactClient/issues/153#issuecomment-399772723)'
+  },
+  {
+    pattern: /changelog/,
+    message: '[Changelog](https://impactdevelopment.github.io/changelog)'
   }
 ];

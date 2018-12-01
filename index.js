@@ -1,9 +1,6 @@
 const { Client, PermissionLevels } = require('klasa');
 const { Permissions, Permissions: { FLAGS } } = require('discord.js');
 
-Client.defaultPermissionLevels
-
-
 new Client({
   permissionLevels: new PermissionLevels()
       .add(0, () => true)

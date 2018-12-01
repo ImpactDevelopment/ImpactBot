@@ -5,7 +5,7 @@ module.exports = class extends Command {
     super(...args, {
       name: 'prune',
       enabled: true,
-      runIn: ['text', 'dm', 'group'],
+      runIn: ['text'],
       cooldown: 3,
       bucket: 1,
       aliases: [],

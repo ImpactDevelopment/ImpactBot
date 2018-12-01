@@ -1,11 +1,11 @@
-# nodejs
+# node
 node_modules/
 .npm/
 pids
 *.pid
 *.seed
 *.pid.lock
-.env
 
 # contains information
 bwd/provider/
+.env
