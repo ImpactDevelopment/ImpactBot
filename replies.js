@@ -31,7 +31,7 @@ module.exports = [
     message: 'Optifine can be installed with Impact 4.0 and up (except 4.2). Instructions: [video](https://www.youtube.com/watch?v=o1LHq6L0ibk), [text](https://github.com/ImpactDevelopment/ImpactClient/blob/master/Optifine.md)'
   },
   {
-    pattern: /mediafire|die? ?re(c|k)tt? (link|url|site|page)|adf\.?ly|adblock|ublock/,
+    pattern: /mediafire|die? ?re(c|k)+to? (linko?|url|site|page)|adf\.?ly|adblock|ublock/,
     message: 'Direct links: [4.2](http://www.mediafire.com/file/ziqx4m44zkgj1ye/Impact+4.2+for+Minecraft+1.12.2.zip) | [4.3](http://www.mediafire.com/file/9ujvsouklxoq5hj/Impact+4.3+for+Minecraft+1.12.2.zip) | [4.4](http://www.mediafire.com/file/l7brss1f228so0p/Impact+4.4+for+Minecraft+1.12.2.zip).'
   },
   {
