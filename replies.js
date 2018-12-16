@@ -32,7 +32,7 @@ module.exports = [
   },
   {
     pattern: /mediafire|direct (link|url|site|page)|adf\.?ly/,
-    message: 'Direct links: [4.2](http://www.mediafire.com/file/ziqx4m44zkgj1ye/Impact+4.2+for+Minecraft+1.12.2.zip) | [4.3](http://www.mediafire.com/file/9ujvsouklxoq5hj/Impact+4.3+for+Minecraft+1.12.2.zip).'
+    message: 'Direct links: [4.2](http://www.mediafire.com/file/ziqx4m44zkgj1ye/) | [4.3](http://www.mediafire.com/file/9ujvsouklxoq5hj/) | [4.4](http://www.mediafire.com/file/l7brss1f228so0p/).'
   },
   {
     pattern: /macros/,
