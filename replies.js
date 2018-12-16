@@ -45,5 +45,5 @@ module.exports = [
   {
     pattern: /damn/,
     message: 'Damn Daniel!'
-  },
+  }
 ];
