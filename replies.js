@@ -49,5 +49,9 @@ module.exports = [
   {
     pattern: /op+a/,
     message: 'OPPA GANGNAM STYLE!'
+  },
+  {
+    pattern: /ha?ck?s?/,
+    message: 'Please do not discuss h**ks in this Discord.'
   }
 ];
