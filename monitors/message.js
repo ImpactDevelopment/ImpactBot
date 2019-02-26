@@ -26,7 +26,7 @@ module.exports = class extends Monitor {
     if(reply && [channels.general, channels.help, channels.bot].includes(msg.channel.id)) {
       const m = await msg.send(new MessageEmbed().setDescription(reply));
       if(!msg.mentions.has(this.client.user)) {
-        setTimeout(() => m.delete().catch(() => {}), 15000);
+        setTimeout(() => m.delete().catch(() => {}), 20000);
         let deletedUsingReaction = false;
         m.react('\uD83D\uDDD1'); // wastebasket emoji
         const collector = m.createReactionCollector((reaction, user) => reaction.emoji.name === '\uD83D\uDDD1' && user.id === msg.author.id, { time: 15000 });
