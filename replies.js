@@ -55,7 +55,7 @@ module.exports = [
     message: 'Please do not discuss h**ks in this Discord.'
   },
   {
-    pattern: /1\.13|/,
+    pattern: /1\.13/,
     message: 'No 1.13 ETA so... Soon™'
   }
 ];
