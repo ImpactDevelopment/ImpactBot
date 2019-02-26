@@ -55,7 +55,7 @@ module.exports = [
     message: 'Please do not discuss h**ks in this Discord.'
   },
   {
-    pattern: /1.13?|when 1.13|impact 1.13|impact for 1.13|1.13 when|1.13 when?|eta on 1.13|/,
-    message: 'No ETA so... Soon™'
+    pattern: /1\.13|/,
+    message: 'No 1.13 ETA so... Soon™'
   }
 ];
