@@ -56,6 +56,6 @@ module.exports = [
   },
   {
     pattern: /1\.13/,
-    message: 'No 1.13 ETA so... Soon™'
+    message: 'Imminent release. Donate $5 for beta access.'
   }
 ];
