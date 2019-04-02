@@ -36,7 +36,7 @@ module.exports = [
   },
   {
     pattern: /macros?/,
-    message: '[Macro tutorial](https://github.com/ImpactDevelopment/ImpactClient/issues/153#issuecomment-399772723)'
+    message: '[Macro tutorial.](https://github.com/ImpactDevelopment/ImpactClient/issues/153#issuecomment-399772723) You can also make macros in-game Impact Button -> Macros'
   },
   {
     pattern: /change(\s*logs?|s)/,
