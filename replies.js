@@ -45,5 +45,9 @@ module.exports = [
   {
     pattern: /hack(s|ing|er|client)?/,
     message: 'Please do not discuss hacks in this Discord.'
+  },
+  {
+    pattern: /premium/,
+    message: 'If you donate $5 or more, you will recieve a few small rewards such as premium mods (currently Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to closed betas of upcoming releases.'
   }
 ];
