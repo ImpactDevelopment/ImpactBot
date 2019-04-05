@@ -7,7 +7,7 @@ module.exports = [
   },
   {
     pattern: /lite\s*loader/,
-    message: '[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactClient/blob/master/LiteLoader.md)',
+    message: '[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-LiteLoader)',
   },
   {
     pattern: /(web)?(site|page)|donate|become ?a? don(at)?or/,
@@ -28,7 +28,7 @@ module.exports = [
   },
   {
     pattern: /opti\s*fine/,
-    message: '[OptiFine tutorial (4.0+ but not 4.2)](https://www.youtube.com/watch?v=o1LHq6L0ibk), [text](https://github.com/ImpactDevelopment/ImpactClient/blob/master/Optifine.md)'
+    message: '[OptiFine tutorial (4.0+ but not 4.2)](https://www.youtube.com/watch?v=o1LHq6L0ibk), [text](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-OptiFine)'
   },
   {
     pattern: /mediafire|dire(c|k)+to? (linko?|url|site|page)|adf\.?ly|(ad|u)block/,
