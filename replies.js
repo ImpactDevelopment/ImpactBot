@@ -3,7 +3,7 @@ const channels = require('./channels');
 module.exports = [
   {
     pattern: /forge/,
-    message: 'Very soon™ (<#' + channels.upcoming + '>).'
+    message: '[4.6 1.11.2 Forge](https://www.mediafire.com/file/5xvfod2ftegmef4/Impact-4.6-1.12.2-forge.jar'
   },
   {
     pattern: /lite\s*loader/,
@@ -32,7 +32,7 @@ module.exports = [
   },
   {
     pattern: /mediafire|dire(c|k)+to? (linko?|url|site|page)|adf\.?ly|(ad|u)block/,
-    message: '[4.2](https://www.mediafire.com/file/ziqx4m44zkgj1ye/Impact+4.2+for+Minecraft+1.12.2.zip) | [4.3](https://www.mediafire.com/file/9ujvsouklxoq5hj/Impact+4.3+for+Minecraft+1.12.2.zip) | [4.4](https://www.mediafire.com/file/l7brss1f228so0p/Impact+4.4+for+Minecraft+1.12.2.zip) | [4.5](https://www.mediafire.com/file/a9srjpjfb4uppqj/Impact+4.5+for+Minecraft+1.12.2.zip). | [4.6](https://www.mediafire.com/file/ccjf2xs8veokkc9/Impact+4.6+for+Minecraft+1.13.2.zip)'
+    message: '[4.2](https://www.mediafire.com/file/ziqx4m44zkgj1ye/Impact+4.2+for+Minecraft+1.12.2.zip) | [4.3](https://www.mediafire.com/file/9ujvsouklxoq5hj/Impact+4.3+for+Minecraft+1.12.2.zip) | [4.4](https://www.mediafire.com/file/l7brss1f228so0p/Impact+4.4+for+Minecraft+1.12.2.zip) | [4.5](https://www.mediafire.com/file/a9srjpjfb4uppqj/Impact+4.5+for+Minecraft+1.12.2.zip). | [4.6 1.12.2](http://www.mediafire.com/file/2ud3yig0i8i8p63/Impact+4.6+for+Minecraft+1.12.2.zip) | [4.6 1.13.2](https://www.mediafire.com/file/ccjf2xs8veokkc9/Impact+4.6+for+Minecraft+1.13.2.zip)'
   },
   {
     pattern: /macros?/,
