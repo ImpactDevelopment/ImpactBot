@@ -3,7 +3,7 @@ const channels = require('./channels');
 module.exports = [
   {
     pattern: /forge/,
-    message: '[4.6 1.11.2 Forge](https://www.mediafire.com/file/5xvfod2ftegmef4/Impact-4.6-1.12.2-forge.jar'
+    message: '[4.6 1.11.2 Forge](https://www.mediafire.com/file/5xvfod2ftegmef4/Impact-4.6-1.12.2-forge.jar)'
   },
   {
     pattern: /lite\s*loader/,
