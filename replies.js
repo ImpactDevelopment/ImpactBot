@@ -10,7 +10,7 @@ module.exports = [
     message: '[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-LiteLoader)',
   },
   {
-    pattern: /(web)?(site|page)|donate|become ?a? don(at)?or/,
+    pattern: /(web)?(site|page)/,
     message: '[Website](https://impactdevelopment.github.io)'
   },
   {
@@ -47,8 +47,8 @@ module.exports = [
     message: 'Please do not discuss hacks in this Discord.'
   },
   {
-    pattern: /premium/,
-    message: 'If you donate $5 or more, you will recieve a few small rewards such as premium mods (currently Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to closed betas of upcoming releases.'
+    pattern: /premium|donate|become ?a? don(at)?or/,
+    message: 'If you donate $5 or more, you will recieve 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to closed betas of upcoming releases. Go on the website to donate.'
   },
   {
     pattern: /1\.14/,
