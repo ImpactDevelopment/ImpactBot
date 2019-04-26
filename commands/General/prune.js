@@ -24,8 +24,10 @@ module.exports = class extends Command {
     if(amount < 1 || amount > 98) return msg.send('Message amount range: 1-98');
     if(!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.send('You don\'t have Manage Messages permission!');
     let msgs = await msg.channel.messages.fetch({limit: amount});
-    if(user.id) msgs = msgs.filter(m => m.author.id == user.id);
+    if(user) msgs = msgs.filter(m => m.author.id == user.id);
+    msgs = msgs.filter(m => Date.now() - m.createdTimestamp < 1209600000);
     await msg.delete();
+    if(!msgs) return msg.send('No messages younger than 14 days found!');
     msg.channel.bulkDelete(msgs);
   }
 }
