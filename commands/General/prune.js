@@ -23,7 +23,7 @@ module.exports = class extends Command {
   async run(msg, [amount, user]) {
     if(amount < 1 || amount > 98) return msg.send('Message amount range: 1-98');
     if(!msg.member.hasPermission('MANAGE_MESSAGES')) return msg.send('You don\'t have Manage Messages permission!');
-    var msgs = await msg.channel.messages.fetch({limit: amount});
+    let msgs = await msg.channel.messages.fetch({limit: amount});
     if(user.id) msgs = msgs.filter(m => m.author.id == user.id);
     await msg.delete();
     msg.channel.bulkDelete(msgs);
