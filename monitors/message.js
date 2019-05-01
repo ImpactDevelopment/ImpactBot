@@ -19,9 +19,10 @@ module.exports = class extends Monitor {
 
   async run(msg) {
     const reply = replies
-      .filter((e) => ((e.exclude && !e.exclude.includes(msg.channel.id)) || true) && 
-              new RegExp('\\b(?:' + e.pattern.source + ')\\b', 'i').test(msg.content))
-      .reduce((a, e) => a + e.message + ' ', '');
+      .filter((e) => {
+        if(e.exclude && e.exclude.includes(msg.channel.id)) return false;
+        return new RegExp('\\b(?:' + e.pattern.source + ')\\b', 'i').test(msg.content);
+      }).reduce((a, e) => a + e.message + ' ', '');
 
     if(reply && [channels.general, channels.help, channels.bot].includes(msg.channel.id)) {
       const m = await msg.send(new MessageEmbed().setDescription(reply));
