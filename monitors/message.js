@@ -4,6 +4,9 @@ const { MessageEmbed } = require('discord.js');
 const channels = require('../channels');
 const replies = require('../replies');
 
+const TIMEOUT = 20000;
+const TRASH_EMOJI = '\uD83D\uDDD1';
+
 module.exports = class extends Monitor {
   constructor(...args) {
     super(...args, {
@@ -27,16 +30,17 @@ module.exports = class extends Monitor {
     if(reply && [channels.general, channels.help, channels.bot].includes(msg.channel.id)) {
       const m = await msg.send(new MessageEmbed().setDescription(reply));
       if(!msg.mentions.has(this.client.user)) {
-        setTimeout(() => m.delete().catch(() => {}), 20000);
         let deletedUsingReaction = false;
-        m.react('\uD83D\uDDD1'); // wastebasket emoji
-        const collector = m.createReactionCollector((reaction, user) => reaction.emoji.name === '\uD83D\uDDD1' && user.id === msg.author.id, { time: 15000 });
+        m.react(TRASH_EMOJI);
+        const collector = m.createReactionCollector(
+          (reaction, user) => reaction.emoji.name === TRASH_EMOJI && user.id === msg.author.id, { time: TIMEOUT }
+        );
         collector.on('collect', r => {
           m.delete().catch(() => {});
           deletedUsingReaction = true;
           collector.stop();
         });
-        collector.on('end', () => !deletedUsingReaction ? m.delete().catch(() => {}) : null);
+        collector.on('end', () => !deletedUsingReaction && m.delete().catch(() => {}));
       }
     }
   }
