@@ -27,7 +27,7 @@ module.exports = [
     exclude: [channels.help]
   },
   {
-    pattern: /what(\s+does)?\s+franky/,
+    pattern: /what\s+?(does|is|s)?\s+franky/,
     message: 'It does exactly what you think it does.'
   },
   {
