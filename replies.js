@@ -3,7 +3,11 @@ const channels = require('./channels');
 module.exports = [
   {
     pattern: /forge/,
-    message: '[4.6 1.12.2 Forge](https://www.mediafire.com/file/5xvfod2ftegmef4/Impact-4.6-1.12.2-forge.jar)'
+    message: 'Use the installer to install Forge (1.12.2 only)'
+  },
+  {
+    pattern: /installer/,
+    message: 'https://cdn.discordapp.com/attachments/222120655594848256/583346260681949215/installer-0.1.1.jar\nhttps://cdn.discordapp.com/attachments/222120655594848256/583346436414898186/installer-0.1.1.exe'
   },
   {
     pattern: /lite\s*loader/,
