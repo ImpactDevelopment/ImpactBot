@@ -7,7 +7,7 @@ module.exports = [
   },
   {
     pattern: /installer/,
-    message: 'https://cdn.discordapp.com/attachments/222120655594848256/583346260681949215/installer-0.1.1.jar\nhttps://cdn.discordapp.com/attachments/222120655594848256/583346436414898186/installer-0.1.1.exe'
+    message: 'https://github.com/ImpactDevelopment/Installer/releases/download/0.1.1/installer-0.1.1.jar\nhttps://github.com/ImpactDevelopment/Installer/releases/download/0.1.1/installer-0.1.1.exe'
   },
   {
     pattern: /lite\s*loader/,
