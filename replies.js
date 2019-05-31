@@ -7,7 +7,7 @@ module.exports = [
   },
   {
     pattern: /installer/,
-    message: 'https://github.com/ImpactDevelopment/Installer/releases/download/0.1.1/installer-0.1.1.jar\nhttps://github.com/ImpactDevelopment/Installer/releases/download/0.1.1/installer-0.1.1.exe'
+    message: 'https://github.com/ImpactDevelopment/Installer/releases'
   },
   {
     pattern: /lite\s*loader/,
