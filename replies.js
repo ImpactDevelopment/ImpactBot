@@ -6,7 +6,7 @@ module.exports = [
     message: 'Use the installer to install Forge (1.12.2 only)'
   },
   {
-    pattern: /installer/,
+    pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)block/,
     message: 'https://github.com/ImpactDevelopment/Installer/releases'
   },
   {
@@ -35,7 +35,7 @@ module.exports = [
     message: '[OptiFine tutorial (4.0+ but not 4.2)](https://www.youtube.com/watch?v=o1LHq6L0ibk), [text](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-OptiFine)'
   },
   {
-    pattern: /mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)block/,
+    pattern: /directlinktomanualjsoninstallation/,
     message: '[4.2](https://www.mediafire.com/file/ziqx4m44zkgj1ye/Impact+4.2+for+Minecraft+1.12.2.zip) | [4.3](https://www.mediafire.com/file/9ujvsouklxoq5hj/Impact+4.3+for+Minecraft+1.12.2.zip) | [4.4](https://www.mediafire.com/file/l7brss1f228so0p/Impact+4.4+for+Minecraft+1.12.2.zip) | [4.5](https://www.mediafire.com/file/a9srjpjfb4uppqj/Impact+4.5+for+Minecraft+1.12.2.zip). | [4.6 1.12.2](http://www.mediafire.com/file/2ud3yig0i8i8p63/Impact+4.6+for+Minecraft+1.12.2.zip) | [4.6 1.13.2](https://www.mediafire.com/file/ccjf2xs8veokkc9/Impact+4.6+for+Minecraft+1.13.2.zip)'
   },
   {
