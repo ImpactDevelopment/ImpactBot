@@ -14,7 +14,7 @@ module.exports = [
     message: '[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-LiteLoader)',
   },
   {
-    pattern: /(web)?(site|page)/,
+    pattern: /(web\s?)?(site|page)/,
     message: '[Website](https://impactdevelopment.github.io)'
   },
   {
