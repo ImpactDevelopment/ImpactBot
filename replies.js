@@ -6,7 +6,7 @@ module.exports = [
     message: 'Use the installer to install Forge (1.12.2 only)'
   },
   {
-    pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)block/,
+    pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)\s?block/,
     message: 'https://impactdevelopment.github.io/?brady-money-grubbing-completed=true'
   },
   {
