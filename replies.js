@@ -7,7 +7,7 @@ module.exports = [
   },
   {
     pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)block/,
-    message: 'https://github.com/ImpactDevelopment/Installer/releases'
+    message: 'https://impactdevelopment.github.io/?brady-money-grubbing-completed=true'
   },
   {
     pattern: /lite\s*loader/,
