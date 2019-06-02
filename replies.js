@@ -52,7 +52,7 @@ module.exports = [
   },
   {
     pattern: /premium|donate|become\s*a?\s+don(at)?or/,
-    message: 'If you donate $5 or more, you will recieve 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to closed betas of upcoming releases. Go on the website to donate.'
+    message: 'If you donate $5 or more, you will recieve 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, access to #donator-help (with faster and nicer responses), and access to closed betas of upcoming releases. Go on the website to donate.'
   },
   {
     pattern: /1\.14/,
