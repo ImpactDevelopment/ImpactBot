@@ -24,8 +24,8 @@ module.exports = class extends Command {
   
   async run(msg, [search]) {
     var searchString = search;
-    var return = searchString.split(' ').join('+')
-    var sendgay = 'http://lmgtfy.com/?q=' + return;
+    var editstring = searchString.split(' ').join('+')
+    var sendgay = 'http://lmgtfy.com/?q=' + editstring;
     msg.send(sendgay);
   }
 }
