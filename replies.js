@@ -3,15 +3,15 @@ const channels = require('./channels');
 module.exports = [
   {
     pattern: /forge/,
-    message: 'Use the installer to install Forge (1.12.2 only)'
+    message: 'Use the [installer](https://impactdevelopment.github.io) to install Forge (1.12.2 only)'
   },
   { 
     pattern: /faq/,
-    message: '[FAQ](https://github.com/impactdevelopment/impactclient/wiki/faq)'
+    message: '[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)'
   },
   {
     pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)\s?block/,
-    message: 'https://impactdevelopment.github.io/?brady-money-grubbing-completed=true'
+    message: '[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)'
   },
   {
     pattern: /lite\s*loader/,
@@ -36,7 +36,7 @@ module.exports = [
   },
   {
     pattern: /opti\s*fine/,
-    message: '[OptiFine tutorial (4.0+ but not 4.2)](https://www.youtube.com/watch?v=o1LHq6L0ibk), [text](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-OptiFine)'
+    message: 'Use the installer to add OptiFine to Impact!\n[Old tutorial](https://www.youtube.com/watch?v=o1LHq6L0ibk). [Text instructions](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-OptiFine)'
   },
   {
     pattern: /directlinktomanualjsoninstallation/,
