@@ -10,6 +10,10 @@ module.exports = [
     message: '[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)'
   },
   {
+    pattern: /(take\sa?\s?)?screenshot/,
+    message: 'https://www.minecraft.net/en-us/article/screenshotting-guide'
+  },
+  {
     pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)\s?block/,
     message: '[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)'
   },
