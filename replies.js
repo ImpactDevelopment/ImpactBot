@@ -7,7 +7,7 @@ module.exports = [
   },
   { 
     pattern: /faq/,
-    message: '[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)'
+    message: '[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)\n[Video](https://www.youtube.com/watch?v=k_29vgkPUbk)'
   },
   {
     pattern: /(take\sa?\s?)?screenshot/,
@@ -19,7 +19,7 @@ module.exports = [
   },
   {
     pattern: /lite\s*loader/,
-    message: '[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-LiteLoader)',
+    message: '[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-LiteLoader), [Video](https://www.youtube.com/watch?v=k_29vgkPUbk&t=170s)',
   },
   {
     pattern: /(web\s?)?(site|page)/,
