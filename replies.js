@@ -14,6 +14,10 @@ module.exports = [
     message: 'https://www.minecraft.net/en-us/article/screenshotting-guide'
   },
   {
+    pattern: /use\sbaritone|baritone\susage/,
+    message: 'https://github.com/cabaletta/baritone/blob/master/USAGE.md'
+  },
+  {
     pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)\s?block/,
     message: '[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)'
   },
