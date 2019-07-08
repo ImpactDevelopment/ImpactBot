@@ -10,6 +10,10 @@ module.exports = [
     message: '[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)'
   },
   {
+    pattern: /defender|virus|mcafee/,
+    message: 'https://github.com/ImpactDevelopment/ImpactClient/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus'
+  },
+  {
     pattern: /(take\sa?\s?)?screenshot/,
     message: 'https://www.minecraft.net/en-us/article/screenshotting-guide'
   },
