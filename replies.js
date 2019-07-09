@@ -76,6 +76,6 @@ module.exports = [
   },
   {
     pattern: /schematics?/,
-    message: '[ONLY FOR 1.12 VERSION] Place the schematic file in the folder `.minecraft/schematics` then type `.b build name`. Make sure the required blocks are in your hotbar!'
+    message: '[ONLY FOR 1.12 VERSION] Place the schematic file into `.minecraft/schematics` then type `.b build name`. Make sure the required blocks are in your hotbar!'
   }
 ];
