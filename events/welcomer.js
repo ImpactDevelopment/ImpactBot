@@ -13,7 +13,7 @@ module.exports = class extends Event {
       .addField('Usage FAQ', '[Click here!](https://github.com/ImpactDevelopment/ImpactClient/wiki/Usage-FAQ)', true)
       .addField('Rules', '[Click here!](https://discordapp.com/channels/208753003996512258/224684271913140224/306183650268020748)', true)
       .addField('Github Links', '[Impact](https://github.com/ImpactDevelopment/ImpactClient), [Installer](https://github.com/ImpactDevelopment/Installer/), [Baritone](https://github.com/cabaletta/baritone)', true)
-      .addField('Downloading and installing the client tutorials', '[🔷 Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux 🐧](https://www.youtube.com/watch?v=k_29vgkPUbk)\n')
+      .addField('Tutorial videos for downloading and installing the client', '[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=k_29vgkPUbk)\n')
       .setFooter('♿ Impact Client ♿')
     try {
       member.send({ embed })
