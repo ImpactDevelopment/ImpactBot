@@ -75,7 +75,7 @@ module.exports = [
     message: 'No release date for 1.14, a message will be in #announcements when development starts.'
   },
   {
-    pattern: /schematic(s)/,
+    pattern: /schematics?/,
     message: '[ONLY FOR 1.12 VERSION] Place the schematic folder in `.minecraft/schematics` then type `.b build name`. Make sure the required blocks are in your hotbar!'
   }
 ];
