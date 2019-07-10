@@ -14,6 +14,10 @@ module.exports = [
     message: 'https://github.com/ImpactDevelopment/ImpactClient/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus'
   },
   {
+    pattern: /tutorial/,
+    message: 'Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=k_29vgkPUbk)\n'
+  },
+  {
     pattern: /(take\sa?\s?)?screenshot/,
     message: 'https://www.minecraft.net/en-us/article/screenshotting-guide'
   },
