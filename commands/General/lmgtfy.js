@@ -23,7 +23,7 @@ module.exports = class extends Command {
   async run (msg, [query]) {
     msg.delete()
     const embed = new MessageEmbed()
-      .setDescription('https://lmgtfy.com/?q=' + query.replace(/ /g, '%20'))
+      .setDescription('https://lmgtfy.com/?q=' + query.replace(/ /g, '%20') + '&iie=1')
     msg.channel.send({ embed })
   }
 }
