@@ -21,7 +21,7 @@ module.exports = class extends Monitor {
   }
 
   async run(msg) {
-    if(msg.member.roles.has('245682967546953738') && !msg.isMentioned(client.user)) return; // Don't spam out chat if a person with the Support role says the word and doesnt mention the bot
+    if(msg.member.roles.has('245682967546953738') && !msg.mentions.has(this.client.user)) return; // Don't spam out chat if a person with the Support role says the word and doesnt mention the bot
     const reply = replies
       .filter((e) => {
         if(e.exclude && e.exclude.includes(msg.channel.id)) return false;
