@@ -81,5 +81,9 @@ module.exports = [
   {
     pattern: /schematics?/,
     message: '[ONLY FOR 1.12 VERSION] Place the schematic file into `.minecraft/schematics` then type `.b build name`. Make sure the required blocks are in your hotbar!'
+  },
+  {
+    pattern: /((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))/,
+    message: 'Impact does not support cracked launchers. You can attempt to use the unstable Forge version, but no further support will be provided.'
   }
 ];
