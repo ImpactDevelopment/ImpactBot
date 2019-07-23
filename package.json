@@ -10,7 +10,8 @@
   "dependencies": {
     "discord.js": "github:discordjs/discord.js#276109ed3c8ee990296af34e2ae0a6174e151c70",
     "dotenv": "^6.0.0",
-    "klasa": "github:dirigeants/klasa#7f75c19143a92e5c87ffc018ba1bfd25b0d8be4f"
+    "klasa": "github:dirigeants/klasa#7f75c19143a92e5c87ffc018ba1bfd25b0d8be4f",
+    "rimraf": "^2.6.3"
   },
   "engines": {
     "node": "8.x"
