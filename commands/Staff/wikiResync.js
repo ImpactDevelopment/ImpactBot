@@ -1,11 +1,6 @@
 const { Command } = require('klasa')
-const { MessageEmbed } = require('discord.js')
 const { exec } = require('child_process')
-const fs = require('fs')
 const rimraf = require('rimraf')
-function capitalizeFirstLetter (string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
 
 module.exports = class extends Command {
   constructor (...args) {
