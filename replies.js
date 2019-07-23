@@ -10,7 +10,7 @@ module.exports = [
     message: '[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)'
   },
   {
-    pattern: /defender|virus|mcafee/,
+    pattern: /defender|virus|mcafee|norton/,
     message: 'https://github.com/ImpactDevelopment/ImpactClient/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus'
   },
   {
@@ -26,7 +26,7 @@ module.exports = [
     message: 'https://github.com/cabaletta/baritone/blob/master/USAGE.md'
   },
   {
-    pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)\s?block|download/,
+    pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat/,
     message: '[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)'
   },
   {
