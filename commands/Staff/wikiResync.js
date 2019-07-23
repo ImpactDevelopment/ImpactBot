@@ -31,6 +31,7 @@ module.exports = class extends Command {
         msg.channel.send('```\n' + err + '\n```')
       } else {
         msg.channel.send('Successfully cloned the wiki repository!')
+        console.log('Updated the bot\'s local wiki!')
       }
     })
   }
