@@ -76,7 +76,7 @@ module.exports = [
   },
   {
     pattern: /1\.14/,
-    message: 'No release date for 1.14, a message will be in #announcements when development starts.'
+    message: 'Development for 1.14+ started, no ETA currently.'
   },
   {
     pattern: /schematics?/,
