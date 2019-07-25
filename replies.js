@@ -26,7 +26,7 @@ module.exports = [
     message: 'https://github.com/cabaletta/baritone/blob/master/USAGE.md'
   },
   {
-    pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|adf\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat/,
+    pattern: /installer|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat/,
     message: '[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)'
   },
   {
