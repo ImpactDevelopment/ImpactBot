@@ -22,7 +22,7 @@ module.exports = [
     message: 'https://www.minecraft.net/en-us/article/screenshotting-guide'
   },
   {
-    pattern: /use\sbaritone|baritone\susage|baritone\scommand|\.b|goal|goto/,
+    pattern: /use\sbaritone|baritone\susage|baritone\scommand|\.b|goal|goto|path/,
     message: 'https://github.com/cabaletta/baritone/blob/master/USAGE.md'
   },
   {
