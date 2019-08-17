@@ -80,7 +80,7 @@ module.exports = [
   },
   {
     pattern: /1\.14/,
-    message: 'Development for 1.14+ started, no ETA currently.'
+    message: 'Preview builds of 1.14.4 are available to donators. No ETA on full release.'
   },
   {
     pattern: /schematics?/,
