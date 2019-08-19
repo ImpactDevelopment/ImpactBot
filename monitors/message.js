@@ -28,7 +28,7 @@ module.exports = class extends Monitor {
         return new RegExp('\\b(?:' + e.pattern.source + ')\\b', 'i').test(msg.content);
       }).reduce((a, e) => a + e.message + ' ', '');
 
-    if(reply && [channels.general, channels.help, channels.bot].includes(msg.channel.id)) {
+    if(reply && [channels.general, channels.help, channels.bot, channels.donatorHelp].includes(msg.channel.id)) {
       const m = await msg.send(new MessageEmbed().setDescription(reply));
       if(!msg.mentions.has(this.client.user)) {
         let deletedUsingReaction = false;
