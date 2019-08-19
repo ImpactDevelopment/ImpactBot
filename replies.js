@@ -75,8 +75,8 @@ module.exports = [
     message: 'Please do not discuss hacks in this Discord.'
   },
   {
-    pattern: /premium|donate|become\s*a?\s+don(at)?or/,
-    message: 'If you donate $5 or more, you will recieve early access to upcoming releases through nightly builds, 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). Go on the [website](https://impactdevelopment.github.io/#donate) to donate.'
+    pattern: /premium|donat|become\s*a?\s+don(at)?or/,
+    message: 'If you donate $5 or more, you will recieve early access to upcoming releases through nightly builds (**now including 1.14.4 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). Go on the [website](https://impactdevelopment.github.io/#donate) to donate.'
   },
   {
     pattern: /1\.14/,
