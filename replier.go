@@ -21,7 +21,7 @@ const (
 var channels = []string{general, help, bot, donatorHelp}
 
 func onMessageReactedTo(s *discordgo.Session, m *discordgo.MessageReactionAdd) {
-	if m.Emoji.Name == TRASH && isSupport(m.UserID) {
+	if m.Emoji.Name == TRASH && isSupport(m.UserID) && m.UserID != myselfID {
 		discord.ChannelMessageDelete(m.ChannelID, m.MessageID) // sometimes errors since it was already trashcanned, dont spam logs with this error its too common
 	}
 }
