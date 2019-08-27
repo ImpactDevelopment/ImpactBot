@@ -8,7 +8,6 @@ import (
 )
 
 func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
-	log.Println(m)
 	if m.GuildID != IMPACT_SERVER {
 		log.Println("Joining the wrong server")
 		return
