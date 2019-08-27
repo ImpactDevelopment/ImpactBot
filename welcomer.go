@@ -9,11 +9,9 @@ import (
 
 func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 	if m.GuildID != IMPACT_SERVER {
-		log.Println("Joining the wrong server")
 		return
 	}
 	if m.User == nil {
-		log.Println("A user joined, but we got no information about them?")
 		return
 	}
 	embed := &discordgo.MessageEmbed{
