@@ -1,11 +1,2 @@
-# node
-node_modules/
-.npm/
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# contains information
-bwd/provider/
-.env
+.idea
+/ImpactBot

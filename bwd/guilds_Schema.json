@@ -1,1 +1,0 @@
-{"prefix":{"type":"String","default":"i!","array":false,"sql":"TEXT NOT NULL DEFAULT 'i!'"},"language":{"type":"Language","default":"en-US","array":false,"sql":"TEXT NOT NULL DEFAULT 'en-US'"},"disabledCommands":{"type":"Command","default":[],"array":true,"sql":"TEXT DEFAULT '[]'"}}
