@@ -17,9 +17,10 @@ const (
 	help        = "222120655594848256"
 	bot         = "306182416329080833"
 	donatorHelp = "583453983427788830"
+	staff       = "308653317834145802" // for testing
 )
 
-var channels = []string{general, help, bot, donatorHelp}
+var channels = []string{general, help, bot, donatorHelp, staff}
 
 // a map from ID of a message I sent, to the ID of who is allowed to delete it (aka who sent the message that I was responding to)
 var messageSender = make(map[string]string)
