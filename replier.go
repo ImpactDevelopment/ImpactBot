@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/bwmarrin/discordgo"
@@ -20,8 +21,18 @@ const (
 
 var channels = []string{general, help, bot, donatorHelp}
 
+// a map from ID of a message I sent, to the ID of who is allowed to delete it (aka who sent the message that I was responding to)
+var messageSender = make(map[string]string)
+var messageSenderLock sync.Mutex
+
 func onMessageReactedTo(s *discordgo.Session, m *discordgo.MessageReactionAdd) {
-	if m.Emoji.Name == TRASH && isSupport(m.UserID) && m.UserID != myselfID {
+	messageSenderLock.Lock()
+	defer messageSenderLock.Unlock()
+	origAuthor, ok := messageSender[m.UserID]
+	if !ok {
+		return // this wasn't us
+	}
+	if m.Emoji.Name == TRASH && (isSupport(m.UserID) || m.UserID == origAuthor) && m.UserID != myselfID {
 		discord.ChannelMessageDelete(m.ChannelID, m.MessageID) // sometimes errors since it was already trashcanned, dont spam logs with this error its too common
 	}
 }
@@ -32,10 +43,12 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 		log.Println("wtf")
 		return
 	}
-	if !includes(channels, msg.ChannelID) || msg.Type != discordgo.MessageTypeDefault || msg.Author == nil || msg.Author.ID == myselfID {
+	author := msg.Author.ID
+	if !includes(channels, msg.ChannelID) || msg.Type != discordgo.MessageTypeDefault || msg.Author == nil || author == myselfID {
 		return
 	}
-	if isSupport(msg.Author.ID) && !mentionsMe(msg) {
+	mentionedMe := mentionsMe(msg)
+	if isSupport(author) && !mentionedMe {
 		return
 	}
 	response := ""
@@ -50,6 +63,8 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if response == "" {
 		return
 	}
+	messageSenderLock.Lock()
+	defer messageSenderLock.Unlock()
 	embed := &discordgo.MessageEmbed{
 		Author:      &discordgo.MessageEmbedAuthor{},
 		Color:       prettyembedcolor,
@@ -59,15 +74,23 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if err != nil {
 		log.Println(err)
 	}
-	err = discord.MessageReactionAdd(msg.ChannelID, msg.ID, TRASH)
-	if err != nil {
-		log.Println(err)
-	}
-	go func() {
-		time.Sleep(TIMEOUT)
-		err := discord.ChannelMessageDelete(msg.ChannelID, msg.ID)
+	messageSender[msg.ID] = author
+	if !mentionedMe {
+		err = discord.MessageReactionAdd(msg.ChannelID, msg.ID, TRASH)
 		if err != nil {
 			log.Println(err)
 		}
+	}
+	go func() {
+		time.Sleep(TIMEOUT)
+		if !mentionedMe {
+			err := discord.ChannelMessageDelete(msg.ChannelID, msg.ID)
+			if err != nil {
+				log.Println(err)
+			}
+		}
+		messageSenderLock.Lock()
+		defer messageSenderLock.Unlock()
+		delete(messageSender, msg.ID)
 	}()
 }

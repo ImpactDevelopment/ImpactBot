@@ -51,5 +51,5 @@ func main() {
 	}
 	log.Println("Connected to discord")
 	forever := make(chan int)
-	<- forever
+	<-forever
 }
