@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	TIMEOUT = 20 * time.Second
+	TIMEOUT = 30 * time.Second
 	TRASH   = "🗑"
 
 	general     = "208753003996512258"
@@ -40,18 +40,30 @@ func onMessageReactedTo(s *discordgo.Session, m *discordgo.MessageReactionAdd) {
 
 func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 	msg := m.Message
-	if msg == nil {
-		log.Println("wtf")
-		return
+	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault {
+		return // wtf
 	}
 	author := msg.Author.ID
-	if !includes(channels, msg.ChannelID) || msg.Type != discordgo.MessageTypeDefault || msg.Author == nil || author == myselfID {
+
+	// Don't talk to oneself
+	if author == myselfID {
 		return
 	}
-	mentionedMe := mentionsMe(msg)
-	if isSupport(author) && !mentionedMe {
-		return
+
+	// Unless we're being spoken to
+	if !triggeredManually(msg) {
+		// Don't talk where we're not welcome
+		if !includes(channels, msg.ChannelID) {
+			return
+		}
+
+		// Ignore messages from ‘know-it-all’s
+		if isSupport(author) {
+			return
+		}
 	}
+
+	// Phew, actually start doing stuff
 	response := ""
 	for _, reply := range replies {
 		if includes(reply.exclude, msg.ChannelID) {
@@ -76,23 +88,27 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 		log.Println(err)
 		return // if this failed, msg will be nil, so we cannot continue!
 	}
-	messageSender[msg.ID] = author
-	if !mentionedMe {
+
+	// Add a trashcan icon if the message wasn't triggered manually
+	// Keep track of who is allowed to delete the message too
+	if !triggeredManually(msg) {
+		messageSender[msg.ID] = author
 		err = discord.MessageReactionAdd(msg.ChannelID, msg.ID, TRASH)
 		if err != nil {
 			log.Println(err)
 		}
+
+		// Delete the entry from our messageSender map after the TIMEOUT
+		go func() {
+			time.Sleep(TIMEOUT)
+			messageSenderLock.Lock()
+			defer messageSenderLock.Unlock()
+			delete(messageSender, msg.ID)
+		}()
 	}
-	go func() {
-		time.Sleep(TIMEOUT)
-		if !mentionedMe {
-			err := discord.ChannelMessageDelete(msg.ChannelID, msg.ID)
-			if err != nil {
-				log.Println(err)
-			}
-		}
-		messageSenderLock.Lock()
-		defer messageSenderLock.Unlock()
-		delete(messageSender, msg.ID)
-	}()
+}
+
+func triggeredManually(msg *discordgo.Message) bool {
+	// TODO other methods of manual triggering, e.g. i!commands
+	return mentionsMe(msg)
 }
