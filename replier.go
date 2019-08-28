@@ -34,7 +34,7 @@ func onMessageReactedTo(s *discordgo.Session, m *discordgo.MessageReactionAdd) {
 		return // this wasn't us
 	}
 	if m.Emoji.Name == TRASH && (isSupport(m.UserID) || m.UserID == origAuthor) && m.UserID != myselfID {
-		discord.ChannelMessageDelete(m.ChannelID, m.MessageID) // sometimes errors since it was already trashcanned, dont spam logs with this error its too common
+		go discord.ChannelMessageDelete(m.ChannelID, m.MessageID) // sometimes errors since it was already trashcanned, dont spam logs with this error its too common
 	}
 }
 
@@ -74,6 +74,7 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 	msg, err := discord.ChannelMessageSendEmbed(msg.ChannelID, embed)
 	if err != nil {
 		log.Println(err)
+		return // if this failed, msg will be nil, so we cannot continue!
 	}
 	messageSender[msg.ID] = author
 	if !mentionedMe {
