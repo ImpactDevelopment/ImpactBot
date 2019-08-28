@@ -29,7 +29,7 @@ var messageSenderLock sync.Mutex
 func onMessageReactedTo(s *discordgo.Session, m *discordgo.MessageReactionAdd) {
 	messageSenderLock.Lock()
 	defer messageSenderLock.Unlock()
-	origAuthor, ok := messageSender[m.UserID]
+	origAuthor, ok := messageSender[m.MessageID]
 	if !ok {
 		return // this wasn't us
 	}
