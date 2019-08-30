@@ -83,7 +83,7 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 		Color:       prettyembedcolor,
 		Description: response,
 	}
-	msg, err := discord.ChannelMessageSendEmbed(msg.ChannelID, embed)
+	reply, err := discord.ChannelMessageSendEmbed(msg.ChannelID, embed)
 	if err != nil {
 		log.Println(err)
 		return // if this failed, msg will be nil, so we cannot continue!
@@ -92,18 +92,18 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Add a trashcan icon if the message wasn't triggered manually
 	// Keep track of who is allowed to delete the message too
 	if !triggeredManually(msg) {
-		messageSender[msg.ID] = author
-		err = discord.MessageReactionAdd(msg.ChannelID, msg.ID, TRASH)
+		err = discord.MessageReactionAdd(reply.ChannelID, reply.ID, TRASH)
 		if err != nil {
 			log.Println(err)
 		}
 
-		// Delete the entry from our messageSender map after the TIMEOUT
+		// Add the message to the sender map then delete it later
+		messageSender[reply.ID] = author
 		go func() {
 			time.Sleep(TIMEOUT)
 			messageSenderLock.Lock()
 			defer messageSenderLock.Unlock()
-			delete(messageSender, msg.ID)
+			delete(messageSender, reply.ID)
 		}()
 	}
 }
