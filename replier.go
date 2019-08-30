@@ -17,25 +17,49 @@ const (
 	help        = "222120655594848256"
 	bot         = "306182416329080833"
 	donatorHelp = "583453983427788830"
-	staff       = "308653317834145802" // for testing
+	testing     = "617066818925756506"
 )
 
-var channels = []string{general, help, bot, donatorHelp, staff}
+var channels = []string{general, help, bot, donatorHelp, testing}
 
 // a map from ID of a message I sent, to the ID of who is allowed to delete it (aka who sent the message that I was responding to)
 var messageSender = make(map[string]string)
 var messageSenderLock sync.Mutex
 
-func onMessageReactedTo(s *discordgo.Session, m *discordgo.MessageReactionAdd) {
+func onMessageReactedTo(s *discordgo.Session, reaction *discordgo.MessageReactionAdd) {
 	messageSenderLock.Lock()
 	defer messageSenderLock.Unlock()
-	origAuthor, ok := messageSender[m.MessageID]
+
+	// If the reaction isn't trash we don't care
+	if reaction.Emoji.Name != TRASH {
+		return
+	}
+
+	// Get the author of the trigger message
+	author, ok := messageSender[reaction.MessageID]
 	if !ok {
 		return // this wasn't us
 	}
-	if m.Emoji.Name == TRASH && (isSupport(m.UserID) || m.UserID == origAuthor) && m.UserID != myselfID {
-		go discord.ChannelMessageDelete(m.ChannelID, m.MessageID) // sometimes errors since it was already trashcanned, dont spam logs with this error its too common
+
+	// Get the reply we sent
+	reply, err := discord.ChannelMessage(reaction.ChannelID, reaction.MessageID)
+	if err != nil {
+		return //wtf
 	}
+
+	// If we didn't send the reply or we added the reaction
+	if reply.Author.ID != myselfID || reaction.UserID == myselfID {
+		return
+	}
+
+	// Filter approved users
+	if reaction.UserID != author && !isSupport(reaction.UserID) {
+		return
+	}
+
+	// Delete the reply
+	// sometimes errors since it was already trashcanned, dont spam logs with this error its too common
+	go discord.ChannelMessageDelete(reply.ChannelID, reply.ID)
 }
 
 func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
