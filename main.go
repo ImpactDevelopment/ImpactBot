@@ -5,7 +5,6 @@ import (
 	"github.com/subosito/gotenv"
 	"log"
 	"os"
-	"syscall"
 )
 
 var discord *discordgo.Session
@@ -27,7 +26,7 @@ func init() {
 	err = gotenv.Load()
 	if err == nil {
 		println("Loaded .env file")
-	} else if e, ok := err.(*os.PathError); ok && e.Err == syscall.ERROR_FILE_NOT_FOUND {
+	} else if os.IsNotExist(err) {
 		println("No .env file found")
 		err = nil // Mutating state is bad mkay
 	} else {
