@@ -26,7 +26,7 @@ var channels = []string{general, help, bot, donatorHelp, testing}
 var messageSender = make(map[string]string)
 var messageSenderLock sync.Mutex
 
-func onMessageReactedTo(s *discordgo.Session, reaction *discordgo.MessageReactionAdd) {
+func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageReactionAdd) {
 	messageSenderLock.Lock()
 	defer messageSenderLock.Unlock()
 
@@ -42,7 +42,7 @@ func onMessageReactedTo(s *discordgo.Session, reaction *discordgo.MessageReactio
 	}
 
 	// Get the reply we sent
-	reply, err := discord.ChannelMessage(reaction.ChannelID, reaction.MessageID)
+	reply, err := session.ChannelMessage(reaction.ChannelID, reaction.MessageID)
 	if err != nil {
 		return //wtf
 	}
@@ -59,10 +59,10 @@ func onMessageReactedTo(s *discordgo.Session, reaction *discordgo.MessageReactio
 
 	// Delete the reply
 	// sometimes errors since it was already trashcanned, dont spam logs with this error its too common
-	go discord.ChannelMessageDelete(reply.ChannelID, reply.ID)
+	go session.ChannelMessageDelete(reply.ChannelID, reply.ID)
 }
 
-func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
+func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 	msg := m.Message
 	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault {
 		return // wtf
@@ -107,7 +107,7 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 		Color:       prettyembedcolor,
 		Description: response,
 	}
-	reply, err := discord.ChannelMessageSendEmbed(msg.ChannelID, embed)
+	reply, err := session.ChannelMessageSendEmbed(msg.ChannelID, embed)
 	if err != nil {
 		log.Println(err)
 		return // if this failed, msg will be nil, so we cannot continue!
@@ -116,7 +116,7 @@ func onMessageSent(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// Add a trashcan icon if the message wasn't triggered manually
 	// Keep track of who is allowed to delete the message too
 	if !triggeredManually(msg) {
-		err = discord.MessageReactionAdd(reply.ChannelID, reply.ID, TRASH)
+		err = session.MessageReactionAdd(reply.ChannelID, reply.ID, TRASH)
 		if err != nil {
 			log.Println(err)
 		}
