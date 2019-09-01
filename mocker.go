@@ -33,7 +33,7 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 		Color:       prettyembedcolor,
 		Description: msg.Content,
 		Footer: &discordgo.MessageEmbedFooter{
-			Text: "From " + msg.Author.Username + "#" + msg.Author.Discriminator,
+			Text: "from @" + msg.Author.Username + "#" + msg.Author.Discriminator,
 		},
 	}
 	_, err := session.ChannelMessageSendEmbed(FORWARD_TO, embed)
