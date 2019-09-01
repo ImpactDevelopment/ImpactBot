@@ -9,7 +9,18 @@ import (
 
 const (
 	FORWARD_TO = "617549691730526209"
+
+	NO_HELP_ROLE = "230803433752363020"
 )
+
+
+func canDMBot(user_id string) bool {
+	member, err := discord.GuildMember(IMPACT_SERVER, user_id)
+	if err != nil || member == nil {
+		return false
+	}
+	return !includes(member.Roles, NO_HELP_ROLE)
+}
 
 // inform when someone DMs the bot because the messages are humorous
 func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
@@ -26,6 +37,10 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if msg.GuildID != "" {
 		return // DMs only!
+	}
+
+	if !canDMBot(author) {
+		return
 	}
 
 	embed := &discordgo.MessageEmbed{
