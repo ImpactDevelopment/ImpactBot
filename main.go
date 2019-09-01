@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/bwmarrin/discordgo"
-	"github.com/subosito/gotenv"
 	"log"
 	"os"
+
+	"github.com/bwmarrin/discordgo"
+	"github.com/subosito/gotenv"
 )
 
 var discord *discordgo.Session
@@ -54,6 +55,7 @@ func init() {
 	discord.AddHandler(onMessageSent)
 	discord.AddHandler(onMessageReactedTo)
 	discord.AddHandler(onReady)
+	discord.AddHandler(onMessageSent2)
 }
 
 func main() {
