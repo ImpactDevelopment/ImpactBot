@@ -24,7 +24,6 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	log.Println(msg.GuildID)
 	if msg.GuildID != "" {
 		return // DMs only!
 	}
