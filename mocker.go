@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	FORWARD_TO = "308653317834145802"
+	FORWARD_TO = "617140506069303306"
 )
 
 // inform when someone DMs the bot because the messages are humorous
