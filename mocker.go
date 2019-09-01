@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -40,4 +41,9 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 	if err != nil {
 		log.Println(err)
 	}
+
+	go func() {
+		time.Sleep(3 * time.Second)
+		SendDM(author, "hey do you need some help?")
+	}()
 }
