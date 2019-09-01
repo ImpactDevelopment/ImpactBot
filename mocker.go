@@ -48,7 +48,20 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	go func() {
-		time.Sleep(3 * time.Second)
-		SendDM(author, "hey do you need some help?")
+		time.Sleep(1 * time.Second)
+		ch, err := discord.UserChannelCreate(author)
+		if err != nil {
+			log.Println(err)
+			return
+		}
+		err = discord.ChannelTyping(ch.ID)
+		if err != nil {
+			log.Println(err)
+		}
+		time.Sleep(2 * time.Second)
+		_, err = discord.ChannelMessageSend(ch.ID, "hey do you need some help?")
+		if err != nil {
+			log.Println(err)
+		}
 	}()
 }
