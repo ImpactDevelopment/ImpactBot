@@ -31,7 +31,12 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 	embed := &discordgo.MessageEmbed{
 		Author:      &discordgo.MessageEmbedAuthor{},
 		Color:       prettyembedcolor,
-		Description: msg.Content,
+		Description: ":rotating_light: :wheelchair: I have received a DM :wheelchair: :rotating_light:",
+		Fields: []*discordgo.MessageEmbedField{
+			&discordgo.MessageEmbedField{
+				Name: msg.Content,
+			},
+		},
 		Footer: &discordgo.MessageEmbedFooter{
 			Text: "from @" + msg.Author.Username + "#" + msg.Author.Discriminator,
 		},
