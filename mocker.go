@@ -74,7 +74,7 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 			log.Println(err)
 		}
 		time.Sleep(2 * time.Second)
-		_, err = discord.ChannelMessageSend(ch.ID, "hey do you need some help?")
+		_, err = discord.ChannelMessageSend(ch.ID, "hey do you need some #help?")
 		if err != nil {
 			log.Println(err)
 		}
