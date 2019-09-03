@@ -24,7 +24,7 @@ func init() {
 var replies = []Reply{
 	{
 		pattern: `forge`,
-		message: "Use the [installer](https://impactdevelopment.github.io) to install Forge (1.12.2 only)",
+		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)",
 	},
 	{
 		pattern: `faq`,
@@ -32,7 +32,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `defender|virus|mcafee|norton`,
-		message: "https://github.com/ImpactDevelopment/ImpactClient/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
+		message: "https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
 		pattern: `tutorial`,
@@ -52,19 +52,19 @@ var replies = []Reply{
 	},
 	{
 		pattern: `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
-		message: "[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
+		message: "[Direct download link after adfly](https://impactclient.net/?brady-money-grubbing-completed=true)",
 	},
 	{
 		pattern: `lite\s*loader`,
-		message: "[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-LiteLoader)",
+		message: "[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-LiteLoader)",
 	},
 	{
 		pattern: `(web\s?)?(site|page)`,
-		message: "[Website](https://impactdevelopment.github.io)",
+		message: "[Website](https://impactclient.net)",
 	},
 	{
 		pattern: `issue|bug|crash|error|suggest(ion)?s?|feature|enhancement`,
-		message: "Use the [GitHub repo](https://github.com/ImpactDevelopment/ImpactClient/issues) to report issues/suggestions!",
+		message: "Use the [GitHub repo](https://github.com/ImpactDevelopment/ImpactIssues/issues) to report issues/suggestions!",
 	},
 	{
 		pattern: `help|support`,
@@ -77,7 +77,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `opti\s*fine`,
-		message: "Use the installer to add OptiFine to Impact!\n[Old tutorial](https://www.youtube.com/watch?v=o1LHq6L0ibk). [Text instructions](https://github.com/ImpactDevelopment/ImpactClient/wiki/Adding-OptiFine)",
+		message: "Use the installer to add OptiFine to Impact!\n[Old tutorial](https://www.youtube.com/watch?v=o1LHq6L0ibk). [Text instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
 	},
 	{
 		pattern: `macros?`,
@@ -85,7 +85,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `change(\s*logs?|s)`,
-		message: "[Changelog](https://impactdevelopment.github.io/changelog)",
+		message: "[Changelog](https://impactclient.net/Impact/changelog)",
 	},
 	{
 		pattern: `hack(s|ing|er|client)?`,
@@ -93,7 +93,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `premium|donat|become\s*a?\s+don(at)?or`,
-		message: "If you donate $5 or more, you will recieve early access to upcoming releases through nightly builds (**now including 1.14.4 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). Go on the [website](https://impactdevelopment.github.io/#donate) to donate.",
+		message: "If you donate $5 or more, you will recieve early access to upcoming releases through nightly builds (**now including 1.14.4 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
 	},
 	{
 		pattern: `1\.14`,
