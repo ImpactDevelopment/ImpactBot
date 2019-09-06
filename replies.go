@@ -65,7 +65,7 @@ var replies = []Reply{
 	{
 		pattern: `help|support`,
 		message: "Switch to the <#" + help + "> channel!",
-		exclude: []string{help},
+		exclude: []string{help, donatorHelp},
 	},
 	{
 		pattern: `what(\sdoes|\sis|s|'s)?\s+franky`,
