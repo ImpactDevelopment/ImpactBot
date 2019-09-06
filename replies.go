@@ -13,11 +13,7 @@ type Reply struct {
 
 func init() {
 	for i := range replies {
-		r, err := regexp.Compile(replies[i].pattern)
-		if err != nil {
-			panic(err)
-		}
-		replies[i].regex = r
+		replies[i].regex = regexp.MustCompile(replies[i].pattern)
 	}
 }
 
