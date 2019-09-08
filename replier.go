@@ -13,11 +13,16 @@ const (
 	TIMEOUT = 30 * time.Second
 	TRASH   = "🗑"
 
-	general     = "208753003996512258"
-	help        = "222120655594848256"
-	bot         = "306182416329080833"
-	donatorHelp = "583453983427788830"
-	testing     = "617066818925756506"
+	general       = "208753003996512258"
+	help          = "222120655594848256"
+	bot           = "306182416329080833"
+	betterGeneral = "617140506069303306"
+	donatorHelp   = "583453983427788830"
+	testing       = "617066818925756506"
+
+	donator = "210114021641289728"
+
+	brady = "205718273696858113"
 )
 
 var channels = []string{general, help, bot, donatorHelp, testing}
