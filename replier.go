@@ -40,12 +40,6 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 		return
 	}
 
-	// Get the author of the trigger message
-	author, ok := messageSender[reaction.MessageID]
-	if !ok {
-		return // this wasn't us
-	}
-
 	// Get the reply we sent
 	reply, err := session.ChannelMessage(reaction.ChannelID, reaction.MessageID)
 	if err != nil {
@@ -58,7 +52,7 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 	}
 
 	// Filter approved users
-	if reaction.UserID != author && !isSupport(reaction.UserID) {
+	if !isMessageSender(reaction.UserID, reaction.MessageID) && !isSupport(reaction.UserID) {
 		return
 	}
 
@@ -167,4 +161,10 @@ replyLoop:
 func triggeredManually(msg *discordgo.Message) bool {
 	// TODO other methods of manual triggering, e.g. i!commands
 	return mentionsMe(msg)
+}
+
+// Check the given user was the sender that triggered message
+func isMessageSender(user, message string) bool {
+	author, ok := messageSender[message]
+	return ok && user == author
 }
