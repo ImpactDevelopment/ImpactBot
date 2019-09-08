@@ -119,7 +119,7 @@ var replies = []Reply{
 	},
 	{
 		pattern:      `1\.14`,
-		message:      "Preview builds of 1.14.4 are available to donators (see #DONATOR-info). No ETA on full release.",
+		message:      "Preview builds of 1.14.4 are available to donators (see <#" + donatorInfo + ">). No ETA on full release.",
 		excludeRoles: []string{DONATOR},
 	},
 	{
