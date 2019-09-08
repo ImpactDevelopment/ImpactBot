@@ -118,8 +118,14 @@ var replies = []Reply{
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
 	{
-		pattern: `1\.14`,
-		message: "Preview builds of 1.14.4 are available to donators (see #DONATOR-info). No ETA on full release.",
+		pattern:      `1\.14`,
+		message:      "Preview builds of 1.14.4 are available to donators (see #DONATOR-info). No ETA on full release.",
+		excludeRoles: []string{DONATOR},
+	},
+	{
+		pattern:   `1\.14|nightly|pre[- ]*release|beta|alpha|alfa`,
+		message:   "You can install nightly builds of Impact using the Donator Installer linked in <#" + donatorInfo + ">.",
+		onlyRoles: []string{DONATOR},
 	},
 	{
 		pattern: `schematics?`,
