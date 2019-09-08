@@ -89,13 +89,40 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 
 	// Phew, actually start doing stuff
 	response := ""
+replyLoop:
 	for _, reply := range replies {
-		if includes(reply.exclude, msg.ChannelID) {
-			continue
+		if includes(reply.excludeChannels, msg.ChannelID) {
+			continue replyLoop
 		}
-		if reply.regex.MatchString(strings.ToLower(msg.Content)) {
-			response += reply.message + " "
+		for _, role := range reply.excludeRoles {
+			if hasRole(msg.Author.ID, role) {
+				continue replyLoop
+			}
 		}
+		if len(reply.onlyChannels) > 0 && !includes(reply.onlyChannels, msg.ChannelID) {
+			continue replyLoop
+		}
+		if len(reply.onlyRoles) > 0 {
+			for i, role := range reply.onlyRoles {
+				if hasRole(msg.Author.ID, role) {
+					break
+				}
+				// End of loop, role not found
+				if i == len(reply.onlyRoles)-1 {
+					continue replyLoop
+				}
+			}
+		}
+		lower := strings.ToLower(msg.Content)
+		if !reply.regex.MatchString(lower) {
+			continue replyLoop
+		}
+		if reply.notRegex != nil && reply.notRegex.MatchString(lower) {
+			continue replyLoop
+		}
+
+		// Not excluded, append to response
+		response += reply.message + " "
 	}
 	if response == "" {
 		return

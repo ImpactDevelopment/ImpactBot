@@ -5,15 +5,24 @@ import (
 )
 
 type Reply struct {
-	pattern string
-	message string
-	exclude []string
-	regex   *regexp.Regexp
+	pattern         string
+	unless          string
+	message         string
+	excludeChannels []string
+	excludeRoles    []string
+	onlyChannels    []string
+	onlyRoles       []string
+	regex           *regexp.Regexp
+	notRegex        *regexp.Regexp
 }
 
 func init() {
 	for i := range replies {
 		replies[i].regex = regexp.MustCompile(replies[i].pattern)
+
+		if replies[i].unless != "" {
+			replies[i].notRegex = regexp.MustCompile(replies[i].unless)
+		}
 	}
 }
 
@@ -63,9 +72,9 @@ var replies = []Reply{
 		message: "Use the [GitHub repo](https://github.com/ImpactDevelopment/ImpactIssues/issues) to report issues/suggestions!",
 	},
 	{
-		pattern: `help|support`,
-		message: "Switch to the <#" + help + "> channel!",
-		exclude: []string{help, donatorHelp},
+		pattern:         `help|support`,
+		message:         "Switch to the <#" + help + "> channel!",
+		excludeChannels: []string{help, donatorHelp},
 	},
 	{
 		pattern: `what(\sdoes|\sis|s|'s)?\s+franky`,

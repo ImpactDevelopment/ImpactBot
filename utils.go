@@ -4,12 +4,16 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func isSupport(user_id string) bool {
-	member, err := discord.GuildMember(IMPACT_SERVER, user_id)
+func isSupport(user string) bool {
+	return hasRole(user, SUPPORT_ROLE)
+}
+
+func hasRole(user string, role string) bool {
+	member, err := discord.GuildMember(IMPACT_SERVER, user)
 	if err != nil || member == nil {
 		return false
 	}
-	return includes(member.Roles, SUPPORT_ROLE)
+	return includes(member.Roles, role)
 }
 
 func mentionsMe(msg *discordgo.Message) bool {
