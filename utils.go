@@ -8,12 +8,32 @@ func isSupport(user string) bool {
 	return hasRole(user, SUPPORT_ROLE)
 }
 
-func hasRole(user string, role string) bool {
+// True if user has ANY role passed in
+func hasRole(user string, role ...string) bool {
 	member, err := discord.GuildMember(IMPACT_SERVER, user)
 	if err != nil || member == nil {
 		return false
 	}
-	return includes(member.Roles, role)
+	for _, r := range role {
+		if includes(member.Roles, r) {
+			return true
+		}
+	}
+	return false
+}
+
+// True if user has ALL roles passed in
+func hasRoles(user string, role ...string) bool {
+	member, err := discord.GuildMember(IMPACT_SERVER, user)
+	if err != nil || member == nil {
+		return false
+	}
+	for _, r := range role {
+		if !includes(member.Roles, r) {
+			return false
+		}
+	}
+	return true
 }
 
 func mentionsMe(msg *discordgo.Message) bool {

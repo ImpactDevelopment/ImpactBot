@@ -93,23 +93,15 @@ replyLoop:
 		if includes(reply.excludeChannels, msg.ChannelID) {
 			continue replyLoop
 		}
-		for _, role := range reply.excludeRoles {
-			if hasRole(msg.Author.ID, role) {
-				continue replyLoop
-			}
+		if hasRole(msg.Author.ID, reply.excludeRoles...) {
+			continue replyLoop
 		}
 		if len(reply.onlyChannels) > 0 && !includes(reply.onlyChannels, msg.ChannelID) {
 			continue replyLoop
 		}
 		if len(reply.onlyRoles) > 0 {
-			for i, role := range reply.onlyRoles {
-				if hasRole(msg.Author.ID, role) {
-					break
-				}
-				// End of loop, role not found
-				if i == len(reply.onlyRoles)-1 {
-					continue replyLoop
-				}
+			if !hasRole(msg.Author.ID, reply.onlyRoles...) {
+				continue replyLoop
 			}
 		}
 		lower := strings.ToLower(msg.Content)
