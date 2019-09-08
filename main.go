@@ -13,12 +13,18 @@ var discord *discordgo.Session
 var myselfID string
 
 const (
-	IMPACT_SERVER = "208753003996512258"
-
-	SUPPORT_ROLE = "245682967546953738"
-
+	IMPACT_SERVER    = "208753003996512258"
+	BRADY            = "205718273696858113"
+	DONATOR          = "210114021641289728"
 	prettyembedcolor = 3447003
 )
+
+var STAFF = map[string]string{
+	"headDeveloper": "209817890713632768",
+	"developer":     "221655083748687873",
+	"moderator":     "210377982731223040",
+	"support":       "245682967546953738",
+}
 
 func init() {
 	var err error

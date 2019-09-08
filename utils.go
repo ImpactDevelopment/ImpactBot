@@ -4,8 +4,13 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func isSupport(user string) bool {
-	return hasRole(user, SUPPORT_ROLE)
+func isStaff(user string) bool {
+	for _, role := range STAFF {
+		if hasRole(user, role) {
+			return true
+		}
+	}
+	return false
 }
 
 // True if user has ANY role passed in

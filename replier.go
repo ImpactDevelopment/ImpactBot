@@ -19,10 +19,6 @@ const (
 	betterGeneral = "617140506069303306"
 	donatorHelp   = "583453983427788830"
 	testing       = "617066818925756506"
-
-	donator = "210114021641289728"
-
-	brady = "205718273696858113"
 )
 
 var channels = []string{general, help, bot, donatorHelp, testing}
@@ -52,7 +48,7 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 	}
 
 	// Filter approved users
-	if !isMessageSender(reaction.UserID, reaction.MessageID) && !isSupport(reaction.UserID) {
+	if !isMessageSender(reaction.UserID, reaction.MessageID) && !isStaff(reaction.UserID) {
 		return
 	}
 
@@ -81,7 +77,7 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		// Ignore messages from ‘know-it-all’s
-		if isSupport(author) {
+		if isStaff(author) {
 			return
 		}
 	}

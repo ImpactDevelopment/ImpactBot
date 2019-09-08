@@ -74,13 +74,13 @@ var replies = []Reply{
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + help + "> channel!",
-		excludeRoles:    []string{donator},
+		excludeRoles:    []string{DONATOR},
 		excludeChannels: []string{help, donatorHelp},
 	},
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + donatorHelp + "> channel!",
-		onlyRoles:       []string{donator},
+		onlyRoles:       []string{DONATOR},
 		excludeChannels: []string{help, donatorHelp},
 	},
 	{
@@ -106,20 +106,20 @@ var replies = []Reply{
 	{
 		pattern:         `premium|donat|become\s*a?\s+don(at)?or`,
 		unless:          `forgot|how\s*long|i\s*donated|hours?`,
-		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.14.4 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
-		excludeRoles:    []string{donator},
+		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.14.4 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #DONATOR-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
+		excludeRoles:    []string{DONATOR},
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
 	{
 		pattern:         `(how\s*long|).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
-		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + brady + ">.",
-		excludeRoles:    []string{donator},
+		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
+		excludeRoles:    []string{DONATOR},
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
 	{
 		pattern: `1\.14`,
-		message: "Preview builds of 1.14.4 are available to donators (see #donator-info). No ETA on full release.",
+		message: "Preview builds of 1.14.4 are available to donators (see #DONATOR-info). No ETA on full release.",
 	},
 	{
 		pattern: `schematics?`,
