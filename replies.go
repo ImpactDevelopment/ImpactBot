@@ -74,6 +74,13 @@ var replies = []Reply{
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + help + "> channel!",
+		excludeRoles:    []string{donator},
+		excludeChannels: []string{help, donatorHelp},
+	},
+	{
+		pattern:         `help|support`,
+		message:         "Switch to the <#" + donatorHelp + "> channel!",
+		onlyRoles:       []string{donator},
 		excludeChannels: []string{help, donatorHelp},
 	},
 	{
