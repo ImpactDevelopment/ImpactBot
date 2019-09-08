@@ -5,12 +5,15 @@ import (
 )
 
 func isStaff(user string) bool {
+	// Convert STAFF map to array
+	i := 0
+	staff := make([]string, len(STAFF))
 	for _, role := range STAFF {
-		if hasRole(user, role) {
-			return true
-		}
+		staff[i] = role
+		i++
 	}
-	return false
+
+	return hasRole(user, staff...)
 }
 
 // True if user has ANY role passed in
