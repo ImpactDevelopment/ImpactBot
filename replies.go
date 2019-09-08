@@ -111,7 +111,7 @@ var replies = []Reply{
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
 	{
-		pattern:         `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(how\s*long).+(premium|donat|become\s*a?\s+don(at)?or)`,
+		pattern:         `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(how\s*long|still\sdon'?t|did).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
 		excludeRoles:    []string{DONATOR},
