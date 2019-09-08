@@ -49,11 +49,11 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(take\sa?\s?)?screenshot`,
-		message: "https://www.minecraft.net/en-us/article/screenshotting-guide",
+		message: "[How to take a screenshot in Minecraft](https://www.minecraft.net/en-us/article/screenshotting-guide)",
 	},
 	{
 		pattern: `use\sbaritone|baritone\susage|baritone\scommand|\.b|goal|goto|path`,
-		message: "https://github.com/cabaletta/baritone/blob/master/USAGE.md",
+		message: "[Baritone usage guide](https://github.com/cabaletta/baritone/blob/master/USAGE.md)",
 	},
 	{
 		pattern: `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
@@ -65,7 +65,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(web\s?)?(site|page)`,
-		message: "[Website](https://impactclient.net)",
+		message: "[Impact Website](https://impactclient.net)",
 	},
 	{
 		pattern: `issue|bug|crash|error|suggest(ion)?s?|feature|enhancement`,
@@ -89,7 +89,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `opti\s*fine`,
-		message: "Use the installer to add OptiFine to Impact!\n[Old tutorial](https://www.youtube.com/watch?v=o1LHq6L0ibk). [Text instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
+		message: "Use the installer to add OptiFine to Impact! [Text instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
 	},
 	{
 		pattern: `macros?`,
