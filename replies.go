@@ -113,7 +113,7 @@ var replies = []Reply{
 	{
 		pattern:         `(how\s*long|).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
-		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the donation form please DM <#" + brady + ">.",
+		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the donation form please DM <@" + brady + ">.",
 		excludeRoles:    []string{donator},
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
