@@ -104,14 +104,14 @@ var replies = []Reply{
 		message: "Please do not discuss hacks in this Discord.",
 	},
 	{
-		pattern:         `premium|donat|become\s*a?\s+don(at)?or`,
+		pattern:         `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:          `forgot|how\s*long|i\s*donated|hours?`,
 		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.14.4 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #DONATOR-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
 		excludeRoles:    []string{DONATOR},
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
 	{
-		pattern:         `(how\s*long|).+(premium|donat|become\s*a?\s+don(at)?or)`,
+		pattern:         `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(how\s*long).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
 		excludeRoles:    []string{DONATOR},
