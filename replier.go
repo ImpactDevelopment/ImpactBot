@@ -48,8 +48,13 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 		return
 	}
 
+	user, err := GetMember(reaction.UserID)
+	if err != nil {
+		return
+	}
+
 	// Filter approved users
-	if !isMessageSender(reaction.UserID, reaction.MessageID) && !isStaff(reaction.UserID) {
+	if !isMessageSender(reaction.UserID, reaction.MessageID) && !isStaff(user) {
 		return
 	}
 
@@ -63,10 +68,14 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault {
 		return // wtf
 	}
-	author := msg.Author.ID
 
 	// Don't talk to oneself
-	if author == myselfID {
+	if msg.Author.ID == myselfID {
+		return
+	}
+
+	author, err := GetMember(msg.Author.ID)
+	if err != nil {
 		return
 	}
 
@@ -90,14 +99,14 @@ replyLoop:
 		if includes(reply.excludeChannels, msg.ChannelID) {
 			continue replyLoop
 		}
-		if hasRole(msg.Author.ID, reply.excludeRoles...) {
+		if hasRole(author, reply.excludeRoles...) {
 			continue replyLoop
 		}
 		if len(reply.onlyChannels) > 0 && !includes(reply.onlyChannels, msg.ChannelID) {
 			continue replyLoop
 		}
 		if len(reply.onlyRoles) > 0 {
-			if !hasRole(msg.Author.ID, reply.onlyRoles...) {
+			if !hasRole(author, reply.onlyRoles...) {
 				continue replyLoop
 			}
 		}
@@ -137,7 +146,7 @@ replyLoop:
 		}
 
 		// Add the message to the sender map then delete it later
-		messageSender[reply.ID] = author
+		messageSender[reply.ID] = msg.Author.ID
 		go func() {
 			time.Sleep(TIMEOUT)
 			messageSenderLock.Lock()

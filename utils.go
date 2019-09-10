@@ -4,26 +4,19 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func isStaff(user string) bool {
-	// Convert STAFF map to array
-	i := 0
-	staff := make([]string, len(STAFF))
+func isStaff(user *discordgo.Member) bool {
 	for _, role := range STAFF {
-		staff[i] = role
-		i++
+		if hasRole(user, role) {
+			return true
+		}
 	}
-
-	return hasRole(user, staff...)
+	return false
 }
 
 // True if user has ANY role passed in
-func hasRole(user string, role ...string) bool {
-	member, err := discord.GuildMember(IMPACT_SERVER, user)
-	if err != nil || member == nil {
-		return false
-	}
+func hasRole(user *discordgo.Member, role ...string) bool {
 	for _, r := range role {
-		if includes(member.Roles, r) {
+		if includes(user.Roles, r) {
 			return true
 		}
 	}
@@ -62,11 +55,16 @@ func includes(list []string, val string) bool {
 	return false
 }
 
-func SendDM(user_id string, message string) error {
-	ch, err := discord.UserChannelCreate(user_id) // only creates it if it doesn"t already exist
+func SendDM(userID string, message string) error {
+	ch, err := discord.UserChannelCreate(userID) // only creates it if it doesn"t already exist
 	if err != nil {
 		return err
 	}
 	_, err = discord.ChannelMessageSend(ch.ID, message)
 	return err
+}
+
+// Get a Member from the Impact Discord
+func GetMember(userID string) (member *discordgo.Member, err error) {
+	return discord.GuildMember(IMPACT_SERVER, userID)
 }
