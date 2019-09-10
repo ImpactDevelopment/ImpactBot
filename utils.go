@@ -24,13 +24,9 @@ func hasRole(user *discordgo.Member, role ...string) bool {
 }
 
 // True if user has ALL roles passed in
-func hasRoles(user string, role ...string) bool {
-	member, err := discord.GuildMember(IMPACT_SERVER, user)
-	if err != nil || member == nil {
-		return false
-	}
+func hasRoles(user *discordgo.Member, role ...string) bool {
 	for _, r := range role {
-		if !includes(member.Roles, r) {
+		if !includes(user.Roles, r) {
 			return false
 		}
 	}
