@@ -97,7 +97,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `change(\s*logs?|s)`,
-		message: "[Changelog](https://impactclient.net/Impact/changelog)",
+		message: "[Changelog](https://impactclient.net/changelog)",
 	},
 	{
 		pattern: `hack(s|ing|er|client)?`,
