@@ -129,7 +129,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `schematics?`,
-		message: "[ONLY FOR 1.12 VERSION] Place the schematic file into `.minecraft/schematics` then type `.b build name`. Make sure the required blocks are in your hotbar!",
+		message: "[ONLY FOR 1.12.2 VERSION] Place the schematic file into `.minecraft/schematics` then type `.b build name`. Make sure the required blocks are in your hotbar!",
 	},
 	{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
