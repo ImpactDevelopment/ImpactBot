@@ -93,6 +93,8 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 				resp(DM.ID, providedReason)
 			}
 
+			resp(FORWARD_TO, providedReason)
+
 			switch command {
 			case "ban":
 				err = discord.GuildBanCreateWithReason(m.GuildID, user.ID, providedReason, 0)
