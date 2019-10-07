@@ -10,6 +10,7 @@ import (
 
 const (
 	RATELIMIT = 5 * time.Minute
+	MUTE_ROLE = "630800201015361566"
 )
 
 var ratelimit = make(map[string]int64)
@@ -37,6 +38,15 @@ func resp(ch string, text string) {
 	discord.ChannelMessageSendEmbed(ch, embed)
 }
 
+func contains(list []string, it string) bool {
+	for _, s := range list {
+		if s == it {
+			return true
+		}
+	}
+	return false
+}
+
 func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 	msg := m.Message
 	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault || msg.Author.ID == myselfID || m.GuildID != IMPACT_SERVER {
@@ -44,13 +54,11 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	content := msg.Content
-	if len(content) < 5 {
-		return
-	}
-	if content[:2] == "i!" { // bot woke
-		var fields = strings.Fields(content)
-		var command = fields[0][2:]
-		if command == "kick" || command == "ban" || command == "mute" || command == "unmute" { // we don't want role checking outside of these commands
+
+	if strings.HasPrefix(content, "i!") { // bot woke
+		fields := strings.Fields(content[2:])
+		command := strings.ToLower(fields[0])
+		if contains([]string{"kick", "ban", "mute", "unmute"}, command) { // we don't want role checking outside of these commands
 			author, err := GetMember(msg.Author.ID)
 			if err != nil || !isStaff(author) {
 				return
@@ -77,16 +85,12 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 			switch command {
 			case "ban":
 				err = discord.GuildBanCreateWithReason(m.GuildID, user.ID, providedReason, 0)
-				break
 			case "kick":
 				err = discord.GuildMemberDeleteWithReason(m.GuildID, user.ID, providedReason)
-				break
 			case "mute":
-				err = discord.GuildMemberRoleAdd(m.GuildID, user.ID, "dummyRoleID")
-				break
+				err = discord.GuildMemberRoleAdd(m.GuildID, user.ID, MUTE_ROLE)
 			case "unmute":
-				err = discord.GuildMemberRoleRemove(m.GuildID, user.ID, "dummyRoleID")
-				break
+				err = discord.GuildMemberRoleRemove(m.GuildID, user.ID, MUTE_ROLE)
 			}
 			if err != nil {
 				resp(msg.ChannelID, "ERROR "+err.Error())
