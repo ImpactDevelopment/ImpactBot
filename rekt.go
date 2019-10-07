@@ -78,7 +78,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 		resp(msg.ChannelID, "They have role(s)")
 		return
 	}
-	if !evalRatelimit(msg.Author.ID) {
+	if !hasRole(author, STAFF["moderator"], STAFF["developer"]) && !evalRatelimit(msg.Author.ID) {
 		resp(msg.ChannelID, "Too soon")
 		return
 	}
