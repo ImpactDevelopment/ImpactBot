@@ -34,6 +34,7 @@ func resp(ch string, text string) {
 		Author:      &discordgo.MessageEmbedAuthor{},
 		Color:       prettyembedcolor,
 		Description: text,
+		Timestamp: time.Now().Format(time.RFC3339),
 	}
 	discord.ChannelMessageSendEmbed(ch, embed)
 }
