@@ -82,6 +82,13 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 			}
 			providedReason := strings.TrimSpace(content[strings.Index(content, ">")+1:])
 			providedReason = command + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason : " + providedReason
+
+			DM, err := discord.UserChannelCreate(user.ID) // only creates it if it doesn"t already exist
+			if err != nil {
+				// if there is an error DMing them, we still want to ban them, they just won't know why
+				resp(DM.ID, providedReason)
+			}
+
 			switch command {
 			case "ban":
 				err = discord.GuildBanCreateWithReason(m.GuildID, user.ID, providedReason, 0)
