@@ -119,11 +119,12 @@ replyLoop:
 		}
 
 		// Not excluded, append to response
-		response += reply.message + " "
+		response += reply.message + "\n"
 	}
 	if response == "" {
 		return
 	}
+	response = strings.TrimSpace(response)
 	messageSenderLock.Lock()
 	defer messageSenderLock.Unlock()
 	embed := &discordgo.MessageEmbed{
