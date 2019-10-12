@@ -106,7 +106,7 @@ var replies = []Reply{
 	{
 		pattern:         `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:          `just|forgot|how\s*long|i\s*donated|hours?|wait`,
-		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.14.4 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #DONATOR-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
+		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds, 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #DONATOR-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
 		excludeRoles:    []string{DONATOR},
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
@@ -118,12 +118,7 @@ var replies = []Reply{
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
 	{
-		pattern:      `1\.14`,
-		message:      "Preview builds of 1.14.4 are available to donators (see <#" + donatorInfo + ">). No ETA on full release.",
-		excludeRoles: []string{DONATOR},
-	},
-	{
-		pattern:   `1\.14|nightly|pre[- ]*release|beta|alpha|alfa`,
+		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa`,
 		message:   "You can install nightly builds of Impact using the Donator Installer linked in <#" + donatorInfo + ">.",
 		onlyRoles: []string{DONATOR},
 	},
