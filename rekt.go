@@ -11,6 +11,7 @@ import (
 const (
 	RATELIMIT = 5 * time.Minute
 	MUTE_ROLE = "630800201015361566"
+	NOHELP_ROLE = "230803433752363020"
 )
 
 var ratelimit = make(map[string]int64)
@@ -62,7 +63,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.HasPrefix(content, "i!") { // bot woke
 		fields := strings.Fields(content[2:])
 		command := strings.ToLower(fields[0])
-		if contains([]string{"kick", "ban", "mute", "unmute"}, command) { // we don't want role checking outside of these commands
+		if contains([]string{"kick", "ban", "mute", "unmute", "nohelp", "help"}, command) { // we don't want role checking outside of these commands
 			author, err := GetMember(msg.Author.ID)
 			if err != nil || !isStaff(author) {
 				return
@@ -76,11 +77,11 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 			if err != nil {
 				return
 			}
-			if len(member.Roles) > 0 && command != "unmute" {
+			if len(member.Roles) > 0 && command != "unmute" && command != "help" {
 				resp(msg.ChannelID, "They have role(s)")
 				return
 			}
-			if !hasRole(author, STAFF["moderator"], STAFF["developer"]) && !evalRatelimit(msg.Author.ID) && command != "unmute" {
+			if !hasRole(author, STAFF["moderator"], STAFF["developer"]) && !evalRatelimit(msg.Author.ID) && command != "unmute" && command  != "help" && command != "nohelp" {
 				resp(msg.ChannelID, "Too soon")
 				return
 			}
@@ -102,6 +103,10 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 				err = discord.GuildMemberRoleAdd(m.GuildID, user.ID, MUTE_ROLE)
 			case "unmute":
 				err = discord.GuildMemberRoleRemove(m.GuildID, user.ID, MUTE_ROLE)
+			case "nohelp":
+				err = discord.GuildMemberRoleAdd(m.GuildID, user.ID, NOHELP_ROLE)
+			case "help":
+				err = discord.GuildMemberRoleRemove(m.GuildID, user.ID, NOHELP_ROLE)
 			}
 			if err != nil {
 				resp(msg.ChannelID, "ERROR "+err.Error())
