@@ -42,7 +42,7 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 			},
 			&discordgo.MessageEmbedField{
 				Name:   "Tutorial videos for downloading and installing the client",
-				Value:  "[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=k_29vgkPUbk)\n",
+				Value:  "[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 				Inline: false,
 			},
 		},
