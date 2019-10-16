@@ -76,7 +76,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 			if err != nil {
 				return
 			}
-			if len(member.Roles) > 0 && command != "unmute" {
+			if !hasRole(author, STAFF["moderator"], STAFF["developer"]) && len(member.Roles) > 0 && command != "unmute" {
 				resp(msg.ChannelID, "They have role(s)")
 				return
 			}
