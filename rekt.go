@@ -105,7 +105,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 					err = errors.New("I have no database, so I cannot tempmute")
 					break
 				}
-				_, err = DB.Exec("INSERT INTO tempmutes(discord_id, expiration) VALUES (?, ?) ON CONFLICT(discord_id) DO UPDATE SET expiration = EXCLUDED.expiration", user.ID, time.Now().Unix()+60)
+				_, err = DB.Exec("INSERT INTO tempmutes(discord_id, expiration) VALUES ($1, $2) ON CONFLICT(discord_id) DO UPDATE SET expiration = EXCLUDED.expiration", user.ID, time.Now().Unix()+60)
 				if err != nil {
 					break
 				}
@@ -137,11 +137,11 @@ func init() {
 			time.Sleep(10 * time.Second)
 			now := time.Now().Unix()
 			var id string
-			err := DB.QueryRow("SELECT discord_id FROM tempmutes WHERE expiration < ?", now).Scan(&id)
+			err := DB.QueryRow("SELECT discord_id FROM tempmutes WHERE expiration < $1", now).Scan(&id)
 			if err != nil {
 				continue // probably sql.ErrNoRows
 			}
-			_, err = DB.Exec("DELETE FROM tempmutes WHERE discord_id = ?", id)
+			_, err = DB.Exec("DELETE FROM tempmutes WHERE discord_id = $1", id)
 			if err != nil {
 				fmt.Println("Couldn't delete?", err)
 				continue
