@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+	"fmt"
 	"strings"
 	"sync"
 	"time"
@@ -62,7 +64,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.HasPrefix(content, "i!") { // bot woke
 		fields := strings.Fields(content[2:])
 		command := strings.ToLower(fields[0])
-		if contains([]string{"kick", "ban", "mute", "unmute"}, command) { // we don't want role checking outside of these commands
+		if contains([]string{"kick", "ban", "tempmute", "mute", "unmute"}, command) { // we don't want role checking outside of these commands
 			author, err := GetMember(msg.Author.ID)
 			if err != nil || !isStaff(author) {
 				return
@@ -98,6 +100,16 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 				err = discord.GuildBanCreateWithReason(m.GuildID, user.ID, providedReason, 0)
 			case "kick":
 				err = discord.GuildMemberDeleteWithReason(m.GuildID, user.ID, providedReason)
+			case "tempmute":
+				if DB == nil {
+					err = errors.New("I have no database, so I cannot tempmute")
+					break
+				}
+				_, err = DB.Exec("INSERT INTO tempmutes(discord_id, expiration) VALUES (?, ?) ON CONFLICT(discord_id) DO UPDATE SET expiration = EXCLUDED.expiration", user.ID, time.Now().Unix()+60)
+				if err != nil {
+					break
+				}
+				fallthrough
 			case "mute":
 				err = discord.GuildMemberRoleAdd(m.GuildID, user.ID, MUTE_ROLE)
 			case "unmute":
@@ -113,4 +125,39 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 			resp(msg.ChannelID, providedReason)
 		}
 	}
+}
+
+func init() {
+	if DB == nil {
+		fmt.Println("Tempmutes will never end since I don't have access to a database lol")
+		return
+	}
+	go func() {
+		for {
+			time.Sleep(10 * time.Second)
+			now := time.Now().Unix()
+			var id string
+			err := DB.QueryRow("SELECT discord_id FROM tempmutes WHERE expiration < ?", now).Scan(&id)
+			if err != nil {
+				continue // probably sql.ErrNoRows
+			}
+			_, err = DB.Exec("DELETE FROM tempmutes WHERE discord_id = ?", id)
+			if err != nil {
+				fmt.Println("Couldn't delete?", err)
+				continue
+			}
+			fmt.Println("Processing temp unmute for", id)
+			err = discord.GuildMemberRoleRemove(IMPACT_SERVER, id, MUTE_ROLE)
+			if err != nil {
+				fmt.Println("Could not remove mute role", err)
+				continue
+			}
+			DM, err := discord.UserChannelCreate(id) // only creates it if it doesn"t already exist
+			if err != nil {
+				// guess we can't let em know
+				continue
+			}
+			resp(DM.ID, "Your temorary mute is over")
+		}
+	}()
 }

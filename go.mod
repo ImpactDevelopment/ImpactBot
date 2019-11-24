@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/gorilla/websocket v1.4.1 // indirect
+	github.com/lib/pq v1.2.0
 	github.com/subosito/gotenv v1.2.0
 	golang.org/x/crypto v0.0.0-20190820162420-60c769a6c586 // indirect
 	golang.org/x/net v0.0.0-20190813141303-74dc4d7220e7 // indirect
