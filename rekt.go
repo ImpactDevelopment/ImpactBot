@@ -105,7 +105,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 					err = errors.New("I have no database, so I cannot tempmute")
 					break
 				}
-				_, err = DB.Exec("INSERT INTO tempmutes(discord_id, expiration) VALUES ($1, $2) ON CONFLICT(discord_id) DO UPDATE SET expiration = EXCLUDED.expiration", user.ID, time.Now().Unix()+60)
+				_, err = DB.Exec("INSERT INTO tempmutes(discord_id, expiration) VALUES ($1, $2) ON CONFLICT(discord_id) DO UPDATE SET expiration = EXCLUDED.expiration", user.ID, time.Now().Unix()+6*3600)
 				if err != nil {
 					break
 				}
