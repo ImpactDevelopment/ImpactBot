@@ -130,4 +130,8 @@ var replies = []Reply{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
 		message: "Impact does not support cracked launchers. You can attempt to use the unstable Forge version, but no further support will be provided.",
 	},
+	{
+		pattern: `(download|install|start|run|play|(crash|error)*(linux|ubuntu|arch|distro|manjaro|mint)*)`,
+		message: "Most issues on Linux are due to having the wrong version of Java installed. Please install, or switch to, Oracle Java 8. Support on installing Java will not be provided.",
+	},
 }
