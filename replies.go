@@ -130,4 +130,8 @@ var replies = []Reply{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
 		message: "Impact does not support cracked launchers. You can attempt to use the unstable Forge version, but no further support will be provided.",
 	},
+	{
+		pattern: `(1\.15.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
+		message: "No ETA on 1.15 Impact release.",
+	},
 }
