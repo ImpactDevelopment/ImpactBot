@@ -134,4 +134,8 @@ var replies = []Reply{
 		pattern: `(1\.15.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
 		message: "No ETA on 1.15 Impact release.",
 	},
+	{
+		pattern: `impact.*(wiki|spammer|multimc)`,
+		message: "Impact Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
+	},
 }
