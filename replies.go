@@ -132,7 +132,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
-		message: "No ETA on 1.15 Impact release.",
+		message: "No ETA on 1.15 Impact release. If an ETA on 1.15 Impact release is decided, then there will be an announcement in <#" + announcements + ">.",
 	},
 	{
 		pattern: `impact.*(wiki|spammer|multimc)`,
