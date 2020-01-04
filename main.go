@@ -22,6 +22,7 @@ const (
 var STAFF = map[string]string{
 	"headDeveloper": "209817890713632768",
 	"developer":     "221655083748687873",
+	"seniorModerator": "663065117738663938", // wow so new, it starts with a 6
 	"moderator":     "210377982731223040",
 	"support":       "245682967546953738",
 }
