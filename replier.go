@@ -13,6 +13,7 @@ const (
 	TIMEOUT = 30 * time.Second
 	TRASH   = "🗑"
 
+	announcements = "378645175947362320"
 	general       = "208753003996512258"
 	help          = "222120655594848256"
 	bot           = "306182416329080833"
@@ -54,7 +55,7 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 	}
 
 	// Filter approved users
-	if !isMessageSender(reaction.UserID, reaction.MessageID) && !isStaff(user) {
+	if !isMessageSender(reaction.UserID, reaction.MessageID) && !IsUserStaff(user) {
 		return
 	}
 
@@ -87,7 +88,7 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		// Ignore messages from ‘know-it-all’s
-		if isStaff(author) {
+		if IsUserStaff(author) {
 			return
 		}
 	}

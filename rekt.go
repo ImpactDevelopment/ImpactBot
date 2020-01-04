@@ -66,7 +66,11 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 		command := strings.ToLower(fields[0])
 		if contains([]string{"kick", "ban", "tempmute", "mute", "unmute"}, command) { // we don't want role checking outside of these commands
 			author, err := GetMember(msg.Author.ID)
-			if err != nil || !isStaff(author) {
+			if err != nil {
+				return
+			}
+			// Allow support to run `tempmute` and mods to run anything
+			if !(command == "tempmute" && IsUserAtLeast(author, Support)) || IsUserAtLeast(author, Moderator) {
 				return
 			}
 			if len(msg.Mentions) != 1 {
@@ -78,11 +82,11 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 			if err != nil {
 				return
 			}
-			if !hasRole(author, STAFF["moderator"], STAFF["seniorModerator"], STAFF["developer"]) && len(member.Roles) > 0 && command != "unmute" {
+			if !IsUserAtLeast(author, Moderator) && len(member.Roles) > 0 && command != "unmute" {
 				resp(msg.ChannelID, "They have role(s)")
 				return
 			}
-			if !hasRole(author, STAFF["moderator"], STAFF["seniorModerator"], STAFF["developer"]) && !evalRatelimit(msg.Author.ID) && command != "unmute" {
+			if !IsUserAtLeast(author, Moderator) && !evalRatelimit(msg.Author.ID) && command != "unmute" {
 				resp(msg.ChannelID, "Too soon")
 				return
 			}

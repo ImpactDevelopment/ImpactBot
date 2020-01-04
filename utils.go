@@ -4,19 +4,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func isStaff(user *discordgo.Member) bool {
-	for _, role := range STAFF {
-		if hasRole(user, role) {
-			return true
-		}
-	}
-	return false
-}
-
 // True if user has ANY role passed in
-func hasRole(user *discordgo.Member, role ...string) bool {
+func hasRole(user *discordgo.Member, role ...Role) bool {
 	for _, r := range role {
-		if includes(user.Roles, r) {
+		if includes(user.Roles, r.ID) {
 			return true
 		}
 	}
@@ -24,9 +15,9 @@ func hasRole(user *discordgo.Member, role ...string) bool {
 }
 
 // True if user has ALL roles passed in
-func hasRoles(user *discordgo.Member, role ...string) bool {
+func hasRoles(user *discordgo.Member, role ...Role) bool {
 	for _, r := range role {
-		if !includes(user.Roles, r) {
+		if !includes(user.Roles, r.ID) {
 			return false
 		}
 	}

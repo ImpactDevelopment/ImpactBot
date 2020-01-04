@@ -9,9 +9,9 @@ type Reply struct {
 	unless          string
 	message         string
 	excludeChannels []string
-	excludeRoles    []string
+	excludeRoles    []Role
 	onlyChannels    []string
-	onlyRoles       []string
+	onlyRoles       []Role
 	regex           *regexp.Regexp
 	notRegex        *regexp.Regexp
 }
@@ -74,13 +74,13 @@ var replies = []Reply{
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + help + "> channel!",
-		excludeRoles:    []string{DONATOR},
+		excludeRoles:    []Role{DONATOR},
 		excludeChannels: []string{help, donatorHelp},
 	},
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + donatorHelp + "> channel!",
-		onlyRoles:       []string{DONATOR},
+		onlyRoles:       []Role{DONATOR},
 		excludeChannels: []string{help, donatorHelp},
 	},
 	{
@@ -107,20 +107,20 @@ var replies = []Reply{
 		pattern:         `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:          `just|forgot|how\s*long|i\s*donated|hours?|wait`,
 		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds, 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #DONATOR-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
-		excludeRoles:    []string{DONATOR},
+		excludeRoles:    []Role{DONATOR},
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
 	{
 		pattern:         `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(just|how\s*long|still\sdon'?t|did|wait).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
-		excludeRoles:    []string{DONATOR},
+		excludeRoles:    []Role{DONATOR},
 		excludeChannels: []string{betterGeneral, donatorHelp},
 	},
 	{
 		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa`,
 		message:   "You can install nightly builds of Impact using the Donator Installer linked in <#" + donatorInfo + ">.",
-		onlyRoles: []string{DONATOR},
+		onlyRoles: []Role{DONATOR},
 	},
 	{
 		pattern: `schematics?`,
