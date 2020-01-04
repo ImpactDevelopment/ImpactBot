@@ -70,7 +70,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 			// Allow support to run `tempmute` and mods to run anything
-			if !(command == "tempmute" && IsUserAtLeast(author, Support)) || IsUserAtLeast(author, Moderator) {
+			if !(command == "tempmute" && IsUserAtLeast(author, Support)) && !IsUserAtLeast(author, Moderator) {
 				return
 			}
 			if len(msg.Mentions) != 1 {
