@@ -1,0 +1,170 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+	"github.com/bwmarrin/discordgo"
+	"os"
+	"strings"
+)
+
+var prefix string
+
+type Command struct {
+	Name        string
+	Description string
+	Usage       []string
+	RoleNeeded  *Role
+	Handler     func(caller *discordgo.Member, message *discordgo.Message, args []string) error
+}
+
+// List of commands
+var Commands = []Command{
+	{
+		Name:        "tempmute",
+		Description: "mute someone temporarily",
+		Usage:       []string{"@user reason"},
+		RoleNeeded:  &Support,
+		Handler:     muteHandler,
+	},
+	{
+		Name:        "mute",
+		Description: "mute someone permanently",
+		Usage:       []string{"@user reason"},
+		RoleNeeded:  &Moderator,
+		Handler:     muteHandler,
+	},
+	{
+		Name:        "unmute",
+		Description: "unmute someone",
+		Usage:       []string{"@user reason"},
+		RoleNeeded:  &Moderator,
+		Handler:     rektHandler,
+	},
+	{
+		Name:        "kick",
+		Description: "kick someone from the server",
+		Usage:       []string{"@user reason"},
+		RoleNeeded:  &Moderator,
+		Handler:     rektHandler,
+	},
+	{
+		Name:        "ban",
+		Description: "ban someone from the server",
+		Usage:       []string{"@user reason"},
+		RoleNeeded:  &Moderator,
+		Handler:     rektHandler,
+	},
+}
+
+func init() {
+	// Load prefix from the environment
+	prefix = os.Getenv("IMPACT_PREFIX")
+	if prefix == "" {
+		prefix = "i!"
+	}
+
+	// Have to append helpCommand after initializing Commands to avoid an initialization loop
+	Commands = append(Commands, helpCommand)
+}
+
+func onMessageSentCommandHandler(session *discordgo.Session, m *discordgo.MessageCreate) {
+	msg := m.Message
+	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault || msg.Author.ID == myselfID || m.GuildID != IMPACT_SERVER {
+		return // wtf
+	}
+	content := msg.Content
+
+	if strings.HasPrefix(content, prefix) { // bot woke
+		args := strings.Fields(content[len(prefix):])
+		command := findCommand(strings.ToLower(args[0]))
+		if command == nil {
+			resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" not found! Try %shelp", args[0], prefix))
+			return
+		}
+		author, err := GetMember(msg.Author.ID)
+		if err != nil {
+			return
+		}
+		if command.RoleNeeded != nil && !IsUserAtLeast(author, *command.RoleNeeded) {
+			resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" requires at least %s", command.Name, command.RoleNeeded.Name))
+			return
+		}
+		err = command.Handler(author, msg, args)
+		if err != nil {
+			resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" returned an error: %s", command.Name, err.Error()))
+			return
+		}
+
+	}
+}
+
+func findCommand(command string) *Command {
+	for _, it := range Commands {
+		if command == it.Name {
+			return &it
+		}
+	}
+	return nil
+}
+
+var helpCommand = Command{
+	Name:        "help",
+	Description: "display this help message",
+	Usage:       nil,
+	RoleNeeded:  nil,
+	Handler: func(caller *discordgo.Member, message *discordgo.Message, args []string) error {
+		embed := discordgo.MessageEmbed{
+			Color:  0,
+			Fields: []*discordgo.MessageEmbedField{},
+		}
+		if len(args) < 2 {
+			// All commands
+			embed.Title = "ImpactBot help"
+			embed.Description = "Available commands:"
+			for _, command := range Commands {
+				embed.Fields = append(embed.Fields, &discordgo.MessageEmbedField{
+					Name:  command.Name,
+					Value: command.helpText(),
+				})
+			}
+		} else {
+			// Specified commands
+			command := findCommand(args[1])
+			if command == nil {
+				return errors.New(fmt.Sprintf("Command \"%s\" not found! Try %shelp", args[1], prefix))
+			}
+			embed.Title = fmt.Sprintf("Command `%s` usage", command.Name)
+			embed.Description = command.helpText()
+			embed.Footer = &discordgo.MessageEmbedFooter{
+				Text: fmt.Sprintf("See %shelp for alternative commands", prefix),
+			}
+		}
+		_, err := discord.ChannelMessageSendEmbed(message.ChannelID, &embed)
+		if err != nil {
+			return err
+		}
+
+		return nil
+	},
+}
+
+func (c Command) helpText() string {
+	var desc strings.Builder
+	if len(c.Usage) > 0 {
+		desc.WriteString("```\n")
+		for _, usage := range c.Usage {
+			desc.WriteString(fmt.Sprintf("%s%s %s\n", prefix, c.Name, usage))
+		}
+		desc.WriteString("```")
+	}
+	desc.WriteString(c.Description)
+	if !strings.HasSuffix(c.Description, ".") {
+		desc.WriteString(".")
+	}
+	if c.RoleNeeded != nil {
+		desc.WriteString(fmt.Sprintf("\nRequires `%s` or higher", c.RoleNeeded.Name))
+	}
+
+	return desc.String()
+}

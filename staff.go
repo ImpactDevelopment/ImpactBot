@@ -78,3 +78,7 @@ func IsUserAtLeast(user *discordgo.Member, role Role) bool {
 func IsUserHigherThan(user *discordgo.Member, role Role) bool {
 	return hasRole(user, GetRolesHigherThan(role)...)
 }
+
+func IsUserLowerThan(user *discordgo.Member, role Role) bool {
+	return !IsUserAtLeast(user, role)
+}

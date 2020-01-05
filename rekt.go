@@ -53,86 +53,114 @@ func contains(list []string, it string) bool {
 	return false
 }
 
-func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
-	msg := m.Message
-	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault || msg.Author.ID == myselfID || m.GuildID != IMPACT_SERVER {
-		return // wtf
+// TODO get without using Message.Mentions?
+func getUserFromArgs(msg *discordgo.Message, args []string) (*discordgo.User, error) {
+	if len(msg.Mentions) != 1 {
+		return nil, errors.New("Mention exactly one user")
+	}
+	user := msg.Mentions[0]
+	if args[1] != fmt.Sprintf("<@!%s>", user.ID) {
+		return nil, errors.New("First argument should mention user")
+	}
+	return user, nil
+}
+
+// TODO get without using Message.Mentions?
+func getReasonFromArgs(args []string) string {
+	index := 1
+	// Find the first index that isn't a user/channel mention
+	for index < len(args) && strings.HasPrefix(args[index], "<") && strings.HasSuffix(args[index], ">") {
+		index++
+	}
+	if index >= len(args) {
+		return ""
+	}
+	return strings.Join(args[index:], " ")
+}
+
+// TODO add channel specific mute mode
+func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
+	user, err := getUserFromArgs(msg, args)
+	if err != nil {
+		return err
 	}
 
-	content := msg.Content
+	// Reasons are important
+	reason := getReasonFromArgs(args)
+	if reason == "" {
+		return errors.New("Give a reason")
+	}
+	providedReason := args[0] + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + reason
 
-	if strings.HasPrefix(content, "i!") { // bot woke
-		fields := strings.Fields(content[2:])
-		command := strings.ToLower(fields[0])
-		if contains([]string{"kick", "ban", "tempmute", "mute", "unmute"}, command) { // we don't want role checking outside of these commands
-			author, err := GetMember(msg.Author.ID)
-			if err != nil {
-				return
-			}
-			// Allow support to run `tempmute` and mods to run anything
-			if !(command == "tempmute" && IsUserAtLeast(author, Support)) && !IsUserAtLeast(author, Moderator) {
-				return
-			}
-			if len(msg.Mentions) != 1 {
-				resp(msg.ChannelID, "Mention exactly one user")
-				return
-			}
-			user := msg.Mentions[0]
-			member, err := GetMember(user.ID)
-			if err != nil {
-				return
-			}
-			if !IsUserAtLeast(author, Moderator) && len(member.Roles) > 0 && command != "unmute" {
-				resp(msg.ChannelID, "They have role(s)")
-				return
-			}
-			if !IsUserAtLeast(author, Moderator) && !evalRatelimit(msg.Author.ID) && command != "unmute" {
-				resp(msg.ChannelID, "Too soon")
-				return
-			}
-			providedReason := strings.TrimSpace(content[strings.Index(content, ">")+1:])
-			if providedReason == "" {
-				resp(msg.ChannelID, "Give a reason")
-				return
-			}
-			providedReason = command + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + providedReason
+	// Support can tempmute, but only on users without roles
+	if strings.ToLower(args[0]) == "tempmute" {
+		member, err := GetMember(user.ID)
+		if err != nil {
+			return err
+		}
+		if IsUserLowerThan(caller, Moderator) && len(member.Roles) > 0 {
+			return errors.New("They have role(s)")
+		}
+		if IsUserLowerThan(caller, Moderator) && !evalRatelimit(msg.Author.ID) {
+			return errors.New("Too soon")
+		}
 
-			DM, err := discord.UserChannelCreate(user.ID) // only creates it if it doesn"t already exist
-			if err == nil {
-				// if there is an error DMing them, we still want to ban them, they just won't know why
-				resp(DM.ID, providedReason)
-			}
+		DM, err := discord.UserChannelCreate(user.ID) // only creates it if it doesn"t already exist
+		if err == nil {
+			// if there is an error DMing them, we still want to ban them, they just won't know why
+			resp(DM.ID, providedReason)
+		}
 
-			switch command {
-			case "ban":
-				err = discord.GuildBanCreateWithReason(m.GuildID, user.ID, providedReason, 0)
-			case "kick":
-				err = discord.GuildMemberDeleteWithReason(m.GuildID, user.ID, providedReason)
-			case "tempmute":
-				if DB == nil {
-					err = errors.New("I have no database, so I cannot tempmute")
-					break
-				}
-				_, err = DB.Exec("INSERT INTO tempmutes(discord_id, expiration) VALUES ($1, $2) ON CONFLICT(discord_id) DO UPDATE SET expiration = EXCLUDED.expiration", user.ID, time.Now().Unix()+6*3600)
-				if err != nil {
-					break
-				}
-				fallthrough
-			case "mute":
-				err = discord.GuildMemberRoleAdd(m.GuildID, user.ID, MUTE_ROLE)
-			case "unmute":
-				err = discord.GuildMemberRoleRemove(m.GuildID, user.ID, MUTE_ROLE)
-			}
-			if err != nil {
-				resp(msg.ChannelID, "ERROR "+err.Error())
-				return
-			}
-
-			resp(FORWARD_TO, providedReason)
-
-			resp(msg.ChannelID, providedReason)
+		if DB == nil {
+			return errors.New("I have no database, so I cannot tempmute")
+		}
+		_, err = DB.Exec("INSERT INTO tempmutes(discord_id, expiration) VALUES ($1, $2) ON CONFLICT(discord_id) DO UPDATE SET expiration = EXCLUDED.expiration", user.ID, time.Now().Add(3*time.Hour).Unix())
+		if err != nil {
+			return err
 		}
 	}
+	err = discord.GuildMemberRoleAdd(msg.GuildID, user.ID, MUTE_ROLE)
+	if err != nil {
+		return err
+	}
+
+	resp(FORWARD_TO, providedReason)
+
+	resp(msg.ChannelID, providedReason)
+	return nil
+}
+
+// tbh should this be separate handlers??
+func rektHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
+	user, err := getUserFromArgs(msg, args)
+	if err != nil {
+		return err
+	}
+
+	// Reasons are important
+	reason := getReasonFromArgs(args)
+	if reason == "" {
+		return errors.New("Give a reason")
+	}
+	providedReason := args[0] + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + reason
+
+	switch args[0] {
+	case "ban":
+		err = discord.GuildBanCreateWithReason(msg.GuildID, user.ID, providedReason, 0)
+	case "kick":
+		err = discord.GuildMemberDeleteWithReason(msg.GuildID, user.ID, providedReason)
+	case "unmute":
+		err = discord.GuildMemberRoleRemove(msg.GuildID, user.ID, MUTE_ROLE)
+	}
+
+	if err != nil {
+		return err
+	}
+
+	resp(FORWARD_TO, providedReason)
+
+	resp(msg.ChannelID, providedReason)
+	return nil
 }
 
 func init() {
