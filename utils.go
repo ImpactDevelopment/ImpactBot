@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/bwmarrin/discordgo"
+	"regexp"
 )
 
 // True if user has ANY role passed in
@@ -54,4 +55,18 @@ func SendDM(userID string, message string) error {
 // Get a Member from the Impact Discord
 func GetMember(userID string) (member *discordgo.Member, err error) {
 	return discord.GuildMember(IMPACT_SERVER, userID)
+}
+
+func findNamedMatches(r *regexp.Regexp, str string) map[string]string {
+	matches := r.FindStringSubmatch(str)
+	names := r.SubexpNames()
+	subs := map[string]string{}
+
+	for i, sub := range matches {
+		if names[i] != "" {
+			subs[names[i]] = sub
+		}
+	}
+
+	return subs
 }

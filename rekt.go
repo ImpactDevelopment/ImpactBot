@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"regexp"
 	"strings"
 	"sync"
 	"time"
@@ -17,6 +18,8 @@ const (
 
 var ratelimit = make(map[string]int64)
 var ratelimitLock sync.Mutex
+
+var mentionRegex = regexp.MustCompile(`<(?P<Type>[#@])!?(?P<ID>\d+)>`)
 
 func evalRatelimit(author string) bool {
 	ratelimitLock.Lock()
@@ -44,53 +47,78 @@ func resp(ch string, text string) {
 	discord.ChannelMessageSendEmbed(ch, embed)
 }
 
-func contains(list []string, it string) bool {
-	for _, s := range list {
-		if s == it {
-			return true
+// Turns the first one or two args into users and/or channels and also returns whatever args weren't consumed
+func getUserAndChannelAndArgs(args []string) (user *discordgo.User, channel *discordgo.Channel, remainingArgs []string) {
+	remainingArgs = args
+	user, channel = getUserOrChannelForArg(args[0])
+	if user != nil || channel != nil {
+		// Consume an arg
+		remainingArgs = remainingArgs[1:]
+		// Don't return since we want to try the second arg too
+	} else {
+		// No match on first arg so don't try to match second arg
+		return
+	}
+
+	// getUserOrChannelForArg always has one nil arg, so if-else instead of if-elseif is fine
+	if user == nil {
+		user, _ = getUserOrChannelForArg(args[1])
+		if user != nil {
+			// Consume an arg
+			remainingArgs = remainingArgs[1:]
+		}
+	} else {
+		_, channel = getUserOrChannelForArg(args[1])
+		if channel != nil {
+			// Consume an arg
+			remainingArgs = remainingArgs[1:]
 		}
 	}
-	return false
+	return
 }
 
-// TODO get without using Message.Mentions?
-func getUserFromArgs(msg *discordgo.Message, args []string) (*discordgo.User, error) {
-	if len(msg.Mentions) != 1 {
-		return nil, errors.New("Mention exactly one user")
+// Send a blocking api request if a match is found
+func getUserOrChannelForArg(arg string) (*discordgo.User, *discordgo.Channel) {
+	match := findNamedMatches(mentionRegex, arg)
+	if match["ID"] == "" {
+		return nil, nil
 	}
-	user := msg.Mentions[0]
-	if args[1] != fmt.Sprintf("<@!%s>", user.ID) {
-		return nil, errors.New("First argument should mention user")
+	switch match["Type"] {
+	// Sends a blocking API request
+	case "#":
+		{
+			channel, err := discord.Channel(match["ID"])
+			if err == nil {
+				return nil, channel
+			}
+		}
+	case "@":
+		{
+			user, err := discord.User(match["ID"])
+			if err == nil {
+				return user, nil
+			}
+		}
 	}
-	return user, nil
-}
 
-// TODO get without using Message.Mentions?
-func getReasonFromArgs(args []string) string {
-	index := 1
-	// Find the first index that isn't a user/channel mention
-	for index < len(args) && strings.HasPrefix(args[index], "<") && strings.HasSuffix(args[index], ">") {
-		index++
-	}
-	if index >= len(args) {
-		return ""
-	}
-	return strings.Join(args[index:], " ")
+	return nil, nil
 }
 
 // TODO add channel specific mute mode
 func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	user, err := getUserFromArgs(msg, args)
-	if err != nil {
-		return err
+	user, channel, remainingArgs := getUserAndChannelAndArgs(args[1:])
+	if user == nil {
+		return errors.New("First argument should mention user")
+	}
+	if channel != nil { //TODO
+		return errors.New("Channel mentions not supported... for now")
+	}
+	if len(remainingArgs) < 1 {
+		return errors.New("Give a reason")
 	}
 
 	// Reasons are important
-	reason := getReasonFromArgs(args)
-	if reason == "" {
-		return errors.New("Give a reason")
-	}
-	providedReason := args[0] + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + reason
+	providedReason := args[0] + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + strings.Join(remainingArgs, " ")
 
 	// Support can tempmute, but only on users without roles
 	if strings.ToLower(args[0]) == "tempmute" {
@@ -119,7 +147,7 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			return err
 		}
 	}
-	err = discord.GuildMemberRoleAdd(msg.GuildID, user.ID, MUTE_ROLE)
+	err := discord.GuildMemberRoleAdd(msg.GuildID, user.ID, MUTE_ROLE)
 	if err != nil {
 		return err
 	}
@@ -132,18 +160,21 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 
 // tbh should this be separate handlers??
 func rektHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	user, err := getUserFromArgs(msg, args)
-	if err != nil {
-		return err
+	user, channel, remainingArgs := getUserAndChannelAndArgs(args[1:])
+	if user == nil {
+		return errors.New("First argument should mention user")
+	}
+	if channel != nil {
+		return errors.New(args[0] + " does not support channel mentions")
+	}
+	if len(remainingArgs) < 1 {
+		return errors.New("Give a reason")
 	}
 
 	// Reasons are important
-	reason := getReasonFromArgs(args)
-	if reason == "" {
-		return errors.New("Give a reason")
-	}
-	providedReason := args[0] + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + reason
+	providedReason := args[0] + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + strings.Join(remainingArgs, " ")
 
+	var err error
 	switch args[0] {
 	case "ban":
 		err = discord.GuildBanCreateWithReason(msg.GuildID, user.ID, providedReason, 0)
