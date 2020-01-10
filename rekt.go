@@ -120,6 +120,13 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 	// Reasons are important
 	providedReason := args[0] + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + strings.Join(remainingArgs, " ")
 
+	// Direct message the user being muted
+	DM, err := discord.UserChannelCreate(user.ID) // only creates it if it doesn"t already exist
+	if err == nil {
+		// if there is an error DMing them, we still want to ban them, they just won't know why
+		resp(DM.ID, providedReason)
+	}
+
 	// Support can tempmute, but only on users without roles
 	if strings.ToLower(args[0]) == "tempmute" {
 		member, err := GetMember(user.ID)
@@ -133,12 +140,6 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			return errors.New("Too soon")
 		}
 
-		DM, err := discord.UserChannelCreate(user.ID) // only creates it if it doesn"t already exist
-		if err == nil {
-			// if there is an error DMing them, we still want to ban them, they just won't know why
-			resp(DM.ID, providedReason)
-		}
-
 		if DB == nil {
 			return errors.New("I have no database, so I cannot tempmute")
 		}
@@ -147,7 +148,7 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			return err
 		}
 	}
-	err := discord.GuildMemberRoleAdd(msg.GuildID, user.ID, MUTE_ROLE)
+	err = discord.GuildMemberRoleAdd(msg.GuildID, user.ID, MUTE_ROLE)
 	if err != nil {
 		return err
 	}
@@ -174,7 +175,13 @@ func rektHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 	// Reasons are important
 	providedReason := args[0] + " has been issued to " + user.Username + " by @" + msg.Author.Username + "#" + msg.Author.Discriminator + " for reason: " + strings.Join(remainingArgs, " ")
 
-	var err error
+	// Direct message the user being rekt
+	DM, err := discord.UserChannelCreate(user.ID) // only creates it if it doesn"t already exist
+	if err == nil {
+		// if there is an error DMing them, we still want to ban them, they just won't know why
+		resp(DM.ID, providedReason)
+	}
+
 	switch args[0] {
 	case "ban":
 		err = discord.GuildBanCreateWithReason(msg.GuildID, user.ID, providedReason, 0)
