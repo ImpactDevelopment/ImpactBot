@@ -34,7 +34,7 @@ func evalRatelimit(author string) bool {
 	return false
 }
 
-func resp(ch string, text string) {
+func resp(ch string, text string) error {
 	embed := &discordgo.MessageEmbed{
 		Author:      &discordgo.MessageEmbedAuthor{},
 		Color:       prettyembedcolor,
@@ -44,7 +44,8 @@ func resp(ch string, text string) {
 		},
 		Timestamp: time.Now().Format(time.RFC3339),
 	}
-	discord.ChannelMessageSendEmbed(ch, embed)
+	_, err := discord.ChannelMessageSendEmbed(ch, embed)
+	return err
 }
 
 // Turns the first one or two args into users and/or channels and also returns whatever args weren't consumed
@@ -130,7 +131,10 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 	DM, err := discord.UserChannelCreate(user.ID) // only creates it if it doesn"t already exist
 	if err == nil {
 		// if there is an error DMing them, we still want to ban them, they just won't know why
-		resp(DM.ID, providedReason)
+		err = resp(DM.ID, providedReason)
+		if err != nil {
+			fmt.Printf("Error direct messaging %s#%s: %s\n", user.Username, user.Discriminator, err.Error())
+		}
 	}
 
 	// Support can tempmute, but only on users without roles
@@ -159,13 +163,14 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		return err
 	}
 
-	resp(FORWARD_TO, providedReason)
+	_ = resp(FORWARD_TO, providedReason)
 
-	resp(msg.ChannelID, providedReason)
+	_ = resp(msg.ChannelID, providedReason)
 	return nil
 }
 
 // tbh should this be separate handlers??
+// or maybe multiple handlers here is stupid, this is mostly a copy of mute handler :\
 func rektHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
 	user, channel, remainingArgs := getUserAndChannelAndArgs(args[1:])
 	if user == nil {
@@ -185,7 +190,10 @@ func rektHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 	DM, err := discord.UserChannelCreate(user.ID) // only creates it if it doesn"t already exist
 	if err == nil {
 		// if there is an error DMing them, we still want to ban them, they just won't know why
-		resp(DM.ID, providedReason)
+		err = resp(DM.ID, providedReason)
+		if err != nil {
+			fmt.Printf("Error direct messaging %s#%s: %s\n", user.Username, user.Discriminator, err.Error())
+		}
 	}
 
 	switch args[0] {
@@ -201,9 +209,9 @@ func rektHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		return err
 	}
 
-	resp(FORWARD_TO, providedReason)
+	_ = resp(FORWARD_TO, providedReason)
 
-	resp(msg.ChannelID, providedReason)
+	_ = resp(msg.ChannelID, providedReason)
 	return nil
 }
 
@@ -237,7 +245,7 @@ func init() {
 				// guess we can't let em know
 				continue
 			}
-			resp(DM.ID, "Your temorary mute is over")
+			_ = resp(DM.ID, "Your temorary mute is over")
 		}
 	}()
 }

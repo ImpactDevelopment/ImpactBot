@@ -79,7 +79,7 @@ func onMessageSentCommandHandler(session *discordgo.Session, m *discordgo.Messag
 		args := strings.Fields(content[len(prefix):])
 		command := findCommand(strings.ToLower(args[0]))
 		if command == nil {
-			resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" not found! Try %shelp", args[0], prefix))
+			_ = resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" not found! Try %shelp", args[0], prefix))
 			return
 		}
 		author, err := GetMember(msg.Author.ID)
@@ -87,12 +87,12 @@ func onMessageSentCommandHandler(session *discordgo.Session, m *discordgo.Messag
 			return
 		}
 		if command.RoleNeeded != nil && !IsUserAtLeast(author, *command.RoleNeeded) {
-			resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" requires at least %s", command.Name, command.RoleNeeded.Name))
+			_ = resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" requires at least %s", command.Name, command.RoleNeeded.Name))
 			return
 		}
 		err = command.Handler(author, msg, args)
 		if err != nil {
-			resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" returned an error: %s", command.Name, err.Error()))
+			_ = resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" returned an error: %s", command.Name, err.Error()))
 			return
 		}
 
