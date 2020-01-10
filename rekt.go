@@ -50,6 +50,9 @@ func resp(ch string, text string) {
 // Turns the first one or two args into users and/or channels and also returns whatever args weren't consumed
 func getUserAndChannelAndArgs(args []string) (user *discordgo.User, channel *discordgo.Channel, remainingArgs []string) {
 	remainingArgs = args
+	if len(args) < 1 {
+		return
+	}
 	user, channel = getUserOrChannelForArg(args[0])
 	if user != nil || channel != nil {
 		// Consume an arg
@@ -61,6 +64,9 @@ func getUserAndChannelAndArgs(args []string) (user *discordgo.User, channel *dis
 	}
 
 	// getUserOrChannelForArg always has one nil arg, so if-else instead of if-elseif is fine
+	if len(args) < 2 {
+		return
+	}
 	if user == nil {
 		user, _ = getUserOrChannelForArg(args[1])
 		if user != nil {
