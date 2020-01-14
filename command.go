@@ -74,6 +74,8 @@ func onMessageSentCommandHandler(session *discordgo.Session, m *discordgo.Messag
 		return // wtf
 	}
 	content := msg.Content
+	content = strings.Replace(content, ">", "> ", -1)
+	content = strings.Replace(content, "<", " <", -1)
 
 	if strings.HasPrefix(content, prefix) { // bot woke
 		args := strings.Fields(content[len(prefix):])
