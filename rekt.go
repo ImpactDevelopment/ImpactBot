@@ -19,7 +19,7 @@ const (
 var ratelimit = make(map[string]int64)
 var ratelimitLock sync.Mutex
 
-var mentionRegex = regexp.MustCompile(`<(?P<Type>[#@])!?(?P<ID>\d+)>`)
+var mentionRegex = regexp.MustCompile(`^<(?P<Type>[#@])!?(?P<ID>\d+)>$`)
 
 func evalRatelimit(author string) bool {
 	ratelimitLock.Lock()
