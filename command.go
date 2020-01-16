@@ -55,6 +55,15 @@ var Commands = []Command{
 		RoleNeeded:  &Moderator,
 		Handler:     rektHandler,
 	},
+	{
+		Name:        "rules",
+		Description: "display the rules",
+		Usage: []string{
+			"",
+			"<number>",
+		},
+		Handler: rulesHandler,
+	},
 }
 
 func init() {
