@@ -9,22 +9,6 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-const (
-	TIMEOUT = 30 * time.Second
-	TRASH   = "🗑"
-
-	announcements = "378645175947362320"
-	general       = "208753003996512258"
-	help          = "222120655594848256"
-	bot           = "306182416329080833"
-	betterGeneral = "617140506069303306"
-	donatorHelp   = "583453983427788830"
-	donatorInfo   = "613478149669388298"
-	testing       = "617066818925756506"
-)
-
-var channels = []string{general, help, bot, donatorHelp, testing}
-
 // a map from ID of a message I sent, to the ID of who is allowed to delete it (aka who sent the message that I was responding to)
 var messageSender = make(map[string]string)
 var messageSenderLock sync.Mutex
@@ -83,7 +67,8 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 	// Unless we're being spoken to
 	if !triggeredManually(msg) {
 		// Don't talk where we're not welcome
-		if !includes(channels, msg.ChannelID) {
+		whitelist := []string{general, help, bot, donatorHelp, testing}
+		if !includes(whitelist, msg.ChannelID) {
 			return
 		}
 

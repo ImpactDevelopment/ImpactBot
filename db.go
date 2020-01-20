@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"os"
 
 	_ "github.com/lib/pq"
@@ -28,17 +29,29 @@ func init() {
 		// apparently this DOUBLE CHECKS that it's up?
 		panic(err)
 	}
-	schema()
-}
-
-func schema() {
-	_, err := DB.Exec(`CREATE TABLE IF NOT EXISTS tempmutes(
-
-		discord_id TEXT   NOT NULL UNIQUE PRIMARY KEY,
-		expiration BIGINT NOT NULL
-
-	);`)
+	err = schema()
 	if err != nil {
+		// Failed to create table or something
 		panic(err)
 	}
+}
+
+func schema() (err error) {
+	_, err = DB.Exec(`
+		CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+	`)
+	if err != nil {
+		log.Println("Unable to load pgcrypto extension")
+		return
+	}
+
+	_, err = DB.Exec(`
+		CREATE TABLE IF NOT EXISTS tempmutes (
+			id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+			discord_id TEXT NOT NULL,
+			channel_id TEXT,
+			expiration TIMESTAMP NOT NULL
+		);
+	`)
+	return
 }
