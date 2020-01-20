@@ -2,6 +2,8 @@ module github.com/ImpactDevelopment/ImpactBot
 
 go 1.13
 
+// +heroku goVersion go1.13
+
 require (
 	github.com/bwmarrin/discordgo v0.19.0
 	github.com/google/uuid v1.1.1
