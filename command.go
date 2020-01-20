@@ -22,24 +22,24 @@ type Command struct {
 var Commands = []Command{
 	{
 		Name:        "tempmute",
-		Description: "mute someone temporarily",
-		Usage:       []string{"@user reason"},
+		Description: "mute someone temporarily, optionally from a specific channel",
+		Usage:       []string{"@user reason", "@user #channel reason", "#channel @user reason"},
 		RoleNeeded:  &Support,
 		Handler:     muteHandler,
 	},
 	{
 		Name:        "mute",
-		Description: "mute someone permanently",
-		Usage:       []string{"@user reason"},
+		Description: "mute someone permanently, optionally from a specific channel",
+		Usage:       []string{"@user reason", "@user #channel reason", "#channel @user reason"},
 		RoleNeeded:  &Moderator,
 		Handler:     muteHandler,
 	},
 	{
 		Name:        "unmute",
-		Description: "unmute someone",
-		Usage:       []string{"@user reason"},
+		Description: "unmute someone, either server-wide, from a specific channel, or remove all mutes",
+		Usage:       []string{"@user", "@user #channel", "@user all"},
 		RoleNeeded:  &Moderator,
-		Handler:     rektHandler,
+		Handler:     unmuteHandler,
 	},
 	{
 		Name:        "kick",
