@@ -200,7 +200,7 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 	}
 
 	// Check if we have a matching mute already
-	err = DB.QueryRow("SELECT id from mutes WHERE discord_id=$1 AND channel_id=$2", userId, channelId).Scan(&id)
+	err = DB.QueryRow("SELECT id from mutes WHERE discord_id=$1 AND (channel_id=$2 OR ($2 IS NULL AND channel_id IS NULL))", userId, channelId).Scan(&id)
 
 	if err == nil {
 		// Update existing entry, but only if it was already a tempmute. Don't downgrade a mute to a tempmute.
