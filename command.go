@@ -5,10 +5,14 @@ import (
 	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"os"
+	"regexp"
 	"strings"
 )
 
-var prefix string
+var (
+	prefix        string
+	prefixPattern *regexp.Regexp
+)
 
 type Command struct {
 	Name        string
@@ -72,6 +76,8 @@ func init() {
 	if prefix == "" {
 		prefix = "i!"
 	}
+	// Match case-insensitive & ignore whitespace around prefix
+	prefixPattern = regexp.MustCompile(`(?i)^\s*` + regexp.QuoteMeta(prefix) + `\s*`)
 
 	// Have to append helpCommand after initializing Commands to avoid an initialization loop
 	Commands = append(Commands, helpCommand)
@@ -86,8 +92,8 @@ func onMessageSentCommandHandler(session *discordgo.Session, m *discordgo.Messag
 	content = strings.Replace(content, ">", "> ", -1)
 	content = strings.Replace(content, "<", " <", -1)
 
-	if strings.HasPrefix(content, prefix) { // bot woke
-		args := strings.Fields(content[len(prefix):])
+	if match := prefixPattern.FindString(content); match != "" { // bot woke
+		args := strings.Fields(content[len(match):])
 		command := findCommand(strings.ToLower(args[0]))
 		if command == nil {
 			_ = resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" not found! Try %shelp", args[0], prefix))
