@@ -50,7 +50,7 @@ func schema() (err error) {
 			id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 			discord_id TEXT NOT NULL,
 			channel_id TEXT,
-			expiration TIMESTAMP NOT NULL
+			expiration TIMESTAMP
 		);
 	`)
 	return
