@@ -263,6 +263,10 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 				err = discord.GuildMemberRoleRemove(msg.GuildID, user.ID, muteRole)
 			}
 		}
+		_, err = DB.Exec("DELETE FROM mutes WHERE discord_id = $1", user.ID)
+		if err != nil {
+			return err
+		}
 	} else {
 		// unmute specified channel (or server-wide for nil)
 		muteRole, err := getMuteRoleForChannel(channel)
@@ -286,8 +290,16 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 		// Log the unmute
 		if channel == nil {
 			fullMute = true
+			_, err = DB.Exec("DELETE FROM mutes WHERE discord_id = $1", user.ID)
+			if err != nil {
+				return err
+			}
 		} else {
 			channels = append(channels, channel.ID)
+			_, err = DB.Exec("DELETE FROM mutes WHERE discord_id = $1 AND channel_id = $2", user.ID, channel.ID)
+			if err != nil {
+				return err
+			}
 		}
 
 		// Unmute them
