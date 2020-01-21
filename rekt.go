@@ -384,7 +384,7 @@ func unmuteCallback() {
 
 	// Get all expired rows
 	now := time.Now()
-	rows, err := DB.Query("SELECT id, discord_id, channel_id FROM tempmutes WHERE expiration < $1", now)
+	rows, err := DB.Query("SELECT id, discord_id, channel_id FROM tempmutes WHERE expiration < $1 AND expiration IS NOT NULL", now)
 	if err != nil {
 		if !errors.Is(err, sql.ErrNoRows) {
 			fmt.Println("Error querying expired tempmutes", err)
