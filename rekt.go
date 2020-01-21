@@ -195,17 +195,17 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		}
 
 		// Check if we have a matching mute already
-		err = DB.QueryRow("SELECT id from tempmutes WHERE discord_id=$1 AND channel_id=$2", userId, channelId).Scan(&id)
+		err = DB.QueryRow("SELECT id from mutes WHERE discord_id=$1 AND channel_id=$2", userId, channelId).Scan(&id)
 
 		if err == nil {
 			// Update existing entry
-			_, err = DB.Exec("UPDATE tempmutes SET expiration=$2 WHERE id=$1", id, expiration)
+			_, err = DB.Exec("UPDATE mutes SET expiration=$2 WHERE id=$1", id, expiration)
 			if err != nil {
 				return err
 			}
 		} else if errors.Is(err, sql.ErrNoRows) {
 			// Insert new entry
-			_, err = DB.Exec("INSERT INTO tempmutes (discord_id, channel_id, expiration) VALUES ($1, $2, $3)", userId, channelId, expiration)
+			_, err = DB.Exec("INSERT INTO mutes (discord_id, channel_id, expiration) VALUES ($1, $2, $3)", userId, channelId, expiration)
 			if err != nil {
 				return err
 			}
@@ -384,7 +384,7 @@ func unmuteCallback() {
 
 	// Get all expired rows
 	now := time.Now()
-	rows, err := DB.Query("SELECT id, discord_id, channel_id FROM tempmutes WHERE expiration < $1 AND expiration IS NOT NULL", now)
+	rows, err := DB.Query("SELECT id, discord_id, channel_id FROM mutes WHERE expiration < $1 AND expiration IS NOT NULL", now)
 	if err != nil {
 		if !errors.Is(err, sql.ErrNoRows) {
 			fmt.Println("Error querying expired tempmutes", err)
@@ -407,7 +407,7 @@ func unmuteCallback() {
 
 		// We're handling the user, so delete from db.
 		// If we fail to unmute, at least we won't end up handling them forever
-		_, err = DB.Exec("DELETE FROM tempmutes WHERE id = $1", id)
+		_, err = DB.Exec("DELETE FROM mutes WHERE id = $1", id)
 		if err != nil {
 			fmt.Println("Error deleting tempmute entry", err)
 			continue
@@ -475,3 +475,57 @@ func init() {
 		}
 	}()
 }
+
+
+func onUserJoin2(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
+	if m.GuildID != IMPACT_SERVER || m.User == nil{
+		return
+	}
+	if DB == nil {
+		return
+	}
+
+	// Get all expired rows
+	now := time.Now()
+	rows, err := DB.Query("SELECT channel_id FROM mutes WHERE (expiration IS NULL OR expiration > $1) AND discord_id = $2", now, m.User.ID)
+	if err != nil {
+		if !errors.Is(err, sql.ErrNoRows) {
+			fmt.Println("Error querying expired tempmutes", err)
+		}
+		return
+	}
+
+	for rows.Next() {
+		var (
+			channelId sql.NullString
+		)
+
+		err := rows.Scan(&channelId)
+		if err != nil {
+			fmt.Println("Error scanning tempmute entry", err)
+			continue
+		}
+
+		// Get channel and mute role
+		var channel *discordgo.Channel
+		if channelId.Valid {
+			channel, err = discord.Channel(channelId.String)
+			if err != nil {
+				fmt.Println("Error getting tempmute channel from channel id "+channelId.String, err)
+				continue
+			}
+		}
+		muteRole, err := getMuteRoleForChannel(channel)
+		if err != nil {
+			fmt.Println(fmt.Sprintf("Invalid mute role for channel id \"%s\"\n", channelId.String), err)
+			continue
+		}
+
+		// Do the unmute
+		err = discord.GuildMemberRoleAdd(IMPACT_SERVER, m.User.ID, muteRole)
+		if err != nil {
+			fmt.Println("Could not remove mute role \""+muteRole+"\" from user \""+m.User.ID+"\"", err)
+		}
+	}
+}
+

@@ -46,7 +46,7 @@ func schema() (err error) {
 	}
 
 	_, err = DB.Exec(`
-		CREATE TABLE IF NOT EXISTS tempmutes (
+		CREATE TABLE IF NOT EXISTS mutes (
 			id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 			discord_id TEXT NOT NULL,
 			channel_id TEXT,
