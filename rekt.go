@@ -175,44 +175,48 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		if IsUserLowerThan(caller, Moderator) && !evalRatelimit(msg.Author.ID) {
 			return errors.New("Too soon")
 		}
+	}
 
-		if DB == nil {
-			return errors.New("I have no database, so I cannot tempmute")
+	if DB == nil {
+		return errors.New("I have no database, so I cannot ")
+	}
+
+	// Row values
+	var (
+		id         uuid.UUID
+		userId     = user.ID
+		channelId  sql.NullString
+	)
+	if channel != nil {
+		channelId = sql.NullString{
+			String: channel.ID,
+			Valid:  true,
 		}
+	}
+	var expiration *time.Time
+	if strings.ToLower(args[0]) == "tempmute" {
+		exp := time.Now().Add(TEMPMUTE_DURATION) // go doesn't let you do this in one line
+		expiration = &exp
+	}
 
-		// Row values
-		var (
-			id         uuid.UUID
-			userId     = user.ID
-			channelId  sql.NullString
-			expiration = time.Now().Add(TEMPMUTE_DURATION)
-		)
-		if channel != nil {
-			channelId = sql.NullString{
-				String: channel.ID,
-				Valid:  true,
-			}
-		}
+	// Check if we have a matching mute already
+	err = DB.QueryRow("SELECT id from mutes WHERE discord_id=$1 AND channel_id=$2", userId, channelId).Scan(&id)
 
-		// Check if we have a matching mute already
-		err = DB.QueryRow("SELECT id from mutes WHERE discord_id=$1 AND channel_id=$2", userId, channelId).Scan(&id)
-
-		if err == nil {
-			// Update existing entry
-			_, err = DB.Exec("UPDATE mutes SET expiration=$2 WHERE id=$1", id, expiration)
-			if err != nil {
-				return err
-			}
-		} else if errors.Is(err, sql.ErrNoRows) {
-			// Insert new entry
-			_, err = DB.Exec("INSERT INTO mutes (discord_id, channel_id, expiration) VALUES ($1, $2, $3)", userId, channelId, expiration)
-			if err != nil {
-				return err
-			}
-		} else {
-			// Unknown error
+	if err == nil {
+		// Update existing entry, but only if it was already a tempmute. Don't downgrade a mute to a tempmute.
+		_, err = DB.Exec("UPDATE mutes SET expiration=$2 WHERE id=$1 AND expiration IS NOT NULL", id, expiration)
+		if err != nil {
 			return err
 		}
+	} else if errors.Is(err, sql.ErrNoRows) {
+		// Insert new entry
+		_, err = DB.Exec("INSERT INTO mutes (discord_id, channel_id, expiration) VALUES ($1, $2, $3)", userId, channelId, expiration)
+		if err != nil {
+			return err
+		}
+	} else {
+		// Unknown error
+		return err
 	}
 	err = discord.GuildMemberRoleAdd(msg.GuildID, user.ID, muteRole)
 	if err != nil {
