@@ -501,7 +501,7 @@ func onUserJoin2(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		return
 	}
 
-	// Get all expired rows
+	// Get all nonexpired rows
 	now := time.Now()
 	rows, err := DB.Query("SELECT channel_id FROM mutes WHERE (expiration IS NULL OR expiration > $1) AND discord_id = $2", now, m.User.ID)
 	if err != nil {
