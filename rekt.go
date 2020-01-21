@@ -51,6 +51,31 @@ func resp(ch string, text string) error {
 	return err
 }
 
+// unmute removes the mute role and any matching db entries
+func unmute(guildId string, userId string, channel *discordgo.Channel) (err error) {
+	muteRole, err := getMuteRoleForChannel(channel)
+	if err != nil {
+		// If there's no matching mute role return the error
+		return
+	}
+
+	// Get a NullString for the db query
+	var channelId sql.NullString
+	if channel != nil {
+		channelId = sql.NullString{String: channel.ID, Valid: true}
+	}
+
+	// Remove any matching tempmutes
+	_, err = DB.Exec("DELETE FROM tempmutes WHERE discord_id = $1 AND channel_id = $2", userId, channelId)
+	if err != nil {
+		fmt.Println("Error deleting tempmute entry during manual unmute", err)
+	}
+
+	// Remove the mute role
+	err = discord.GuildMemberRoleRemove(guildId, userId, muteRole)
+	return
+}
+
 // Turns the first one or two args into users and/or channels and also returns whatever args weren't consumed
 func getUserAndChannelAndArgs(args []string) (user *discordgo.User, channel *discordgo.Channel, remainingArgs []string) {
 	remainingArgs = args
@@ -256,7 +281,7 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 				} else {
 					channels = append(channels, mutedChannel)
 				}
-				err = discord.GuildMemberRoleRemove(msg.GuildID, user.ID, muteRole)
+				err = unmute(msg.GuildID, user.ID, &discordgo.Channel{ID: mutedChannel})
 			}
 		}
 	} else {
@@ -287,7 +312,7 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 		}
 
 		// Unmute them
-		err = discord.GuildMemberRoleRemove(msg.GuildID, user.ID, muteRole)
+		err = unmute(msg.GuildID, user.ID, channel)
 	}
 
 	// Construct a reply out of the unmuted channels slice
@@ -405,14 +430,6 @@ func unmuteCallback() {
 			continue
 		}
 
-		// We're handling the user, so delete from db.
-		// If we fail to unmute, at least we won't end up handling them forever
-		_, err = DB.Exec("DELETE FROM tempmutes WHERE id = $1", id)
-		if err != nil {
-			fmt.Println("Error deleting tempmute entry", err)
-			continue
-		}
-
 		// Get channel and mute role
 		var channel *discordgo.Channel
 		if channelId.Valid {
@@ -421,11 +438,6 @@ func unmuteCallback() {
 				fmt.Println("Error getting tempmute channel from channel id "+channelId.String, err)
 				continue
 			}
-		}
-		muteRole, err := getMuteRoleForChannel(channel)
-		if err != nil {
-			fmt.Println(fmt.Sprintf("Invalid mute role for channel id \"%s\"\n", channelId.String), err)
-			continue
 		}
 
 		// Construct a message to the unmuted user
@@ -436,22 +448,21 @@ func unmuteCallback() {
 		}
 		message.WriteString(" has expired!\n")
 
-		{ // Log the unmute
-			var username = "user"
-			if user, _ := discord.User(discordId); user != nil {
-				username = fmt.Sprintf("@%s#%s", user.Username, user.Discriminator)
-			}
-			if channel == nil {
-				fmt.Printf("Processing unmute for %s (%s) serverwide\n", username, discordId)
-			} else {
-				fmt.Printf("Processing unmute for %s (%s) from channel #%s (%s)\n", username, discordId, channel.Name, channel.ID)
-			}
+		// Log the unmute
+		var username = "user"
+		if user, _ := discord.User(discordId); user != nil {
+			username = fmt.Sprintf("@%s#%s", user.Username, user.Discriminator)
+		}
+		if channel == nil {
+			fmt.Printf("Processing unmute for %s (%s) serverwide\n", username, discordId)
+		} else {
+			fmt.Printf("Processing unmute for %s (%s) from channel #%s (%s)\n", username, discordId, channel.Name, channel.ID)
 		}
 
 		// Do the unmute
-		err = discord.GuildMemberRoleRemove(IMPACT_SERVER, discordId, muteRole)
+		err = unmute(IMPACT_SERVER, discordId, channel)
 		if err != nil {
-			fmt.Println("Could not remove mute role \""+muteRole+"\" from user \""+discordId+"\"", err)
+			fmt.Println("Could not remove mute role from "+username+" ("+discordId+")", err)
 			message.WriteString("But the bot failed to unmute you! Please show this message to a moderator.\n")
 		}
 
