@@ -75,13 +75,13 @@ var replies = []Reply{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + help + "> channel!",
 		excludeRoles:    []Role{DONATOR},
-		excludeChannels: []string{help, donatorHelp},
+		excludeChannels: []string{help, betterHelp},
 	},
 	{
 		pattern:         `help|support`,
-		message:         "Switch to the <#" + donatorHelp + "> channel!",
+		message:         "Switch to the <#" + betterHelp + "> channel!",
 		onlyRoles:       []Role{DONATOR},
-		excludeChannels: []string{help, donatorHelp},
+		excludeChannels: []string{help, betterHelp},
 	},
 	{
 		pattern: `what(\sdoes|\sis|s|'s)?\s+franky`,
@@ -108,14 +108,14 @@ var replies = []Reply{
 		unless:          `just|forgot|how\s*long|i\s*donated|hours?|wait`,
 		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds, 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #DONATOR-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
 		excludeRoles:    []Role{DONATOR},
-		excludeChannels: []string{betterGeneral, donatorHelp},
+		excludeChannels: []string{betterGeneral, betterHelp},
 	},
 	{
 		pattern:         `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(just|how\s*long|still\sdon'?t|did|wait).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
 		excludeRoles:    []Role{DONATOR},
-		excludeChannels: []string{betterGeneral, donatorHelp},
+		excludeChannels: []string{betterGeneral, betterHelp},
 	},
 	{
 		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa`,

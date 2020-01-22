@@ -67,7 +67,7 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 	// Unless we're being spoken to
 	if !triggeredManually(msg) {
 		// Don't talk where we're not welcome
-		whitelist := []string{general, help, bot, donatorHelp, testing}
+		whitelist := []string{general, help, bot, betterHelp, testing}
 		if !includes(whitelist, msg.ChannelID) {
 			return
 		}
