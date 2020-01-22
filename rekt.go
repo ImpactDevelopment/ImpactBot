@@ -183,9 +183,9 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 
 	// Row values
 	var (
-		id         uuid.UUID
-		userId     = user.ID
-		channelId  sql.NullString
+		id        uuid.UUID
+		userId    = user.ID
+		channelId sql.NullString
 	)
 	if channel != nil {
 		channelId = sql.NullString{
@@ -290,7 +290,7 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 		// Log the unmute
 		if channel == nil {
 			fullMute = true
-			_, err = DB.Exec("DELETE FROM mutes WHERE discord_id = $1", user.ID)
+			_, err = DB.Exec("DELETE FROM mutes WHERE discord_id = $1 AND channel_id IS NULL", user.ID)
 			if err != nil {
 				return err
 			}
@@ -492,9 +492,8 @@ func init() {
 	}()
 }
 
-
 func onUserJoin2(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
-	if m.GuildID != IMPACT_SERVER || m.User == nil{
+	if m.GuildID != IMPACT_SERVER || m.User == nil {
 		return
 	}
 	if DB == nil {
@@ -544,4 +543,3 @@ func onUserJoin2(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		}
 	}
 }
-
