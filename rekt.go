@@ -252,20 +252,32 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 	var channels []string
 
 	if unmuteAll {
-		// Remove all muted roles
+		// Remove all mutes from DB
+		_, err = DB.Exec("DELETE FROM mutes WHERE discord_id = $1", user.ID)
+		if err != nil {
+			return err
+		}
+
+		// Remove all mute roles
+		var count uint
 		for mutedChannel, muteRole := range muteRoles {
 			if hasRole(member, Role{ID: muteRole}) {
+				// Keep track of what was unmuted for the reply
+				count++
 				if mutedChannel == "" {
 					fullMute = true
 				} else {
 					channels = append(channels, mutedChannel)
 				}
+
+				// Remove the role
 				err = discord.GuildMemberRoleRemove(msg.GuildID, user.ID, muteRole)
 			}
 		}
-		_, err = DB.Exec("DELETE FROM mutes WHERE discord_id = $1", user.ID)
-		if err != nil {
-			return err
+
+		// We didn't actually unmute anything!
+		if count < 1 {
+			return fmt.Errorf("No mutes found for @%s#%s", user.Username, user.Discriminator)
 		}
 	} else {
 		// unmute specified channel (or server-wide for nil)
@@ -287,7 +299,7 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 			}
 		}
 
-		// Log the unmute
+		// Update the database and keep track of what was unmuted (for the reply)
 		if channel == nil {
 			fullMute = true
 			_, err = DB.Exec("DELETE FROM mutes WHERE discord_id = $1 AND channel_id IS NULL", user.ID)
