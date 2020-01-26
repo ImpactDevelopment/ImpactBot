@@ -92,7 +92,7 @@ func init() {
 
 func onMessageSentCommandHandler(session *discordgo.Session, m *discordgo.MessageCreate) {
 	msg := m.Message
-	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault || msg.Author.ID == myselfID || m.GuildID != IMPACT_SERVER {
+	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault || msg.Author.ID == myselfID {
 		return // wtf
 	}
 	content := msg.Content
@@ -102,6 +102,13 @@ func onMessageSentCommandHandler(session *discordgo.Session, m *discordgo.Messag
 	if match := prefixPattern.FindString(content); match != "" { // bot woke
 		args := strings.Fields(content[len(match):])
 		command := findCommand(strings.ToLower(args[0]))
+		if m.GuildID != IMPACT_SERVER {
+			// Probably a direct message
+			// TODO do we need to filter this at all?
+			if command != nil && command.Name != "optout" || command.Name != "help" {
+				return
+			}
+		}
 		if command == nil {
 			_ = resp(msg.ChannelID, fmt.Sprintf("Command \"%s\" not found! Try %shelp", args[0], prefix))
 			return
