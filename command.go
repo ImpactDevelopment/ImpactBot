@@ -26,6 +26,12 @@ type Command struct {
 // List of commands
 var Commands = []Command{
 	{
+		Name:        "optout",
+		Description: "opt-out of out ToS and leave the server permanently",
+		Usage:       []string{"i am sure"},
+		Handler:     optOutHandler,
+	},
+	{
 		Name:        "tempmute",
 		Description: "mute someone temporarily, optionally from a specific channel",
 		Usage:       []string{"@user reason", "@user #channel reason", "#channel @user reason"},

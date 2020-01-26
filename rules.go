@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"strconv"
 	"strings"
@@ -20,8 +21,22 @@ var rules = []string{
 	"No advertising",
 }
 
-const note = "All staff, including Support, Moderators, and Developers are volunteers. " +
-	"They are under _no obligation_ to help you, but are likely to if you are polite."
+var extraRules = []*discordgo.MessageEmbedField{
+	{
+		Name: "Volunteers",
+		Value: "All staff, including Support, Moderators, and Developers are volunteers. " +
+			"They are under _no obligation_ to help you, but are likely to if you are polite.",
+	},
+	{
+		Name:  "Why can't I speak‽",
+		Value: "You need to verify yourself! Click [here](https://modulobot.xyz/verify/208753003996512258) and follow the prompts. You also need to wait 10 minutes.",
+	},
+	{
+		Name: "Terms",
+		Value: "By using this discord you agree to our bots storing information about you, such as your discord id. " +
+			"If you wish for this information to be removed from our servers you can run `i!optout` to delete any records we have about you and remove you from the server.",
+	},
+}
 
 func rulesHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
 	reply := discordgo.MessageEmbed{
@@ -46,6 +61,9 @@ func rulesHandler(caller *discordgo.Member, msg *discordgo.Message, args []strin
 		}
 		reply.Title = "Rule " + strconv.Itoa(index+1)
 		reply.Description = rules[index]
+		reply.Footer = &discordgo.MessageEmbedFooter{
+			Text: fmt.Sprintf("Run %s%s for more", prefix, args[0]),
+		}
 	default:
 		return errors.New("incorrect number of arguments")
 	}
@@ -56,13 +74,14 @@ func rulesHandler(caller *discordgo.Member, msg *discordgo.Message, args []strin
 
 func updateRules() {
 	_, err := discord.ChannelMessageEditEmbed(rulesChannel, rulesMessage, &discordgo.MessageEmbed{
-		Title:       "Rules",
-		Description: buildRules(),
-		Color:       prettyembedcolor,
+		Color: prettyembedcolor,
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://cdn.discordapp.com/attachments/224684271913140224/571442198718185492/unknown.png",
 		},
-		Fields: []*discordgo.MessageEmbedField{getVerifyField()},
+		Fields: append(extraRules, &discordgo.MessageEmbedField{
+			Name:  "Rules",
+			Value: buildRules(),
+		}),
 	})
 	if err != nil {
 		log.Println("Unable to edit rules message with id " + rulesMessage)
@@ -77,8 +96,6 @@ func buildRules() string {
 		r.WriteString(rule)
 		r.WriteString("\n")
 	}
-	r.WriteString("\n")
-	r.WriteString(note)
 
 	return r.String()
 }
