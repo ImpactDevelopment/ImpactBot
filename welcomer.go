@@ -46,7 +46,7 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 				Inline: false,
 			},
 			&discordgo.MessageEmbedField{
-				Name:   "Why can't I speak??",
+				Name:   "Why can't I speak‽‽",
 				Value:  "You need to verify yourself! Click [here](https://modulobot.xyz/verify/208753003996512258) and follow the prompts. You also need to wait 10 minutes.",
 				Inline: false,
 			},
