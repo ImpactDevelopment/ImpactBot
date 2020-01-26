@@ -45,6 +45,11 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 				Value:  "[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 				Inline: false,
 			},
+			&discordgo.MessageEmbedField{
+				Name:   "Why can't I speak??",
+				Value:  "You need to verify yourself! Click [here](https://modulobot.xyz/verify/208753003996512258) and follow the prompts. You also need to wait 10 minutes.",
+				Inline: false,
+			},
 		},
 		Footer: &discordgo.MessageEmbedFooter{
 			Text: "♿ Impact Client ♿",
