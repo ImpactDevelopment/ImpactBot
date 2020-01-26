@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -72,15 +73,8 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 			log.Println(err)
 		}
 		time.Sleep(2 * time.Second)
-		reply := &discordgo.MessageEmbed{
-			Author:      &discordgo.MessageEmbedAuthor{},
-			Color:       prettyembedcolor,
-			Title:       "Hey do you need some help?",
-			Description: "[#help](https://discordapp.com/channels/208753003996512258/222120655594848256/565925125304877056)",
-		}
 
-		// embeds are the only way. Maybe it'd be better to have a link instead, but having a #help label on the link looks nicer.
-		_, err = discord.ChannelMessageSendEmbed(ch.ID, reply)
+		_, err = discord.ChannelMessageSend(ch.ID, fmt.Sprintf("Hey, do you need some help? Checkout <#%s>", help))
 		if err != nil {
 			log.Println(err)
 		}
