@@ -12,16 +12,6 @@ var discord *discordgo.Session
 
 var myselfID string
 
-const (
-	IMPACT_SERVER    = "208753003996512258"
-	BRADY            = "205718273696858113"
-	prettyembedcolor = 3447003
-)
-
-var (
-	DONATOR = Role{"210114021641289728", "Donator"}
-)
-
 func init() {
 	var err error
 

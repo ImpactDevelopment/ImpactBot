@@ -137,6 +137,26 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		return errors.New("Give a reason")
 	}
 
+	// Support can tempmute, but only on users without roles
+	if strings.ToLower(args[0]) == "tempmute" {
+
+		if IsUserLowerThan(caller, Moderator) && !evalRatelimit(msg.Author.ID) {
+			return errors.New("Too soon")
+		}
+		if IsUserLowerThan(caller, Moderator) {
+			member, err := GetMember(user.ID)
+			if err != nil {
+				return err
+			}
+			trustedRoles := append(RolesToIDs(staffRoles), Donator.ID) // TODO calculate this only once?
+			for _, role := range member.Roles {
+				if includes(trustedRoles, role) {
+					return errors.New("They have trusted role(s)")
+				}
+			}
+		}
+	}
+
 	muteRole, err := getMuteRoleForChannel(channel)
 	if err != nil {
 		return fmt.Errorf("Can't mute from %s yet", channel.Mention())
@@ -160,20 +180,6 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		err = resp(DM.ID, providedReason)
 		if err != nil {
 			fmt.Printf("Error direct messaging %s#%s: %s\n", user.Username, user.Discriminator, err.Error())
-		}
-	}
-
-	// Support can tempmute, but only on users without roles
-	if strings.ToLower(args[0]) == "tempmute" {
-		member, err := GetMember(user.ID)
-		if err != nil {
-			return err
-		}
-		if IsUserLowerThan(caller, Moderator) && len(member.Roles) > 0 {
-			return errors.New("They have role(s)")
-		}
-		if IsUserLowerThan(caller, Moderator) && !evalRatelimit(msg.Author.ID) {
-			return errors.New("Too soon")
 		}
 	}
 

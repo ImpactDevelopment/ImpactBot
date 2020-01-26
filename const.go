@@ -3,6 +3,10 @@ package main
 import "time"
 
 const (
+	IMPACT_SERVER    = "208753003996512258"
+	BRADY            = "205718273696858113"
+	prettyembedcolor = 3447003
+
 	TIMEOUT = 30 * time.Second
 	TRASH   = "🗑"
 
@@ -20,6 +24,29 @@ const (
 	development   = "280478531346104321"
 	testing       = "617066818925756506"
 )
+
+var (
+	HeadDev   = Role{"209817890713632768", "headDeveloper"}
+	Developer = Role{"221655083748687873", "developer"}
+	SeniorMod = Role{"663065117738663938", "seniorMod"}
+	Moderator = Role{"210377982731223040", "moderator"}
+	Support   = Role{"245682967546953738", "support"}
+	Donator   = Role{"210114021641289728", "donator"}
+)
+
+type Role struct {
+	// Discord id
+	ID   string
+	Name string
+}
+
+func RolesToIDs(roles []Role) []string {
+	var ids []string
+	for _, role := range roles {
+		ids = append(ids, role.ID)
+	}
+	return ids
+}
 
 var muteRoles = map[string]string{
 	"":            "630800201015361566",

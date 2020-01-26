@@ -74,13 +74,13 @@ var replies = []Reply{
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + help + "> channel!",
-		excludeRoles:    []Role{DONATOR},
+		excludeRoles:    []Role{Donator},
 		excludeChannels: []string{help, betterHelp},
 	},
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + betterHelp + "> channel!",
-		onlyRoles:       []Role{DONATOR},
+		onlyRoles:       []Role{Donator},
 		excludeChannels: []string{help, betterHelp},
 	},
 	{
@@ -106,21 +106,21 @@ var replies = []Reply{
 	{
 		pattern:         `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:          `just|forgot|how\s*long|i\s*donated|hours?|wait`,
-		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds, 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #DONATOR-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
-		excludeRoles:    []Role{DONATOR},
+		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds, 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
+		excludeRoles:    []Role{Donator},
 		excludeChannels: []string{betterGeneral, betterHelp},
 	},
 	{
 		pattern:         `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(just|how\s*long|still\sdon'?t|did|wait).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
-		excludeRoles:    []Role{DONATOR},
+		excludeRoles:    []Role{Donator},
 		excludeChannels: []string{betterGeneral, betterHelp},
 	},
 	{
 		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa`,
 		message:   "You can install nightly builds of Impact using the Donator Installer linked in <#" + donatorInfo + ">.",
-		onlyRoles: []Role{DONATOR},
+		onlyRoles: []Role{Donator},
 	},
 	{
 		pattern: `schematics?`,
