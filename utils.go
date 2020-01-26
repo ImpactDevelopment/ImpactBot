@@ -63,11 +63,11 @@ func highestRole(user *discordgo.Member) *Role {
 }
 
 // true if user1 is higher than user2
-// always false if user2 is not staff
+// also false if user1 is staff and user2 is not
 func outranks(user1, user2 *discordgo.Member) bool {
 	role := highestRole(user2)
 	if role == nil {
-		return false
+		return IsUserStaff(user1)
 	}
 
 	return IsUserHigherThan(user1, *role)
