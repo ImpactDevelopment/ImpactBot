@@ -41,15 +41,10 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 				Inline: true,
 			},
 			{
-				Name:   "Tutorial videos for downloading and installing the client",
-				Value:  "[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
-				Inline: false,
+				Name:  "Tutorial videos for downloading and installing the client",
+				Value: "[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 			},
-			{
-				Name:   "Why can't I speak‽‽",
-				Value:  "You need to verify yourself! Click [here](https://modulobot.xyz/verify/208753003996512258) and follow the prompts. You also need to wait 10 minutes.",
-				Inline: false,
-			},
+			getVerifyField(),
 		},
 		Footer: &discordgo.MessageEmbedFooter{
 			Text: "♿ Impact Client ♿",
@@ -70,5 +65,12 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		log.Println(err)
 		log.Println("Can't send welcome message")
 		return
+	}
+}
+
+func getVerifyField() *discordgo.MessageEmbedField {
+	return &discordgo.MessageEmbedField{
+		Name:  "Why can't I speak‽",
+		Value: "You need to verify yourself! Click [here](https://modulobot.xyz/verify/208753003996512258) and follow the prompts. You also need to wait 10 minutes.",
 	}
 }

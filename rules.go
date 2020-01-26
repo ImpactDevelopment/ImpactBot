@@ -18,7 +18,6 @@ var rules = []string{
 	"Channel specific rules or topics can be found in the channel description",
 	"No trolling, unnecessary tagging, spamming, NSFW content, bullying, or blatant rudeness",
 	"No advertising",
-	"You will not be able to speak until you verify yourself! Click [here.](https://modulobot.xyz/verify/208753003996512258)",
 }
 
 const note = "All staff, including Support, Moderators, and Developers are volunteers. " +
@@ -63,6 +62,7 @@ func updateRules() {
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://cdn.discordapp.com/attachments/224684271913140224/571442198718185492/unknown.png",
 		},
+		Fields:      []*discordgo.MessageEmbedField{getVerifyField()},
 	})
 	if err != nil {
 		log.Println("Unable to edit rules message with id " + rulesMessage)
