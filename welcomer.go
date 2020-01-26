@@ -20,32 +20,32 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		Title:       "Welcome to the Impact Discord!",
 		Description: "In order to prevent spam and give you a chance to read the FAQs and rules, you will not be able to talk for ten minutes.\nIn the meantime, check the useful links below. Please do not DM a staff member while waiting. Try to resolve the problem using the FAQ, or the help channel when you can speak.",
 		Fields: []*discordgo.MessageEmbedField{
-			&discordgo.MessageEmbedField{
+			{
 				Name:   "Setup/Install FAQ",
 				Value:  "[Click here!](https://github.com/ImpactDevelopment/ImpactClient/wiki/Setup-FAQ)",
 				Inline: true,
 			},
-			&discordgo.MessageEmbedField{
+			{
 				Name:   "Usage FAQ",
 				Value:  "[Click here!](https://github.com/ImpactDevelopment/ImpactClient/wiki/Usage-FAQ)",
 				Inline: true,
 			},
-			&discordgo.MessageEmbedField{
+			{
 				Name:   "Rules",
 				Value:  "[Click here!](https://discordapp.com/channels/208753003996512258/224684271913140224/306183650268020748)",
 				Inline: true,
 			},
-			&discordgo.MessageEmbedField{
+			{
 				Name:   "Github Links",
 				Value:  "[Impact](https://github.com/ImpactDevelopment/ImpactClient), [Installer](https://github.com/ImpactDevelopment/Installer/), [Baritone](https://github.com/cabaletta/baritone)",
 				Inline: true,
 			},
-			&discordgo.MessageEmbedField{
+			{
 				Name:   "Tutorial videos for downloading and installing the client",
 				Value:  "[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 				Inline: false,
 			},
-			&discordgo.MessageEmbedField{
+			{
 				Name:   "Why can't I speak‽‽",
 				Value:  "You need to verify yourself! Click [here](https://modulobot.xyz/verify/208753003996512258) and follow the prompts. You also need to wait 10 minutes.",
 				Inline: false,

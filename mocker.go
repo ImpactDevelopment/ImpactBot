@@ -46,7 +46,7 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 		Color:       prettyembedcolor,
 		Description: "",
 		Fields: []*discordgo.MessageEmbedField{
-			&discordgo.MessageEmbedField{
+			{
 				Name:  ":rotating_light: :wheelchair: I have received a DM :wheelchair: :rotating_light:",
 				Value: msg.Content,
 			},
