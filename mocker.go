@@ -42,6 +42,10 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+	if match := prefixPattern.FindString(msg.Content); match != "" {
+		return // this is a command
+	}
+
 	embed := &discordgo.MessageEmbed{
 		Author:      &discordgo.MessageEmbedAuthor{},
 		Color:       prettyembedcolor,
