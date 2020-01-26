@@ -17,6 +17,7 @@ var rules = []string{
 	"Channel specific rules or topics can be found in the channel description",
 	"No trolling, unnecessary tagging, spamming, NSFW content, bullying, or blatant rudeness",
 	"No advertising",
+	"You will not be able to speak until you verify yourself! Click [here.](https://modulobot.xyz/verify/208753003996512258)",
 }
 
 const note = "All staff, including Support, Moderators, and Developers are volunteers. " +
