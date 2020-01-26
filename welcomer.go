@@ -55,6 +55,9 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 			Text: "♿ Impact Client ♿",
 		},
 		Timestamp: time.Now().Format(time.RFC3339),
+		Thumbnail: &discordgo.MessageEmbedThumbnail{
+			URL: "https://cdn.discordapp.com/attachments/224684271913140224/571442198718185492/unknown.png",
+		},
 	}
 	ch, err := discord.UserChannelCreate(m.User.ID)
 	if err != nil {
