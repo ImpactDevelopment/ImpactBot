@@ -2,10 +2,11 @@ package main
 
 import (
 	"errors"
-	"github.com/bwmarrin/discordgo"
 	"log"
 	"strconv"
 	"strings"
+
+	"github.com/bwmarrin/discordgo"
 )
 
 const rulesChannel = "667494326372139008"
@@ -59,6 +60,9 @@ func updateRules() {
 		Title:       "Rules",
 		Description: buildRules(),
 		Color:       prettyembedcolor,
+		Image: &discordgo.MessageEmbedImage{
+			URL: "https://cdn.discordapp.com/attachments/224684271913140224/571442198718185492/unknown.png",
+		},
 	})
 	if err != nil {
 		log.Println("Unable to edit rules message with id " + rulesMessage)

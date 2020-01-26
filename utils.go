@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/bwmarrin/discordgo"
 	"regexp"
+
+	"github.com/bwmarrin/discordgo"
 )
 
 // True if user has ANY role passed in
