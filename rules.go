@@ -62,7 +62,7 @@ func updateRules() {
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://cdn.discordapp.com/attachments/224684271913140224/571442198718185492/unknown.png",
 		},
-		Fields:      []*discordgo.MessageEmbedField{getVerifyField()},
+		Fields: []*discordgo.MessageEmbedField{getVerifyField()},
 	})
 	if err != nil {
 		log.Println("Unable to edit rules message with id " + rulesMessage)
