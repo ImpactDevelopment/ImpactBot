@@ -137,6 +137,15 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		return errors.New("Give a reason")
 	}
 
+	target, err := GetMember(user.ID)
+	if err != nil {
+		return err
+	}
+
+	if !outranks(caller, target) {
+		return fmt.Errorf("You don't outrank %s", target.User.Username)
+	}
+
 	// Support can tempmute, but only on users without roles
 	if strings.ToLower(args[0]) == "tempmute" {
 
@@ -144,12 +153,8 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			return errors.New("Too soon")
 		}
 		if IsUserLowerThan(caller, Moderator) {
-			member, err := GetMember(user.ID)
-			if err != nil {
-				return err
-			}
 			trustedRoles := append(RolesToIDs(staffRoles), Donator.ID) // TODO calculate this only once?
-			for _, role := range member.Roles {
+			for _, role := range target.Roles {
 				if includes(trustedRoles, role) {
 					return errors.New("They have trusted role(s)")
 				}
@@ -247,10 +252,14 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 		return fmt.Errorf("Unexpected arguments \"%s\"", strings.Join(remainingArgs, " "))
 	}
 
-	var member *discordgo.Member
-	member, err = GetMember(user.ID)
+	var target *discordgo.Member
+	target, err = GetMember(user.ID)
 	if err != nil {
 		return
+	}
+
+	if outranks(target, caller) {
+		return fmt.Errorf("You must be at least the same rank as %s", target.User.Username)
 	}
 
 	// produce a list of muted channels for the command output
@@ -267,7 +276,7 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 		// Remove all mute roles
 		var count uint
 		for mutedChannel, muteRole := range muteRoles {
-			if hasRole(member, Role{ID: muteRole}) {
+			if hasRole(target, Role{ID: muteRole}) {
 				// Keep track of what was unmuted for the reply
 				count++
 				if mutedChannel == "" {
@@ -297,7 +306,7 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 		}
 
 		// Check the user is actually muted...
-		if !hasRole(member, Role{ID: muteRole}) {
+		if !hasRole(target, Role{ID: muteRole}) {
 			if channel == nil {
 				return fmt.Errorf("%s isn't muted serverwide", user.Username)
 			} else {
@@ -378,6 +387,14 @@ func rektHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 	}
 	if len(remainingArgs) < 1 {
 		return errors.New("Give a reason")
+	}
+
+	target, err := GetMember(user.ID)
+	if err != nil {
+		return err
+	}
+	if !outranks(caller, target) {
+		return fmt.Errorf("You don't outrank %s", target.User.Username)
 	}
 
 	// Reasons are important

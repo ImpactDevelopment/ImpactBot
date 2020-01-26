@@ -53,6 +53,26 @@ func SendDM(userID string, message string) error {
 	return err
 }
 
+func highestRole(user *discordgo.Member) *Role {
+	for _, role := range staffRoles {
+		if includes(user.Roles, role.ID) {
+			return &role
+		}
+	}
+	return nil
+}
+
+// true if user1 is higher than user2
+// always false if user2 is not staff
+func outranks(user1, user2 *discordgo.Member) bool {
+	role := highestRole(user2)
+	if role == nil {
+		return false
+	}
+
+	return IsUserHigherThan(user1, *role)
+}
+
 // Get a Member from the Impact Discord
 func GetMember(userID string) (member *discordgo.Member, err error) {
 	return discord.GuildMember(IMPACT_SERVER, userID)
