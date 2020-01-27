@@ -18,7 +18,7 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		Author:      &discordgo.MessageEmbedAuthor{},
 		Color:       prettyembedcolor,
 		Title:       "Welcome to the Impact Discord!",
-		Description: "In order to prevent spam and give you a chance to read the FAQs and rules, you will not be able to talk for ten minutes.\nIn the meantime, check the useful links below. Please do not DM a staff member while waiting. Try to resolve the problem using the FAQ, or the help channel when you can speak.",
+		Description: "In order to prevent spam and give you a chance to read the FAQs and rules, you will not be able to talk until 10 minutes have passed **AND you complete a captcha by clicking [this link](https://modulobot.xyz/verify/208753003996512258)** to prove you're not a bot!\nIn the meantime, check the useful links below. Please do not DM a staff member while waiting. Try to resolve the problem using the FAQ, or the help channel when you can speak.",
 		Fields: append([]*discordgo.MessageEmbedField{
 			{
 				Name:   "Setup/Install FAQ",
