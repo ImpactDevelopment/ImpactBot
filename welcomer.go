@@ -32,7 +32,7 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 			},
 			{
 				Name:   "Rules",
-				Value:  "[Click here!](https://discordapp.com/channels/208753003996512258/224684271913140224/306183650268020748)",
+				Value:  "[Click here!](https://discordapp.com/channels/208753003996512258/667494326372139008/667497572264312832)",
 				Inline: true,
 			},
 			{
