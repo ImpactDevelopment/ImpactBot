@@ -2,7 +2,6 @@ package main
 
 import (
 	"strings"
-	"log"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -22,6 +21,6 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.Contains(strings.ToLower(msg.Content), "kami") || strings.Contains(strings.ToLower(msg.Content), "blue") {
 		session.ChannelMessageDelete(msg.ChannelID, msg.ID)
-		log.Println("BEGONE KAMI SHILL")
+		resp(msg.ChannelID, "Note: a message containing \"kami\" or \"blue\" from Bella was deleted")
 	}
 }
