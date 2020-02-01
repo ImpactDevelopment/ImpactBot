@@ -138,4 +138,8 @@ var replies = []Reply{
 		pattern: `impact.*(wiki|spammer|multimc)`,
 		message: "Impact Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
 	},
+	{
+		pattern: `.*kami.*blue`,
+		message: "Stop shilling Kami Blue!!!",
+	},
 }
