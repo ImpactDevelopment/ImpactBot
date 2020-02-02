@@ -13,7 +13,7 @@ type Censorship struct {
 
 var censor = map[string]Censorship{
 	"563138570953687061": Censorship{"Bella", []string{"kami", "blue"}},
-	"209785549010108416": Censorship{"Arisa", []string{"lewd", "loli", "𝗹𝗲𝘄𝗱", "𝗹𝗼𝗹𝗶", "tenor.com/view/anime-"}},
+	"209785549010108416": Censorship{"Arisa", []string{"lewd", "loli", "𝗹𝗲𝘄𝗱", "𝗹𝗼𝗹𝗶", "tenor.com/view/anime-", "tenor.com/view/japanese-cartoon-"}},
 }
 
 func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
