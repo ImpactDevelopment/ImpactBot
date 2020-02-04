@@ -7,7 +7,7 @@ import (
 )
 
 type Censorship struct {
-	name string
+	name        string
 	bannedWords []string
 }
 
@@ -30,7 +30,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 	for _, bannedWord := range censorship.bannedWords {
 		if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord)) {
 			session.ChannelMessageDelete(msg.ChannelID, msg.ID)
-			resp(msg.ChannelID, "Note: a message containing \"" + bannedWord + "\" from " + censorship.name + " was deleted")
+			resp(msg.ChannelID, "Note: a message containing \""+bannedWord+"\" from "+censorship.name+" was deleted")
 			return
 		}
 	}
