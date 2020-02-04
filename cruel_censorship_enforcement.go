@@ -7,14 +7,15 @@ import (
 )
 
 type Censorship struct {
-	name        string
+	name string
 	bannedWords []string
 }
 
 var censor = map[string]Censorship{
 	"563138570953687061": Censorship{"Bella", []string{"kami", "blue"}},
-	"209785549010108416": Censorship{"Arisa", []string{"lewd", "loli", "𝗹𝗲𝘄𝗱", "𝗹𝗼𝗹𝗶", "tenor.com/view/anime-", "tenor.com/view/japanese-cartoon-", "tenor.com/view/gif-anime-"}},
-}
+	"209785549010108416": Censorship{"Arisa", []string{"lewd", "loli", "𝗹𝗲𝘄𝗱", "𝗹𝗼𝗹𝗶", "tenor.com/view/anime-", "tenor.com/view/japanese-cartoon-", "tenor.com/view/gif-anime-", "smh", "boomer"'}},
+	"207833493651193856": Censorship{"XPHonza", []string{"boomer"}},
+}	
 
 func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 	msg := m.Message
@@ -30,7 +31,7 @@ func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
 	for _, bannedWord := range censorship.bannedWords {
 		if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord)) {
 			session.ChannelMessageDelete(msg.ChannelID, msg.ID)
-			resp(msg.ChannelID, "Note: a message containing \""+bannedWord+"\" from "+censorship.name+" was deleted")
+			resp(msg.ChannelID, "Note: a message containing \"" + bannedWord + "\" from " + censorship.name + " was deleted")
 			return
 		}
 	}
