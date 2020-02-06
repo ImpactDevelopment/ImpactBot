@@ -14,8 +14,9 @@ type Censorship struct {
 var censor = map[string]Censorship{
 	"563138570953687061": Censorship{"Bella", []string{"kami", "blue"}},
 	"209785549010108416": Censorship{"Arisa", []string{"loli", "smh"}},
-	"207833493651193856": Censorship{"XPHonza", []string{"boomer"}},
+	"207833493651193856": Censorship{"XPHonza", []string{"boomer", "arisa"}},
 	"297773911158816769": Censorship{"leijurv", []string{"not allowed to say this"}},
+	"204044855654088705": Censorship{"Fox", []string{"iirc", "@"}},
 }
 
 func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
