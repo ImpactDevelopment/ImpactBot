@@ -51,6 +51,7 @@ func init() {
 	discord.AddHandler(onMessageSentCommandHandler)
 	discord.AddHandler(onUserJoin2)
 	discord.AddHandler(onMessageSent3)
+	discord.AddHandler(onMessageUpdate)
 }
 
 func main() {
