@@ -12,7 +12,7 @@ type Censorship struct {
 }
 
 var censor = map[string]Censorship{
-	"563138570953687061": Censorship{"Bella", []string{"kami", "blue"}},
+	"563138570953687061": Censorship{"Bella", []string{"kami", "blue", "力ミ", "ブル"}},
 	"209785549010108416": Censorship{"Arisa", []string{"loli", "smh"}},
 	"207833493651193856": Censorship{"XPHonza", []string{"boomer"}},
 	"297773911158816769": Censorship{"leijurv", []string{"not allowed to say this"}},
