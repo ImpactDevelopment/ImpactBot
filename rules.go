@@ -29,7 +29,7 @@ var extraRules = []*discordgo.MessageEmbedField{
 	},
 	{
 		Name:  "Why can't I speak‽",
-		Value: "You need to verify yourself! Click [here](https://modulobot.xyz/verify/208753003996512258) and follow the prompts. You also need to wait 10 minutes.",
+		Value: "You need to verify yourself! Click the link at the top of my welcome DM to you, if you have it. Otherwise, click [here](https://impactclient.net/discord.html) and fill in your info manually.",
 	},
 	{
 		Name: "Terms",
