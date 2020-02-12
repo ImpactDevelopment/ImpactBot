@@ -81,7 +81,7 @@ func init() {
 	// Load prefix from the environment
 	prefix = os.Getenv("IMPACT_PREFIX")
 	if prefix == "" {
-		prefix = "i!"
+		prefix = "i-"
 	}
 	// Match case-insensitive & ignore whitespace around prefix
 	prefixPattern = regexp.MustCompile(`(?i)^\s*` + regexp.QuoteMeta(prefix) + `\s*`)
