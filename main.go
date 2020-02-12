@@ -79,7 +79,10 @@ func onReady(discord *discordgo.Session, ready *discordgo.Ready) {
 		log.Println(err)
 	}
 	servers := discord.State.Guilds
-	log.Printf("Impcat bot has started on %d servers", len(servers))
+	log.Printf("Impcat bot has started on %d servers:", len(servers))
+	for _, guild := range servers {
+		log.Println("Server ID", guild.ID, "Name", guild.Name)
+	}
 
 	// Replace rules message
 	updateRules()
