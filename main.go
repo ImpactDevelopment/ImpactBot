@@ -52,6 +52,7 @@ func init() {
 	discord.AddHandler(onUserJoin2)
 	discord.AddHandler(onMessageSent3)
 	discord.AddHandler(onMessageUpdate)
+	discord.AddHandler(onVoiceStateUpdate)
 }
 
 func main() {

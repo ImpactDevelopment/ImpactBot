@@ -33,6 +33,7 @@ var (
 	Support   = Role{"245682967546953738", "support"}
 	Donator   = Role{"210114021641289728", "donator"}
 	Verified  = Role{"671048798654562354", "verified"}
+	InVoice   = Role{"677329885680762904", "in voice"}
 )
 
 type Role struct {
