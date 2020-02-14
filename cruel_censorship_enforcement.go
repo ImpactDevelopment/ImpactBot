@@ -17,7 +17,6 @@ var censor = map[string]Censorship{
 	"207833493651193856": Censorship{"XPHonza", []string{"boomer"}},
 	"297773911158816769": Censorship{"leijurv", []string{"not allowed to say this"}},
 	"488400748296667147": Censorship{"Vini", []string{"roblox"}},
-
 }
 
 func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
