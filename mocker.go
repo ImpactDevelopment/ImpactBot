@@ -14,7 +14,7 @@ const (
 )
 
 func canDMBot(userId string) bool {
-	member, err := discord.GuildMember(IMPACT_SERVER, userId)
+	member, err := GetMember(userId)
 	if err != nil || member == nil {
 		return false
 	}

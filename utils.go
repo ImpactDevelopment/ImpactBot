@@ -75,7 +75,11 @@ func outranks(user1, user2 *discordgo.Member) bool {
 
 // Get a Member from the Impact Discord
 func GetMember(userID string) (member *discordgo.Member, err error) {
-	return discord.GuildMember(IMPACT_SERVER, userID)
+	member, err = discord.State.Member(IMPACT_SERVER, userID)
+	if err != nil {
+		member, err = discord.GuildMember(IMPACT_SERVER, userID)
+	}
+	return member, err
 }
 
 func findNamedMatches(r *regexp.Regexp, str string) map[string]string {
