@@ -37,10 +37,10 @@ func handleAddCringe(caller *discordgo.Member, msg *discordgo.Message, args []st
 		}
 		return fmt.Errorf("error : no attachments / links found to add")
 	}
-	_, err := url.ParseRequestURI(args[0])
+	_, err := url.ParseRequestURI(args[1])
 	if err != nil {
 		return fmt.Errorf("invalid url scheme")
 	}
-	_, err = DB.Exec("INSERT INTO cringe(image) VALUES($1)", args[0])
+	_, err = DB.Exec("INSERT INTO cringe(image) VALUES($1)", args[1])
 	return err
 }
