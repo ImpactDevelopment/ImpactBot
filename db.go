@@ -53,5 +53,12 @@ func schema() (err error) {
 			expiration TIMESTAMP
 		);
 	`)
+
+	_, err = DB.Exec(`
+		CREATE TABLE IF NOT EXISTS cringe (
+			image TEXT NOT NULL
+		)
+	`)
+
 	return
 }
