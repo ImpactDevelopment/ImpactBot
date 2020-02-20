@@ -10,7 +10,7 @@ import (
 
 func handleCringe(_ *discordgo.Member, msg *discordgo.Message, _ []string) error {
 	var rngCringe string
-	err := DB.QueryRow("SELECT image FROM cringe ORDER BY RAND() LIMIT 1").Scan(&rngCringe)
+	err := DB.QueryRow("SELECT image FROM cringe ORDER BY RANDOM() LIMIT 1").Scan(&rngCringe)
 	if err != nil {
 		return err
 	}
