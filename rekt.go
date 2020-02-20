@@ -90,21 +90,28 @@ func getUserAndChannelAndArgs(args []string) (user *discordgo.User, channel *dis
 // Send a blocking api request if a match is found
 func getUserOrChannelForArg(arg string) (*discordgo.User, *discordgo.Channel) {
 	match := findNamedMatches(mentionRegex, arg)
-	if match["ID"] == "" {
+	id := match["ID"]
+	if id == "" {
 		return nil, nil
 	}
-	switch match["Type"] {
+
 	// Sends a blocking API request
+	switch match["Type"] {
 	case "#":
 		{
-			channel, err := discord.Channel(match["ID"])
+			// Try to get from the "State" cache before falling back to the API
+			channel, err := discord.State.Channel(id)
+			if err != nil || channel == nil {
+				channel, err = discord.Channel(id)
+			}
 			if err == nil {
 				return nil, channel
 			}
 		}
 	case "@":
 		{
-			user, err := discord.User(match["ID"])
+			// discordgo doesn't cache users, only guilds, channels & members
+			user, err := discord.User(id)
 			if err == nil {
 				return user, nil
 			}
