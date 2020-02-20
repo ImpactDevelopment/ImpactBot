@@ -75,6 +75,18 @@ var Commands = []Command{
 		},
 		Handler: rulesHandler,
 	},
+	{
+		Name:        "cringe",
+		Description: "generates a random cringe image",
+		Usage:       []string{""},
+		Handler:     handleCringe,
+	},
+	{
+		Name:        "addcringe",
+		Description: "adds a cringe photo to the collection",
+		Usage:       []string{"", "url"},
+		Handler:     handleAddCringe,
+	},
 }
 
 func init() {
