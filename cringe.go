@@ -30,7 +30,7 @@ func handleAddCringe(caller *discordgo.Member, msg *discordgo.Message, args []st
 		return fmt.Errorf("you have to be at least support to call something cringe-worthy lol")
 	}
 
-	if len(args) == 0 {
+	if len(args) < 2 {
 		if len(msg.Attachments) > 0 {
 			_, err := DB.Exec("INSERT INTO cringe(image) VALUES($1)", msg.Attachments[0].URL)
 			return err
