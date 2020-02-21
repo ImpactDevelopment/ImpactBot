@@ -10,6 +10,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 	go func() {
 		prev := ""
 		total := 0
+		donatorCount := 0
 		for {
 			st, err := discord.GuildMembers(IMPACT_SERVER, prev, 1000)
 			if err != nil {
@@ -25,9 +26,13 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 			for _, member := range st {
 				total++
 				memberVerificationCheck(member)
+				if hasRole(member, Donator) {
+					donatorCount++
+				}
 			}
 		}
 		log.Println("Processed", total, "members")
+		log.Println("There are", donatorCount, "donators")
 	}()
 }
 
