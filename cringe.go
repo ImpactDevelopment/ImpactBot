@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/bwmarrin/discordgo"
 	"net/url"
+
+	"github.com/bwmarrin/discordgo"
 )
 
 // this file is the story of my life lol
