@@ -9,7 +9,7 @@ const (
 
 	TIMEOUT  = 30 * time.Second
 	TRASH    = "🗑"
-	stevePig = "558474255776481291"
+	stevePig = ":why_is_steve_a_pig:"
 	woke     = "525831118583365632"
 
 	announcements = "378645175947362320"
