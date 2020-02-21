@@ -64,8 +64,8 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if m.GuildID == IMPACT_SERVER && !hasRole(author, Verified) && len(author.Roles) > 0 {
-		session.GuildMemberRoleAdd(IMPACT_SERVER, author.User.ID, Verified.ID)
+	if m.GuildID == IMPACT_SERVER {
+		memberVerificationCheck(author)
 	}
 
 	// Unless we're being spoken to
