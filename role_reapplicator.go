@@ -1,10 +1,10 @@
 package main
 
 import (
-	"os"
+	"io/ioutil"
 	"log"
 	"net/http"
-	"io/ioutil"
+	"os"
 
 	"github.com/bwmarrin/discordgo"
 )
