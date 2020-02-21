@@ -42,5 +42,8 @@ func handleAddCringe(caller *discordgo.Member, msg *discordgo.Message, args []st
 		return fmt.Errorf("invalid url scheme")
 	}
 	_, err = DB.Exec("INSERT INTO cringe(image) VALUES($1)", args[1])
+	if err == nil {
+		return discord.MessageReactionAdd(msg.ChannelID, msg.ID, stevePig)
+	}
 	return err
 }
