@@ -36,6 +36,10 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 	}()
 }
 
+func onGuildMemberUpdate(discord *discordgo.Session, guildMemberUpdate *discordgo.GuildMemberUpdate) {
+	memberVerificationCheck(guildMemberUpdate.Member)
+}
+
 func memberVerificationCheck(member *discordgo.Member) {
 	if len(member.Roles) > 0 && !hasRole(member, Verified) {
 		log.Println("Member", member.User.ID, "had roles not including verified")
