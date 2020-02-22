@@ -13,7 +13,8 @@ func genkey(caller *discordgo.Member, msg *discordgo.Message, _ []string) error 
 	if !IsUserAtLeast(caller, Developer) {
 		return fmt.Errorf("ahaha epic trolololol moment")
 	}
-	return resp(msg.ChannelID, get("https://api.impactclient.net/v1/integration/impactbot/genkey?auth="+os.Getenv("IMPACTBOT_AUTH_SECRET")))
+	code := get("https://api.impactclient.net/v1/integration/impactbot/genkey?auth=" + os.Getenv("IMPACTBOT_AUTH_SECRET"))
+	return resp(msg.ChannelID, "[Click here for free Impact premium](https://impactclient.net/register.html?token="+code+")")
 }
 
 func get(url string) string {
