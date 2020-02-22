@@ -25,7 +25,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 			prev = st[len(st)-1].User.ID
 			for _, member := range st {
 				total++
-				memberVerificationCheck(member)
+				memberSanityCheck(member)
 				if hasRole(member, Donator) {
 					donatorCount++
 				}
@@ -37,13 +37,20 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 }
 
 func onGuildMemberUpdate(discord *discordgo.Session, guildMemberUpdate *discordgo.GuildMemberUpdate) {
-	memberVerificationCheck(guildMemberUpdate.Member)
+	memberSanityCheck(guildMemberUpdate.Member)
 }
 
-func memberVerificationCheck(member *discordgo.Member) {
+func memberSanityCheck(member *discordgo.Member) {
 	if len(member.Roles) > 0 && !hasRole(member, Verified) {
 		log.Println("Member", member.User.ID, "had roles not including verified")
 		err := discord.GuildMemberRoleAdd(IMPACT_SERVER, member.User.ID, Verified.ID)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+	if hasRole(member, InVoice) && !checkDeservesInVoiceRole(member.User.ID) {
+		log.Println("Member", member.User.ID, "had In Voice but isn't in voice")
+		err := discord.GuildMemberRoleRemove(IMPACT_SERVER, member.User.ID, InVoice.ID)
 		if err != nil {
 			log.Println(err)
 		}

@@ -65,7 +65,7 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 
 	if m.GuildID == IMPACT_SERVER {
-		memberVerificationCheck(author)
+		memberSanityCheck(author)
 	}
 
 	// Unless we're being spoken to
