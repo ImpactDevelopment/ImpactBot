@@ -34,6 +34,9 @@ func handleAddCringe(caller *discordgo.Member, msg *discordgo.Message, args []st
 	if len(args) < 2 {
 		if len(msg.Attachments) > 0 {
 			_, err := DB.Exec("INSERT INTO cringe(image) VALUES($1)", msg.Attachments[0].URL)
+			if err == nil {
+				return discord.MessageReactionAdd(msg.ChannelID, msg.ID, stevePig)
+			}
 			return err
 		}
 		return fmt.Errorf("error : no attachments / links found to add")
