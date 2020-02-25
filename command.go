@@ -88,6 +88,12 @@ var Commands = []Command{
 		Handler:     handleAddCringe,
 	},
 	{
+		Name:        "delcringe",
+		Description: "removes a cringe photo from the collection",
+		Usage:       []string{"", "url"},
+		Handler:     handleDelCringe,
+	},
+	{
 		Name:        "genkey",
 		Description: "generates an Impact premium key",
 		Usage:       []string{""},
