@@ -87,6 +87,13 @@ var Commands = []Command{
 		Usage:       []string{"", "url"},
 		Handler:     handleAddCringe,
 	},
+	{
+		Name:        "genkey",
+		Description: "generates an Impact premium key",
+		Usage:       []string{""},
+		RoleNeeded:  &Developer,
+		Handler:     genkey,
+	},
 }
 
 func init() {
