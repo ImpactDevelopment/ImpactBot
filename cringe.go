@@ -71,7 +71,7 @@ func handleDelCringe(caller *discordgo.Member, msg *discordgo.Message, args []st
 	if err != nil {
 		return err
 	}
-	return fmt.Errorf("cring deleted successfully")
+	return resp(msg.ChannelID, "cring deleted successfully")
 }
 
 func cring(url string, channelID string, messageID string) error {
