@@ -24,6 +24,7 @@ func handleCringe(_ *discordgo.Member, msg *discordgo.Message, _ []string) error
 		Color: prettyembedcolor,
 	}
 	_, err = discord.ChannelMessageSendEmbed(msg.ChannelID, &reply)
+	go cringReact(msg.ChannelID, msg.ID)
 	return err
 }
 
@@ -54,11 +55,12 @@ func cring(url string, channelID string, messageID string) error {
 }
 
 func cringReact(channelID string, messageID string) {
+	time.Sleep(1 * time.Second)
 	discord.MessageReactionAdd(channelID, messageID, "why_steve_a_pig:558474255776481291")
-	time.Sleep(1 * time.Second)
+	//time.Sleep(1 * time.Second)
 	discord.MessageReactionAdd(channelID, messageID, "im_stuff:558474787031351339")
-	time.Sleep(1 * time.Second)
+	//time.Sleep(1 * time.Second)
 	discord.MessageReactionAdd(channelID, messageID, "alex_omg_no:558475172022059009")
-	time.Sleep(1 * time.Second)
+	//time.Sleep(1 * time.Second)
 	discord.MessageReactionAdd(channelID, messageID, "steve_your_sister_is_awesome:558475291454996510")
 }
