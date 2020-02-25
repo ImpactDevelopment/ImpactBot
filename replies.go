@@ -106,14 +106,14 @@ var replies = []Reply{
 	{
 		pattern:         `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:          `just|forgot|how\s*long|i\s*donated|hours?|wait`,
-		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds, 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
+		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.15.2 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
 		excludeRoles:    []Role{Donator},
 		excludeChannels: []string{betterGeneral, betterHelp},
 	},
 	{
 		pattern:         `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(just|how\s*long|still\sdon'?t|did|wait).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
-		message:         "Donations can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
+		message:         "Donations using the new system activate instantly on your Discord and Minecraft accounts. If you donated through the old system (I'm sorry), it can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
 		excludeRoles:    []Role{Donator},
 		excludeChannels: []string{betterGeneral, betterHelp},
 	},
@@ -132,7 +132,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
-		message: "No ETA on 1.15 Impact release. If an ETA on 1.15 Impact release is decided, then there will be an announcement in <#" + announcements + ">.",
+		message: "Impact for 1.15.2 is currently in donator-only prerelease. Go on the [website](https://impactclient.net/#donate) to donate.",
 	},
 	{
 		pattern: `impact.*(wiki|spammer|multimc)`,

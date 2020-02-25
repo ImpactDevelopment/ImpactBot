@@ -76,9 +76,29 @@ var Commands = []Command{
 		Handler: rulesHandler,
 	},
 	{
+<<<<<<< HEAD
 		Name:        "franky",
 		Description: "does exactly what you think it does",
 		Usage: nil
+=======
+		Name:        "cringe",
+		Description: "generates a random cringe image",
+		Usage:       []string{""},
+		Handler:     handleCringe,
+	},
+	{
+		Name:        "addcringe",
+		Description: "adds a cringe photo to the collection",
+		Usage:       []string{"", "url"},
+		Handler:     handleAddCringe,
+	},
+	{
+		Name:        "genkey",
+		Description: "generates an Impact premium key",
+		Usage:       []string{""},
+		RoleNeeded:  &Developer,
+		Handler:     genkey,
+>>>>>>> de1e5c4a68833f2c737178738b31e4d9483d312c
 	},
 }
 

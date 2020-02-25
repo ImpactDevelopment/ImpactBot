@@ -14,7 +14,7 @@ const (
 )
 
 func canDMBot(userId string) bool {
-	member, err := discord.GuildMember(IMPACT_SERVER, userId)
+	member, err := GetMember(userId)
 	if err != nil || member == nil {
 		return false
 	}
@@ -78,7 +78,7 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 		time.Sleep(2 * time.Second)
 
-		_, err = discord.ChannelMessageSend(ch.ID, fmt.Sprintf("Hey, do you need some help? Checkout <#%s>!\n\nYour Discord User ID is `"+author+"`", help))
+		_, err = discord.ChannelMessageSend(ch.ID, fmt.Sprintf("Hey, do you need some help? Checkout <#%s>!\n\nYour Discord User ID is `"+author+"`\n\n**Go to https://impactclient.net/discord.html?discord="+author+"** to verify your account and be able to talk on the server.", help))
 		if err != nil {
 			log.Println(err)
 		}

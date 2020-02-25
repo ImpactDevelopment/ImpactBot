@@ -7,8 +7,10 @@ const (
 	BRADY            = "205718273696858113"
 	prettyembedcolor = 3447003
 
-	TIMEOUT = 30 * time.Second
-	TRASH   = "🗑"
+	TIMEOUT  = 30 * time.Second
+	TRASH    = "🗑"
+	stevePig = ":why_is_steve_a_pig:"
+	woke     = "525831118583365632"
 
 	announcements = "378645175947362320"
 	general       = "208753003996512258"
@@ -32,6 +34,8 @@ var (
 	Moderator = Role{"210377982731223040", "moderator"}
 	Support   = Role{"245682967546953738", "support"}
 	Donator   = Role{"210114021641289728", "donator"}
+	Verified  = Role{"671048798654562354", "verified"}
+	InVoice   = Role{"677329885680762904", "in voice"}
 )
 
 type Role struct {

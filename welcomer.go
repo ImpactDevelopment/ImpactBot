@@ -15,10 +15,9 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		return
 	}
 	embed := &discordgo.MessageEmbed{
-		Author:      &discordgo.MessageEmbedAuthor{},
-		Color:       prettyembedcolor,
-		Title:       "Welcome to the Impact Discord!",
-		Description: "**In order to prevent spam you will not be able to talk until you complete a captcha by clicking [this link](https://impactclient.net/discord.html?discord=" + m.User.ID + ")** to prove you're not a bot!\n\nIn the meantime, check the useful links below. Please do not DM a staff member while waiting. Try to resolve the problem using the FAQ, or the help channel when you can speak.",
+		Author: &discordgo.MessageEmbedAuthor{},
+		Color:  prettyembedcolor,
+		Title:  "Welcome to the Impact Discord!",
 		Fields: append([]*discordgo.MessageEmbedField{
 			{
 				Name:   "Setup/Install FAQ",
@@ -52,6 +51,11 @@ func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		Thumbnail: &discordgo.MessageEmbedThumbnail{
 			URL: "https://cdn.discordapp.com/attachments/224684271913140224/571442198718185492/unknown.png",
 		},
+	}
+	if hasRole(m.Member, Verified) {
+		embed.Description = "You have been verified automatically! Check the useful links below or <#" + help + ">"
+	} else {
+		embed.Description = "**In order to prevent spam you will not be able to talk until you complete a captcha by clicking [this link](https://impactclient.net/discord.html?discord=" + m.User.ID + ")** to prove you're not a bot!\n\nCheck the useful links below. Please do not DM a staff member while waiting. Try to resolve the problem using the FAQ, or the help channel when you can speak."
 	}
 	ch, err := discord.UserChannelCreate(m.User.ID)
 	if err != nil {

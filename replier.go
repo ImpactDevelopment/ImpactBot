@@ -64,6 +64,10 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
+	if m.GuildID == IMPACT_SERVER {
+		memberSanityCheck(author)
+	}
+
 	// Unless we're being spoken to
 	if !triggeredManually(msg) {
 		// Don't talk where we're not welcome
