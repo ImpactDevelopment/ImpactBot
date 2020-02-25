@@ -7,10 +7,9 @@ const (
 	BRADY            = "205718273696858113"
 	prettyembedcolor = 3447003
 
-	TIMEOUT  = 30 * time.Second
-	TRASH    = "🗑"
-	stevePig = "why_steve_a_pig:558474255776481291"
-	woke     = "525831118583365632"
+	TIMEOUT = 30 * time.Second
+	TRASH   = "🗑"
+	woke    = "525831118583365632"
 
 	announcements = "378645175947362320"
 	general       = "208753003996512258"
