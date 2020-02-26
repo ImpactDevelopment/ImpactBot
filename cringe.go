@@ -31,10 +31,6 @@ func handleAddCringe(caller *discordgo.Member, msg *discordgo.Message, args []st
 	if !IsUserAtLeast(caller, Support) {
 		return fmt.Errorf("you have to be at least support to call something cringe-worthy lol")
 	}
-	if caller.User.ID == "488400748296667147" {
-		return fmt.Errorf("vini does not get to add cringe")
-	}
-
 	if len(args) < 2 {
 		if len(msg.Attachments) > 0 {
 			return cring(msg.Attachments[0].URL, msg.ChannelID, msg.ID)
