@@ -85,7 +85,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `what(\sdoes|\sis|s|'s)?\s+franky`,
-		message: "[It does exactly what you think it does.](https://youtu.be/_FzInOheiRw)",
+		message: "[It does exactly what you think it does.](https://www.youtube.com/watch?v=dQw4w9WgXcQ)",
 	},
 	{
 		pattern: `opti\s*fine`,
