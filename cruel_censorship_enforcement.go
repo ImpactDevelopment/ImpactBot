@@ -33,7 +33,7 @@ func onMessageUpdate(session *discordgo.Session, m *discordgo.MessageUpdate) {
 func onGuildMemberUpdate2(session *discordgo.Session, m *discordgo.GuildMemberUpdate) {
 	for _, badNick := range bannedNicks {
 		if strings.Contains(strings.ToLower(m.Nick), strings.ToLower(badNick)) {
-			resp(impactBotLog, "Note: User "+m.User.Username+" tried to change his nick to \""+m.Nick+"\", which is ILLEGAL")
+			resp(impactBotLog, "Note: User "+m.User.Username+" tried to change their nick to \""+m.Nick+"\", which is ILLEGAL")
 			session.GuildMemberNickname(IMPACT_SERVER, m.User.ID, TRASH)
 			return
 		}
