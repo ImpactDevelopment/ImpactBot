@@ -7,12 +7,14 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+var staffIDs [5][]string
+
 func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 	go func() {
 		prev := ""
 		total := 0
 		donatorCount := 0
-		meanEntity := 3 // devs take up 0 1 and 2
+
 		for {
 			st, err := discord.GuildMembers(IMPACT_SERVER, prev, 1000)
 			if err != nil {
@@ -31,15 +33,23 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				if hasRole(member, Donator) {
 					donatorCount++
 				}
-				if IsUserStaff(member) && IsUserLowerThan(member, Developer) {
-					// impact bot can't change developer nicks lol
-					discord.GuildMemberNickname(IMPACT_SERVER, member.User.ID, "Mean Entity "+strconv.Itoa(meanEntity))
-					meanEntity++
+				if IsUserStaff(member) {
+					staffIDs[GetHighestStaffRole(member)] = append(staffIDs[GetHighestStaffRole(member)], member.User.ID)
 				}
 			}
 		}
 		log.Println("Processed", total, "members")
 		log.Println("There are", donatorCount, "donators")
+		meanEntity := 3 // devs take up 0 1 and 2
+		for i := 0; i < 5; i++ {
+			for _, id := range staffIDs[i] {
+				str := strconv.Itoa(meanEntity)
+				for len(str) < 2 {
+					str = "0" + str
+				}
+				discord.GuildMemberNickname(IMPACT_SERVER, id, "Mean Entity "+str)
+			}
+		}
 	}()
 }
 

@@ -68,3 +68,12 @@ func IsUserHigherThan(user *discordgo.Member, role Role) bool {
 func IsUserLowerThan(user *discordgo.Member, role Role) bool {
 	return !IsUserAtLeast(user, role)
 }
+
+func GetHighestStaffRole(user *discordgo.Member) int {
+	for i, r := range staffRoles {
+		if hasRole(user, r) {
+			return i
+		}
+	}
+	return -1
+}
