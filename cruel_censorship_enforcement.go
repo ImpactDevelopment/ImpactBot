@@ -32,7 +32,7 @@ func onMessageUpdate(session *discordgo.Session, m *discordgo.MessageUpdate) {
 }
 
 func enforceNickname(m *discordgo.Member) {
-	if nick, ok := nicknameENFORCEMENT[m.User.ID]; ok {
+	if nick, ok := nicknameENFORCEMENT[m.User.ID]; ok && m.Nick != nick {
 		discord.GuildMemberNickname(IMPACT_SERVER, m.User.ID, nick)
 		return
 	}
