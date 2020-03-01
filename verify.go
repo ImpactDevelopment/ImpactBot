@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"strconv"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -32,7 +33,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				}
 				if IsUserStaff(member) && IsUserLowerThan(member, Developer) {
 					// impact bot can't change developer nicks lol
-					discord.GuildMemberNickname(IMPACT_SERVER, member.User.ID, "Mean Entity "+string(meanEntity))
+					discord.GuildMemberNickname(IMPACT_SERVER, member.User.ID, "Mean Entity "+strconv.Itoa(meanEntity))
 					meanEntity++
 				}
 			}
