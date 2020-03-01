@@ -56,6 +56,8 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				if i == 4 {
 					nick = "Purple Entity " + str
 				}
+				nick = str
+				nick = " "
 				discord.GuildMemberNickname(IMPACT_SERVER, id, nick)
 				nicknameENFORCEMENT[id] = nick
 				meanEntity++
