@@ -241,7 +241,7 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		return err
 	}
 
-	_ = resp(FORWARD_TO, providedReason)
+	_ = resp(impactBotLog, providedReason)
 
 	_ = resp(msg.ChannelID, providedReason)
 	return nil
@@ -376,7 +376,7 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 	}
 
 	// Respond in chat & #impactbot-log
-	_ = resp(FORWARD_TO, reply.String())
+	_ = resp(impactBotLog, reply.String())
 	_ = resp(msg.ChannelID, reply.String())
 
 	return nil
@@ -428,7 +428,7 @@ func rektHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		return err
 	}
 
-	_ = resp(FORWARD_TO, providedReason)
+	_ = resp(impactBotLog, providedReason)
 
 	_ = resp(msg.ChannelID, providedReason)
 	return nil

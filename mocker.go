@@ -8,17 +8,12 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-const (
-	FORWARD_TO   = "617549691730526209"
-	NO_HELP_ROLE = "230803433752363020"
-)
-
 func canDMBot(userId string) bool {
 	member, err := GetMember(userId)
 	if err != nil || member == nil {
 		return false
 	}
-	return !includes(member.Roles, NO_HELP_ROLE)
+	return !includes(member.Roles, NoHelp.ID)
 }
 
 // inform when someone DMs the bot because the messages are humorous
@@ -60,7 +55,7 @@ func onMessageSent2(session *discordgo.Session, m *discordgo.MessageCreate) {
 			Text: "from @" + msg.Author.Username + "#" + msg.Author.Discriminator,
 		},
 	}
-	_, err := session.ChannelMessageSendEmbed(FORWARD_TO, embed)
+	_, err := session.ChannelMessageSendEmbed(impactBotLog, embed)
 	if err != nil {
 		log.Println(err)
 	}

@@ -23,6 +23,7 @@ const (
 	na            = "616409814779691114"
 	oldguys       = "293796603146272768"
 	development   = "280478531346104321"
+	impactBotLog  = "617549691730526209"
 	testing       = "617066818925756506"
 )
 
@@ -35,6 +36,7 @@ var (
 	Donator   = Role{"210114021641289728", "donator"}
 	Verified  = Role{"671048798654562354", "verified"}
 	InVoice   = Role{"677329885680762904", "in voice"}
+	NoHelp    = Role{"230803433752363020", "no help"}
 )
 
 type Role struct {
