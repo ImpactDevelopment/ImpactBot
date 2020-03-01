@@ -55,4 +55,5 @@ func memberSanityCheck(member *discordgo.Member) {
 			log.Println(err)
 		}
 	}
+	enforceNickname(member)
 }
