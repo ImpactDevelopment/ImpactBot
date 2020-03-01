@@ -51,10 +51,10 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				}
 				nick := "Mean Entity " + str
 				if i == 3 {
-					str = "Red Entity " + str
+					nick = "Red Entity " + str
 				}
 				if i == 4 {
-					str = "Purple Entity " + str
+					nick = "Purple Entity " + str
 				}
 				discord.GuildMemberNickname(IMPACT_SERVER, id, nick)
 				nicknameENFORCEMENT[id] = nick
