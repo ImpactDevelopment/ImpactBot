@@ -56,10 +56,10 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				if i == 4 {
 					nick = "Purple Entity " + str
 				}
-				nick = str
 				nick = `
 ͔`
 				nick = "﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽"
+				nick = str
 				err := discord.GuildMemberNickname(IMPACT_SERVER, id, nick)
 				if err != nil {
 					log.Println(err)
