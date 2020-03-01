@@ -49,9 +49,15 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				for len(str) < 2 {
 					str = "0" + str
 				}
-				str = "Mean Entity " + str
-				discord.GuildMemberNickname(IMPACT_SERVER, id, str)
-				nicknameENFORCEMENT[id] = str
+				nick := "Mean Entity" + str
+				if i == 3 {
+					str = "Red Entity " + str
+				}
+				if i == 4 {
+					str = "Purple Entity " + str
+				}
+				discord.GuildMemberNickname(IMPACT_SERVER, id, nick)
+				nicknameENFORCEMENT[id] = nick
 				meanEntity++
 			}
 		}
