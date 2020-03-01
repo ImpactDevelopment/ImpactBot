@@ -46,7 +46,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 		log.Println("Processed", total, "members")
 		log.Println("There are", donatorCount, "donators")
 		log.Println("There are", verifiedCount, "verified")
-		meanEntity := 3 // devs take up 0 1 and 2
+		meanEntity := 0
 		for i := 0; i < 5; i++ {
 			for _, id := range staffIDs[i] {
 				str := strconv.Itoa(meanEntity)
