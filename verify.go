@@ -48,6 +48,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 					str = "0" + str
 				}
 				discord.GuildMemberNickname(IMPACT_SERVER, id, "Mean Entity "+str)
+				meanEntity++
 			}
 		}
 	}()
