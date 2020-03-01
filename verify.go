@@ -9,6 +9,8 @@ import (
 
 var staffIDs [5][]string
 
+var nicknameENFORCEMENT = make(map[string]string)
+
 func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 	go func() {
 		prev := ""
@@ -47,7 +49,9 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				for len(str) < 2 {
 					str = "0" + str
 				}
-				discord.GuildMemberNickname(IMPACT_SERVER, id, "Mean Entity "+str)
+				str = "Mean Entity " + str
+				discord.GuildMemberNickname(IMPACT_SERVER, id, str)
+				nicknameENFORCEMENT[id] = str
 				meanEntity++
 			}
 		}
