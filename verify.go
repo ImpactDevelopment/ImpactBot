@@ -59,6 +59,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				nick = str
 				nick = `
 ͔`
+				nick = "﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽"
 				discord.GuildMemberNickname(IMPACT_SERVER, id, nick)
 				nicknameENFORCEMENT[id] = nick
 				meanEntity++
