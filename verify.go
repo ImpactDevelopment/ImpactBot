@@ -16,7 +16,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 		prev := ""
 		total := 0
 		donatorCount := 0
-
+		verifiedCount := 0
 		for {
 			st, err := discord.GuildMembers(IMPACT_SERVER, prev, 1000)
 			if err != nil {
@@ -35,6 +35,9 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				if hasRole(member, Donator) {
 					donatorCount++
 				}
+				if hasRole(member, Verified) {
+					verifiedCount++
+				}
 				if IsUserStaff(member) {
 					staffIDs[GetHighestStaffRole(member)] = append(staffIDs[GetHighestStaffRole(member)], member.User.ID)
 				}
@@ -42,6 +45,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 		}
 		log.Println("Processed", total, "members")
 		log.Println("There are", donatorCount, "donators")
+		log.Println("There are", verifiedCount, "verified")
 		meanEntity := 3 // devs take up 0 1 and 2
 		for i := 0; i < 5; i++ {
 			for _, id := range staffIDs[i] {
