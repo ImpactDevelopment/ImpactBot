@@ -140,6 +140,6 @@ var replies = []Reply{
 	},
 	{
 		pattern: `java.*(download|runtime|environment)`,
-		message: "Java download: https://www.java.com/en/download/",
+		message: "Java download: https://www.java.com/download/",
 	},
 }
