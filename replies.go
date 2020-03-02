@@ -138,4 +138,8 @@ var replies = []Reply{
 		pattern: `impact.*(wiki|spammer|multimc)`,
 		message: "Impact Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
 	},
+	{
+		pattern: `java.*(download|runtime|environment)`,
+		message: "Java download: https://www.java.com/en/download/",
+	},
 }
