@@ -160,7 +160,7 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			return errors.New("Too soon")
 		}
 		if IsUserLowerThan(caller, Moderator) {
-			trustedRoles := append(RolesToIDs(staffRoles), Donator.ID) // TODO calculate this only once?
+			trustedRoles := append(RolesToIDs(staffRoles)) // TODO calculate this only once?
 			for _, role := range target.Roles {
 				if includes(trustedRoles, role) {
 					return errors.New("They have trusted role(s)")
