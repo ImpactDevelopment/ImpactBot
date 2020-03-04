@@ -56,7 +56,7 @@ var replies = []Reply{
 		message: "[Baritone usage guide](https://github.com/cabaletta/baritone/blob/master/USAGE.md)",
 	},
 	{
-		pattern: `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update| infect`,
+		pattern: `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|\sinfect`,
 		message: "[Direct download link after adfly](https://impactclient.net/?brady-money-grubbing-completed=true)",
 	},
 	{
