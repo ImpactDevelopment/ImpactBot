@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"strconv"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -18,6 +19,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 		donatorCount := 0
 		verifiedCount := 0
 		for {
+			log.Println("Fetching starting at", prev)
 			st, err := discord.GuildMembers(IMPACT_SERVER, prev, 1000)
 			if err != nil {
 				log.Println(err)
@@ -87,6 +89,13 @@ func memberSanityCheck(member *discordgo.Member) {
 			log.Println(err)
 		}
 	}
+	if !hasRole(member, Verified) && accountCreatedMoreThanSixMonthsAgo(member.User.ID) && joinedServerMoreThanOneMonthAgo(member) {
+		log.Println("Member", member.User.ID, "has been in the server for a month, and has an account over 6 months old, but isn't verified")
+		err := discord.GuildMemberRoleAdd(IMPACT_SERVER, member.User.ID, Verified.ID)
+		if err != nil {
+			log.Println(err)
+		}
+	}
 	if hasRole(member, InVoice) && !checkDeservesInVoiceRole(member.User.ID) {
 		log.Println("Member", member.User.ID, "had In Voice but isn't in voice")
 		err := discord.GuildMemberRoleRemove(IMPACT_SERVER, member.User.ID, InVoice.ID)
@@ -95,4 +104,25 @@ func memberSanityCheck(member *discordgo.Member) {
 		}
 	}
 	enforceNickname(member)
+}
+
+func accountCreatedMoreThanSixMonthsAgo(discordID string) bool {
+	u, err := strconv.ParseUint(discordID, 10, 64)
+	if err != nil {
+		return false
+	}
+	nowMS := uint64(time.Now().Unix()) * 1000
+	createdAtMS := u/(1<<22) + 1420070400000
+	ageMS := nowMS - createdAtMS
+	ageDays := ageMS / 1000 / 86400
+	return ageDays > 6*30
+}
+
+func joinedServerMoreThanOneMonthAgo(member *discordgo.Member) bool {
+	joinedAt, err := member.JoinedAt.Parse()
+	if err != nil {
+		return false
+	}
+	duration := time.Now().Sub(joinedAt)
+	return duration > 30*24*time.Hour
 }

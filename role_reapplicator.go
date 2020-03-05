@@ -20,10 +20,6 @@ func onUserJoin3(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		if err != nil {
 			log.Println(err)
 		}
-		err = discord.GuildMemberRoleAdd(IMPACT_SERVER, m.User.ID, Verified.ID)
-		if err != nil {
-			log.Println(err)
-		}
 	}
 }
 
