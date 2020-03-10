@@ -42,7 +42,7 @@ func schema() (err error) {
 	`)
 	if err != nil {
 		log.Println("Unable to load pgcrypto extension")
-		return
+		panic(err)
 	}
 
 	_, err = DB.Exec(`
@@ -53,12 +53,33 @@ func schema() (err error) {
 			expiration TIMESTAMP
 		);
 	`)
+	if err != nil {
+		log.Println("Unable to create mutes table")
+		panic(err)
+	}
 
 	_, err = DB.Exec(`
 		CREATE TABLE IF NOT EXISTS cringe (
 			image TEXT NOT NULL
 		)
 	`)
+	if err != nil {
+		log.Println("Unable to create cringe table")
+		panic(err)
+	}
+
+	_, err = DB.Exec(`
+		CREATE TABLE IF NOT EXISTS nicks (
+			id   TEXT PRIMARY KEY,
+			nick SERIAL
+		)
+	`)
+	if err != nil {
+		log.Println("Unable to create nicks table")
+		panic(err)
+	}
+
+
 
 	return
 }

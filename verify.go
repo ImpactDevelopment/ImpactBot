@@ -48,30 +48,29 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 		log.Println("Processed", total, "members")
 		log.Println("There are", donatorCount, "donators")
 		log.Println("There are", verifiedCount, "verified")
-		meanEntity := 0
-		for i := 0; i < 5; i++ {
+		if DB == nil {
+			return
+		}
+		for i := 1; i < 5; i++ {
 			for _, id := range staffIDs[i] {
-				str := strconv.Itoa(meanEntity)
+				var num int
+				err := DB.QueryRow("SELECT nick FROM nicks WHERE id = $1", id).Scan(&num)
+				if err != nil {
+					err = DB.QueryRow("INSERT INTO nicks(id) VALUES ($1) RETURNING (nick)", id).Scan(&num)
+					if err != nil {
+						panic(err)
+					}
+				}
+				str := strconv.Itoa(num)
 				for len(str) < 2 {
 					str = "0" + str
 				}
-				nick := "Mean Entity " + str
-				if i == 3 {
-					nick = "Red Entity " + str
-				}
-				if i == 4 {
-					nick = "Purple Entity " + str
-				}
-				nick = `
-͔`
-				nick = "﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽﷽"
-				nick = str
-				err := discord.GuildMemberNickname(IMPACT_SERVER, id, nick)
+				nick := str
+				err = discord.GuildMemberNickname(IMPACT_SERVER, id, nick)
 				if err != nil {
 					log.Println(err)
 				}
 				nicknameENFORCEMENT[id] = nick
-				meanEntity++
 			}
 		}
 	}()
