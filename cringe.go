@@ -88,3 +88,5 @@ func cringReact(channelID string, messageID string) {
 	discord.MessageReactionAdd(channelID, messageID, "alex_omg_no:558475172022059009")
 	discord.MessageReactionAdd(channelID, messageID, "steve_your_sister_is_awesome:558475291454996510")
 }
+
+// bro you just posted cringe XDDDDD
