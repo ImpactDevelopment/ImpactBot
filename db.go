@@ -68,18 +68,5 @@ func schema() (err error) {
 		panic(err)
 	}
 
-	_, err = DB.Exec(`
-		CREATE TABLE IF NOT EXISTS nicks (
-			id   TEXT PRIMARY KEY,
-			nick SERIAL
-		)
-	`)
-	if err != nil {
-		log.Println("Unable to create nicks table")
-		panic(err)
-	}
-
-
-
 	return
 }
