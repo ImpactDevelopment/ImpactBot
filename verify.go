@@ -36,9 +36,9 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				if hasRole(member, Verified) {
 					verifiedCount++
 				}
-				if IsUserStaff(member) {
+				/*if IsUserStaff(member) {
 					discord.GuildMemberNickname(IMPACT_SERVER, member.User.ID, "")
-				}
+				}*/
 			}
 		}
 		log.Println("Processed", total, "members")
