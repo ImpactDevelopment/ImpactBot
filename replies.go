@@ -97,7 +97,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `macros?`,
-		message: "You can edit macros in-game, click Impact Button then Macros.",
+		message: "Macros are in-game chat commands, they can be accessed in-game by clicking on the Impact button then Macros.",
 	},
 	{
 		pattern: `change(\s*logs?|s)`,
@@ -130,8 +130,14 @@ var replies = []Reply{
 		onlyRoles: []Role{Donator},
 	},
 	{
-		pattern: `schematics?`,
-		message: "[ONLY FOR 1.12.2 VERSION AND 1.13+ NIGHTLY BUILDS] Place the schematic file into `.minecraft/schematics` then type `.b build name`. Make sure the required blocks are in your hotbar! The.schematic files used must be created from a 1.12.2 world or prior.",
+		pattern:         `schematics?`,
+		message:         "[ONLY FOR 1.12.2] 0) Schematics **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
+		excludeRoles:    []Role{Donator},
+	},
+	{
+		pattern:         `schematics?`,
+		message:         "[ONLY FOR 1.12.2 & 1.13+ Nightlies] 0) Schematics **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
+		onlyRoles:       []Role{Donator},
 	},
 	{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
