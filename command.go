@@ -96,7 +96,7 @@ var Commands = []Command{
 	{
 		Name:        "genkey",
 		Description: "generates an Impact premium key",
-		Usage:       []string{""},
+		Usage:       []string{"", "role [...roles]"},
 		RoleNeeded:  &Developer,
 		Handler:     genkey,
 	},
