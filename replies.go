@@ -2,6 +2,7 @@ package main
 
 import (
 	"regexp"
+	"strings"
 )
 
 type Reply struct {
@@ -25,6 +26,8 @@ func init() {
 		}
 	}
 }
+
+var nightlies = "https://impactclient.net/ImpactInstaller.<EXT>?nightlies=true"
 
 var replies = []Reply{
 	{
@@ -57,6 +60,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
+		unless:  `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
 		message: "[Direct download link after adfly](https://impactclient.net/?brady-money-grubbing-completed=true)",
 	},
 	{
@@ -104,22 +108,25 @@ var replies = []Reply{
 		message: "Please do not discuss hacks in this Discord.",
 	},
 	{
-		pattern:         `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
-		unless:          `just|forgot|how\s*long|i\s*donated|hours?|wait`,
-		message:         "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.15.2 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
-		excludeRoles:    []Role{Donator},
-		excludeChannels: []string{betterGeneral, betterHelp},
+		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
+		unless:       `just|forgot|how\s*long|i\s*donated|hours?|wait`,
+		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.15.2 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate.",
+		excludeRoles: []Role{Donator},
 	},
 	{
-		pattern:         `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(just|how\s*long|still\sdon'?t|did|wait).+(premium|donat|become\s*a?\s+don(at)?or)`,
-		unless:          `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
-		message:         "Donations using the new system activate instantly on your Discord and Minecraft accounts. If you donated through the old system (I'm sorry), it can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
-		excludeRoles:    []Role{Donator},
-		excludeChannels: []string{betterGeneral, betterHelp},
+		pattern:      `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(just|how\s*long|still\sdon'?t|did|wait).+(premium|donat|become\s*a?\s+don(at)?or)`,
+		unless:       `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
+		message:      "Donations using the new system activate instantly on your Discord and Minecraft accounts. If you donated through the old system (I'm sorry), it can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
+		excludeRoles: []Role{Donator},
 	},
 	{
-		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa`,
-		message:   "You can install nightly builds of Impact using the Donator Installer linked in <#" + donatorInfo + ">.",
+		pattern:      `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
+		message:      "1.15.2 support is currently in nightly builds, which is an exclusive **donater perk**. Go on the [website](https://impactclient.net/#donate) to donate.",
+		excludeRoles: []Role{Donator},
+	},
+	{
+		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
+		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ")",
 		onlyRoles: []Role{Donator},
 	},
 	{
@@ -129,10 +136,6 @@ var replies = []Reply{
 	{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
 		message: "Impact does not support cracked launchers. You can attempt to use the unstable Forge version, but no further support will be provided.",
-	},
-	{
-		pattern: `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
-		message: "Impact for 1.15.2 is currently in donator-only prerelease. Go on the [website](https://impactclient.net/#donate) to donate.",
 	},
 	{
 		pattern: `impact.*(wiki|spammer|multimc)`,

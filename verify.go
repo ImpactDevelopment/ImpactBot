@@ -81,6 +81,11 @@ func onGuildMemberUpdate(discord *discordgo.Session, guildMemberUpdate *discordg
 }
 
 func memberSanityCheck(member *discordgo.Member) {
+	if member.User.Bot {
+		// Don't enforce roles/nicks on bots
+		log.Printf("Skipping sanity check on bot user %s#%s (%s)\n", member.User.Username, member.User.Discriminator, member.Nick)
+		return
+	}
 	if len(member.Roles) > 0 && !hasRole(member, Verified) {
 		log.Println("Member", member.User.ID, "had roles not including verified")
 		err := discord.GuildMemberRoleAdd(IMPACT_SERVER, member.User.ID, Verified.ID)
