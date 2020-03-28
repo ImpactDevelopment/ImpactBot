@@ -38,8 +38,7 @@ func genkey(caller *discordgo.Member, msg *discordgo.Message, args []string) err
 		return errors.New("No valid roles in list")
 	}
 
-	// https://api.impactclient.net
-	code, err := get("http://api.localhost:3000/v1/integration/impactbot/genkey?auth=" + os.Getenv("IMPACTBOT_AUTH_SECRET") + "&" + roles.String())
+	code, err := get("https://api.impactclient.net/v1/integration/impactbot/genkey?auth=" + os.Getenv("IMPACTBOT_AUTH_SECRET") + "&" + roles.String())
 	if err != nil {
 		return err
 	}
