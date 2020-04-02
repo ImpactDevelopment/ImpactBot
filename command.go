@@ -85,12 +85,14 @@ var Commands = []Command{
 		Name:        "addcringe",
 		Description: "adds a cringe photo to the collection",
 		Usage:       []string{"", "url"},
+		RoleNeeded:  &Support,
 		Handler:     handleAddCringe,
 	},
 	{
 		Name:        "delcringe",
 		Description: "removes a cringe photo from the collection",
 		Usage:       []string{"", "url"},
+		RoleNeeded:  &Moderator,
 		Handler:     handleDelCringe,
 	},
 	{

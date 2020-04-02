@@ -28,9 +28,6 @@ func handleCringe(_ *discordgo.Member, msg *discordgo.Message, _ []string) error
 }
 
 func handleAddCringe(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	if !IsUserAtLeast(caller, Support) {
-		return fmt.Errorf("you have to be at least support to call something cringe-worthy lol")
-	}
 	if caller.User.ID == "488400748296667147" {
 		return fmt.Errorf("cringe vini does not get to add cringe because cringe vini himself is cring")
 	}
@@ -49,9 +46,6 @@ func handleAddCringe(caller *discordgo.Member, msg *discordgo.Message, args []st
 }
 
 func handleDelCringe(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	if !IsUserAtLeast(caller, Moderator) {
-		return fmt.Errorf("you have to be at least moderator to uncringe")
-	}
 	if len(args) < 2 {
 		return fmt.Errorf("give url")
 	}
