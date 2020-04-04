@@ -60,7 +60,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
-		unless:  `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
+		unless:  `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)|multimc`,
 		message: "[Direct download link after adfly](https://impactclient.net/?brady-money-grubbing-completed=true)",
 	},
 	{
@@ -130,21 +130,21 @@ var replies = []Reply{
 		onlyRoles: []Role{Donator},
 	},
 	{
-		pattern:         `schematics?`,
-		message:         "[ONLY FOR 1.12.2] 0) Schematics **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
-		excludeRoles:    []Role{Donator},
+		pattern:      `schematics?`,
+		message:      "[ONLY FOR 1.12.2] 0) Schematics **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
+		excludeRoles: []Role{Donator},
 	},
 	{
-		pattern:         `schematics?`,
-		message:         "[ONLY FOR 1.12.2 & 1.13+ Nightlies] 0) Schematics **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
-		onlyRoles:       []Role{Donator},
+		pattern:   `schematics?`,
+		message:   "[ONLY FOR 1.12.2 & 1.13+ Nightlies] 0) Schematics **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
+		onlyRoles: []Role{Donator},
 	},
 	{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
 		message: "Impact does not support cracked launchers. You can attempt to use the unstable Forge version, but no further support will be provided.",
 	},
 	{
-		pattern: `impact.*(wiki|spammer|multimc)`,
+		pattern: `(impact|install|use).*(wiki|spammer|multimc)`,
 		message: "Impact Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
 	},
 	{
