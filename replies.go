@@ -59,9 +59,15 @@ var replies = []Reply{
 		message: "[Baritone usage guide](https://github.com/cabaletta/baritone/blob/master/USAGE.md)",
 	},
 	{
-		pattern: `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
-		unless:  `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)|multimc`,
-		message: "[Direct download link after adfly](https://impactclient.net/?brady-money-grubbing-completed=true)",
+		pattern:      `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
+		unless:       `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)|multimc`,
+		excludeRoles: []Role{Donator},
+		message:      "[Direct download link after adfly](https://impactclient.net/?brady-money-grubbing-completed=true)",
+	},
+	{
+		pattern:   `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
+		onlyRoles: []Role{Donator},
+		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ")",
 	},
 	{
 		pattern: `lite\s*loader`,
@@ -121,7 +127,7 @@ var replies = []Reply{
 	},
 	{
 		pattern:      `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
-		message:      "1.15.2 support is currently in nightly builds, which is an exclusive **donater perk**. Go on the [website](https://impactclient.net/#donate) to donate.",
+		message:      "1.15.2 support is currently in nightly builds, which is an exclusive **donator perk**. Go on the [website](https://impactclient.net/#donate) to donate.",
 		excludeRoles: []Role{Donator},
 	},
 	{
