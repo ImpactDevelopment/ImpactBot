@@ -14,11 +14,12 @@ const rulesChannel = "667494326372139008"
 const rulesMessage = "667497572264312832"
 
 var rules = []string{
+	"Discord ToS",
 	"Moderators have the final say. Do not argue with them.",
-	"Use the correct channels (ask questions in <#" + help + ">, report bugs on github, etc)",
+	"Use the correct channels in this server. Do not DM anyone. Ask questions in <#" + help + ">, report bugs on github, etc",
 	"Channel specific rules or topics can be found in the channel description",
-	"No trolling, unnecessary tagging, spamming, NSFW content, bullying, or blatant rudeness",
-	"No advertising",
+	"No trolling, unnecessary tagging, spamming, advertising, non-English conversation, NSFW content, bullying, or blatant rudeness",
+	"Don't \"ask to ask\". This means no messages that just say something like \"Can I ask a question?\", or \"Can someone help me?\", or, worst of all, \"hello??\". Just ask your question directly (in <#" + help + ">).",
 }
 
 var extraRules = []*discordgo.MessageEmbedField{
