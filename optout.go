@@ -37,7 +37,7 @@ func optOutHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 		_ = SendDM(caller.User.ID, "Thank you for opting out. We have deleted any data we had stored about you. You have been banned from the server to prevent bypassing our moderation system.")
 
 		// We have to ban them or they could bypass a mute
-		err = discord.GuildBanCreateWithReason(IMPACT_SERVER, caller.User.ID, "opted out of tos", 0)
+		err = discord.GuildBanCreateWithReason(impactServer, caller.User.ID, "opted out of tos", 0)
 		if err != nil {
 			return fmt.Errorf("We were unable to ban you. Please contact a moderator.\nError: %s", err.Error())
 		}
@@ -45,7 +45,7 @@ func optOutHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 		// Send them a DM before kicking
 		_ = SendDM(caller.User.ID, "Thank you for opting out. We have deleted any data we had stored about you and kicked you from the server.")
 
-		err = discord.GuildMemberDeleteWithReason(IMPACT_SERVER, caller.User.ID, "opted out of tos")
+		err = discord.GuildMemberDeleteWithReason(impactServer, caller.User.ID, "opted out of tos")
 		if err != nil {
 			return fmt.Errorf("We were unable to ban you. Please contact a moderator.\nError: %s", err.Error())
 		}

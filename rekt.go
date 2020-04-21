@@ -507,7 +507,7 @@ func unmuteCallback() {
 		}
 
 		// Do the unmute
-		err = discord.GuildMemberRoleRemove(IMPACT_SERVER, discordId, muteRole)
+		err = discord.GuildMemberRoleRemove(impactServer, discordId, muteRole)
 		if err != nil {
 			fmt.Println("Could not remove mute role \""+muteRole+"\" from user \""+discordId+"\"", err)
 			message.WriteString("But the bot failed to unmute you! Please show this message to a moderator.\n")
@@ -535,7 +535,7 @@ func init() {
 }
 
 func onUserJoin2(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
-	if m.GuildID != IMPACT_SERVER || m.User == nil {
+	if m.GuildID != impactServer || m.User == nil {
 		return
 	}
 	if DB == nil {
@@ -579,7 +579,7 @@ func onUserJoin2(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
 		}
 
 		// Do the unmute
-		err = discord.GuildMemberRoleAdd(IMPACT_SERVER, m.User.ID, muteRole)
+		err = discord.GuildMemberRoleAdd(impactServer, m.User.ID, muteRole)
 		if err != nil {
 			fmt.Println("Could not remove mute role \""+muteRole+"\" from user \""+m.User.ID+"\"", err)
 		}

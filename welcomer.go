@@ -8,7 +8,7 @@ import (
 )
 
 func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
-	if m.GuildID != IMPACT_SERVER {
+	if m.GuildID != impactServer {
 		return
 	}
 	if m.User == nil {

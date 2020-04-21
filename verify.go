@@ -16,7 +16,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 		verifiedCount := 0
 		for {
 			log.Println("Fetching starting at", prev)
-			st, err := discord.GuildMembers(IMPACT_SERVER, prev, 1000)
+			st, err := discord.GuildMembers(impactServer, prev, 1000)
 			if err != nil {
 				log.Println(err)
 				break
@@ -37,7 +37,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 					verifiedCount++
 				}
 				/*if IsUserStaff(member) {
-					discord.GuildMemberNickname(IMPACT_SERVER, member.User.ID, "")
+					discord.GuildMemberNickname(impactServer, member.User.ID, "")
 				}*/
 			}
 		}
@@ -59,21 +59,21 @@ func memberSanityCheck(member *discordgo.Member) {
 	}
 	if len(member.Roles) > 0 && !hasRole(member, Verified) {
 		log.Println("Member", member.User.ID, "had roles not including verified")
-		err := discord.GuildMemberRoleAdd(IMPACT_SERVER, member.User.ID, Verified.ID)
+		err := discord.GuildMemberRoleAdd(impactServer, member.User.ID, Verified.ID)
 		if err != nil {
 			log.Println(err)
 		}
 	}
 	if !hasRole(member, Verified) && accountCreatedMoreThanSixMonthsAgo(member.User.ID) && joinedServerMoreThanOneMonthAgo(member) {
 		log.Println("Member", member.User.ID, "has been in the server for a month, and has an account over 6 months old, but isn't verified")
-		err := discord.GuildMemberRoleAdd(IMPACT_SERVER, member.User.ID, Verified.ID)
+		err := discord.GuildMemberRoleAdd(impactServer, member.User.ID, Verified.ID)
 		if err != nil {
 			log.Println(err)
 		}
 	}
 	if hasRole(member, InVoice) && !checkDeservesInVoiceRole(member.User.ID) {
 		log.Println("Member", member.User.ID, "had In Voice but isn't in voice")
-		err := discord.GuildMemberRoleRemove(IMPACT_SERVER, member.User.ID, InVoice.ID)
+		err := discord.GuildMemberRoleRemove(impactServer, member.User.ID, InVoice.ID)
 		if err != nil {
 			log.Println(err)
 		}

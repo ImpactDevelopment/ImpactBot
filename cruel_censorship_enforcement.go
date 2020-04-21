@@ -35,7 +35,7 @@ func enforceNickname(m *discordgo.Member) {
 	for _, badNick := range bannedNicks {
 		if strings.Contains(strings.ToLower(m.Nick), strings.ToLower(badNick)) {
 			resp(impactBotLog, "Note: User "+m.User.Username+" tried to change their nick to \""+m.Nick+"\", which is ILLEGAL")
-			err := discord.GuildMemberNickname(IMPACT_SERVER, m.User.ID, TRASH)
+			err := discord.GuildMemberNickname(impactServer, m.User.ID, trash)
 			if err != nil {
 				log.Println(err)
 			}

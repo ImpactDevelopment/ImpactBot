@@ -1,15 +1,11 @@
 package main
 
-import "time"
-
 const (
-	IMPACT_SERVER    = "208753003996512258"
-	BRADY            = "205718273696858113"
-	prettyembedcolor = 3447003
+	impactServer     = "208753003996512258"
+	brady            = "205718273696858113"
+	prettyembedcolor = 0x3498DB
 
-	TIMEOUT = 30 * time.Second
-	TRASH   = "🗑"
-	woke    = "525831118583365632"
+	trash = "🗑"
 
 	announcements = "378645175947362320"
 	general       = "208753003996512258"
@@ -28,15 +24,14 @@ const (
 )
 
 var (
-	HeadDev   = Role{"209817890713632768", "headDeveloper"}
-	Developer = Role{"221655083748687873", "developer"}
-	SeniorMod = Role{"663065117738663938", "seniorMod"}
-	Moderator = Role{"210377982731223040", "moderator"}
-	Support   = Role{"245682967546953738", "support"}
-	Donator   = Role{"210114021641289728", "donator"}
-	Verified  = Role{"671048798654562354", "verified"}
-	InVoice   = Role{"677329885680762904", "in voice"}
-	NoHelp    = Role{"230803433752363020", "no help"}
+	HeadDev   = Role{"209817890713632768", "Head Developer"}
+	Developer = Role{"221655083748687873", "Developer"}
+	SeniorMod = Role{"663065117738663938", "Senior Moderator"}
+	Moderator = Role{"210377982731223040", "Moderator"}
+	Support   = Role{"245682967546953738", "Support"}
+	Donator   = Role{"210114021641289728", "Donator"}
+	Verified  = Role{"671048798654562354", "Verified"}
+	InVoice   = Role{"677329885680762904", "In Voice"}
 )
 
 type Role struct {

@@ -9,6 +9,8 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+const replySenderTimeout = 30 * time.Second
+
 // a map from ID of a message I sent, to the ID of who is allowed to delete it (aka who sent the message that I was responding to)
 var messageSender = make(map[string]string)
 var messageSenderLock sync.Mutex
@@ -18,7 +20,7 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 	defer messageSenderLock.Unlock()
 
 	// If the reaction isn't trash we don't care
-	if reaction.Emoji.Name != TRASH {
+	if reaction.Emoji.Name != trash {
 		return
 	}
 
@@ -64,7 +66,7 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if m.GuildID == IMPACT_SERVER {
+	if m.GuildID == impactServer {
 		memberSanityCheck(author)
 	}
 
@@ -131,7 +133,7 @@ replyLoop:
 	// Add a trashcan icon if the message wasn't triggered manually
 	// Keep track of who is allowed to delete the message too
 	if !triggeredManually(msg) {
-		err = session.MessageReactionAdd(reply.ChannelID, reply.ID, TRASH)
+		err = session.MessageReactionAdd(reply.ChannelID, reply.ID, trash)
 		if err != nil {
 			log.Println(err)
 		}
@@ -139,7 +141,7 @@ replyLoop:
 		// Add the message to the sender map then delete it later
 		messageSender[reply.ID] = msg.Author.ID
 		go func() {
-			time.Sleep(TIMEOUT)
+			time.Sleep(replySenderTimeout)
 			messageSenderLock.Lock()
 			defer messageSenderLock.Unlock()
 			delete(messageSender, reply.ID)

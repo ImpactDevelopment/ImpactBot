@@ -122,7 +122,7 @@ var replies = []Reply{
 	{
 		pattern:      `forgot\s+.*(name|user|account|discord|mc|minecraft|uuid)|(just|how\s*long|still\sdon'?t|did|wait).+(premium|donat|become\s*a?\s+don(at)?or)`,
 		unless:       `what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
-		message:      "Donations using the new system activate instantly on your Discord and Minecraft accounts. If you donated through the old system (I'm sorry), it can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + BRADY + ">.",
+		message:      "Donations using the new system activate instantly on your Discord and Minecraft accounts. If you donated through the old system (I'm sorry), it can take up to 72 hours to be processed. If you forgot to include your discord or minecraft accounts in the payment note or message please DM <@" + brady + ">.",
 		excludeRoles: []Role{Donator},
 	},
 	{

@@ -13,7 +13,7 @@ func canDMBot(userId string) bool {
 	if err != nil || member == nil {
 		return false
 	}
-	return !includes(member.Roles, NoHelp.ID)
+	return !includes(member.Roles, muteRoles[help])
 }
 
 // inform when someone DMs the bot because the messages are humorous

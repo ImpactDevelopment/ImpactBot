@@ -122,7 +122,7 @@ func onMessageSentCommandHandler(session *discordgo.Session, m *discordgo.Messag
 	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault || msg.Author.ID == myselfID {
 		return // wtf
 	}
-	if msg.GuildID != IMPACT_SERVER && msg.GuildID != "" {
+	if msg.GuildID != impactServer && msg.GuildID != "" {
 		return // Only allow guild messages and DMs
 	}
 

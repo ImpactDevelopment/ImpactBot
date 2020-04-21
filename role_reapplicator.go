@@ -12,11 +12,11 @@ import (
 // note: this is not for mutes. rekt does that
 // this is for roles determined by the central db
 func onUserJoin3(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
-	if m.GuildID != IMPACT_SERVER {
+	if m.GuildID != impactServer {
 		return
 	}
 	if shouldGiveDonator(m.User.ID) {
-		err := discord.GuildMemberRoleAdd(IMPACT_SERVER, m.User.ID, Donator.ID)
+		err := discord.GuildMemberRoleAdd(impactServer, m.User.ID, Donator.ID)
 		if err != nil {
 			log.Println(err)
 		}
