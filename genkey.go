@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -13,10 +12,6 @@ import (
 )
 
 func genkey(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	if !IsUserAtLeast(caller, Developer) {
-		return fmt.Errorf("ahaha epic trolololol moment")
-	}
-
 	// Strip command name from args and set default role
 	args = args[1:]
 	if len(args) < 1 {
