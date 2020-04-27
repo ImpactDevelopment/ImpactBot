@@ -5,5 +5,9 @@ import (
 )
 
 func giveaway(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	return discord.GuildMemberRoleAdd(impactServer, caller.User.ID, "698619050833477633")
+	err := discord.GuildMemberRoleAdd(impactServer, caller.User.ID, "698619050833477633")
+	if err != nil {
+		return err
+	}
+	return discord.MessageReactionAdd(msg.ChannelID, msg.ID, ":white_check_mark:")
 }
