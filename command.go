@@ -102,6 +102,12 @@ var Commands = []Command{
 		RoleNeeded:  &SeniorMod,
 		Handler:     genkey,
 	},
+	{
+		Name:        "giveaway",
+		Description: "gives you the giveaway role",
+		Usage:       []string{""},
+		Handler:     giveaway,
+	},
 }
 
 func init() {
