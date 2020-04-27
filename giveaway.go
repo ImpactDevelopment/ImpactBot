@@ -9,5 +9,5 @@ func giveaway(caller *discordgo.Member, msg *discordgo.Message, args []string) e
 	if err != nil {
 		return err
 	}
-	return discord.MessageReactionAdd(msg.ChannelID, msg.ID, ":white_check_mark:")
+	return discord.MessageReactionAdd(msg.ChannelID, msg.ID, "✅")
 }
