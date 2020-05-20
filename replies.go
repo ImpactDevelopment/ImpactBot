@@ -136,6 +136,11 @@ var replies = []Reply{
 		onlyRoles: []Role{Donator},
 	},
 	{
+		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
+		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.",
+		excludeRoles: []Role{Donator},
+	},
+	{
 		pattern:      `schematics?`,
 		message:      "[ONLY FOR 1.12.2] 0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
 		excludeRoles: []Role{Donator},
