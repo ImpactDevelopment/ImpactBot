@@ -164,6 +164,6 @@ var replies = []Reply{
 	},
 	{
 		pattern: `how.+(mine|auto\s*mine)`,
-		message: "You can mine a specific type of block(s) by typing `#mine <ID> [<ID>]` in chat.\nYou can find a list of block ID names [here](https://www.digminecraft.com/lists/item_id_list_pc.php)",
+		message: "You can mine a specific type of block(s) by typing `#mine <ID> [<ID>]` in chat.\nYou can find a list of block ID names [here](https://www.digminecraft.com/lists/)",
 	},
 }
