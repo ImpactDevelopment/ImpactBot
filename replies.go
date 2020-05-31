@@ -166,4 +166,9 @@ var replies = []Reply{
 		pattern: `how.+(mine|auto\s*mine)`,
 		message: "You can mine a specific type of block(s) by typing `#mine <ID> [<ID>]` in chat.\nYou can find a list of block ID names [here](https://www.digminecraft.com/lists/)",
 	},
+	{
+		pattern: `crash(ing|es)?`,
+		message: "If you are crashing on a nightly, any version higher than 0527 will crash.",
+		onlyRoles: []Role{Donator},
+	},
 }
