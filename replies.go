@@ -121,7 +121,7 @@ var replies = []Reply{
 	},
 	{
 		pattern:      `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
-		message:      "1.15.2 support is currently in nightly builds, which is an exclusive **donator perk**. Go on the [website](https://impactclient.net/#donate) to donate.",
+		message:      "1.15.2 support is now out! Download the newest installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		excludeRoles: []Role{Donator},
 	},
 	{
