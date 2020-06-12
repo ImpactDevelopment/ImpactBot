@@ -136,13 +136,7 @@ var replies = []Reply{
 	},
 	{
 		pattern:      `schematics?`,
-		message:      "[ONLY FOR 1.12.2] 0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
-		excludeRoles: []Role{Donator},
-	},
-	{
-		pattern:   `schematics?`,
-		message:   "[ONLY FOR 1.12.2 & 1.13+ Nightlies] 0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
-		onlyRoles: []Role{Donator},
+		message:      "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
 	},
 	{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
