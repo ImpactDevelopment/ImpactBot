@@ -8,6 +8,10 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
+var staffIDs [5][]string
+
+var nicknameENFORCEMENT = make(map[string]string)
+
 func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 	go func() {
 		prev := ""
@@ -39,11 +43,39 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				/*if IsUserStaff(member) {
 					discord.GuildMemberNickname(impactServer, member.User.ID, "")
 				}*/
+				if IsUserStaff(member) {
+					staffIDs[GetHighestStaffRole(member)] = append(staffIDs[GetHighestStaffRole(member)], member.User.ID)
+				}
 			}
 		}
 		log.Println("Processed", total, "members")
 		log.Println("There are", donatorCount, "donators")
 		log.Println("There are", verifiedCount, "verified")
+		if DB == nil {
+			return
+		}
+		for i := 1; i < 5; i++ {
+			for _, id := range staffIDs[i] {
+				var num int
+				err := DB.QueryRow("SELECT nick FROM nicks WHERE id = $1", id).Scan(&num)
+				if err != nil {
+					err = DB.QueryRow("INSERT INTO nicks(id) VALUES ($1) RETURNING (nick)", id).Scan(&num)
+					if err != nil {
+						panic(err)
+					}
+				}
+				str := strconv.Itoa(num)
+				for len(str) < 2 {
+					str = "0" + str
+				}
+				nick := str
+				err = discord.GuildMemberNickname(impactServer, id, nick)
+				if err != nil {
+					log.Println(err)
+				}
+				nicknameENFORCEMENT[id] = nick
+			}
+		}
 	}()
 }
 
