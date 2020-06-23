@@ -154,4 +154,8 @@ var replies = []Reply{
 		pattern: `how.+(mine|auto\s*mine)`,
 		message: "You can mine a specific type of block(s) by typing `#mine <ID> [<ID>]` in chat.\nYou can find a list of block ID names [here](https://www.digminecraft.com/lists/)",
 	},
+	{
+		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
+		message: "No ETA on 1.16 Impact release, a message will be posted in <#" + announcements + "> when development start & nightly builds.",
+	},
 }
