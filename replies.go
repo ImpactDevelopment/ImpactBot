@@ -156,6 +156,6 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
-		message: "No ETA on 1.16 Impact release, a message will be posted in <#" + announcements + "> when development start & nightly builds.",
+		message: "No ETA on 1.16 Impact release, a message will be posted in <#" + announcements + "> when development starts & nightly builds.",
 	},
 }
