@@ -19,7 +19,7 @@ var rules = []string{
 	"Use the correct channels in this server. Do not DM anyone. Ask questions in <#" + help + ">, report bugs on github, etc",
 	"Channel specific rules or topics can be found in the channel description",
 	"No trolling, unnecessary tagging, spamming, advertising, non-English conversation, NSFW content, bullying, or blatant rudeness",
-	"Don't \"ask to ask\". This means no messages that just say something like \"Can I ask a question?\", or \"Can someone help me?\", or, worst of all, \"hello??\". Just ask your question directly (in <#" + help + ">).",
+	"Don't \"ask to ask\". This means no messages that just say something like \"Can I ask a question?\", or \"Can someone help me?\", or, worst of all, \"hello??\". The answer is yes, in <#" + help + ">).",
 }
 
 var extraRules = []*discordgo.MessageEmbedField{
