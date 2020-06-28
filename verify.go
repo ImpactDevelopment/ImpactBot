@@ -68,7 +68,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 				for len(str) < 2 {
 					str = "0" + str
 				}
-				nick := "Kind Entity "+str
+				nick := "Cute Entity "+str+ " UwU :3"
 				err = discord.GuildMemberNickname(impactServer, id, nick)
 				if err != nil {
 					log.Println(err)
