@@ -8,10 +8,10 @@ import (
 )
 
 var censor = map[string]Censorship{
-	"563138570953687061": {"Bella", []Censorable{"kami", "blue", "力ミ", "ブル"}},
-	"209785549010108416": {"Arisa", []Censorable{"loli", "smh"}},
-	"207833493651193856": {"XPHonza", []Censorable{"boomer"}},
-	"297773911158816769": {"leijurv", []Censorable{"not allowed to say this"}},
+	"563138570953687061": {"Bella", setup("kami", "blue", "力ミ", "ブル")},
+	"209785549010108416": {"Arisa", setup("loli", "smh")},
+	"207833493651193856": {"XPHonza", setup("boomer")},
+	"297773911158816769": {"leijurv", setup("not allowed to say this")},
 }
 
 var globalCensor = Censorship{
@@ -23,6 +23,14 @@ var globalCensor = Censorship{
 
 var bannedNicks = []string{
 	"loli",
+}
+
+func setup(strs string...) []Censorable {
+	ret := make([]Censorable, 0)
+	for str := range strs {
+		ret = append(ret, Censorable(str))
+	}
+	return ret
 }
 
 func onMessageSent3(session *discordgo.Session, m *discordgo.MessageCreate) {
