@@ -25,7 +25,7 @@ var bannedNicks = []string{
 	"loli",
 }
 
-func setup(strs string...) []Censorable {
+func setup(strs ...string) []Censorable {
 	ret := make([]Censorable, 0)
 	for str := range strs {
 		ret = append(ret, Censorable(str))
