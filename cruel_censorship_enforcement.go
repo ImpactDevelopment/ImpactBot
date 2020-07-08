@@ -7,16 +7,18 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-type Censorship struct {
-	name        string
-	bannedWords []string
+var censor = map[string]Censorship{
+	"563138570953687061": {"Bella", []Censorable{"kami", "blue", "力ミ", "ブル"}},
+	"209785549010108416": {"Arisa", []Censorable{"loli", "smh"}},
+	"207833493651193856": {"XPHonza", []Censorable{"boomer"}},
+	"297773911158816769": {"leijurv", []Censorable{"not allowed to say this"}},
 }
 
-var censor = map[string]Censorship{
-	"563138570953687061": {"Bella", []string{"kami", "blue", "力ミ", "ブル"}},
-	"209785549010108416": {"Arisa", []string{"loli", "smh"}},
-	"207833493651193856": {"XPHonza", []string{"boomer"}},
-	"297773911158816769": {"leijurv", []string{"not allowed to say this"}},
+var globalCensor = Censorship{
+	"anyone",
+	[]Censorable{
+		Explained{"retard", "an ableist slur"},
+	},
 }
 
 var bannedNicks = []string{
@@ -51,17 +53,45 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault {
 		return // wtf
 	}
-
-	censorship, ok := censor[msg.Author.ID]
-	if !ok {
-		return
-	}
-
+	
+	censorship := censor[msg.Author.ID]
+	censorship = append(censorship, globalCensor)
 	for _, bannedWord := range censorship.bannedWords {
-		if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord)) {
+		if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord.String())) {
 			session.ChannelMessageDelete(msg.ChannelID, msg.ID)
-			resp(msg.ChannelID, "Note: a message containing \""+bannedWord+"\" from "+censorship.name+" was deleted")
+			resp(msg.ChannelID, "Note: a message containing "+bannedWord.Explanation()+" from "+censorship.name+" was deleted")
 			return
 		}
 	}
+}
+
+type Censorable interface {
+	String() string
+	Explanation() string
+}
+
+func (s string) String() string {
+	return s
+}
+
+func (s string) Explanation() string {
+	return "\"" + s + "\""
+}
+
+type Explained struct {
+	str string
+	explain string
+}
+
+func (e Explained) String() string {
+	return e.str
+}
+
+func (e Explained) Explanation() string {
+	return e.explain
+}
+
+type Censorship struct {
+	name        string
+	bannedWords []Censorable
 }
