@@ -66,7 +66,7 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 	for _, censorship := range []Censorship{censor[msg.Author.ID], globalCensor} {
 		for _, bannedWord := range censorship.bannedWords {
 			if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord.str)) {
-				if bannedWord.onlyIfTheyDontHave != null {
+				if bannedWord.onlyIfTheyDontHave != "" {
 					user, err := GetMember(msg.Author.ID)
 					if err != nil {
 						return
