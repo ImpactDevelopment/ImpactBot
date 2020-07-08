@@ -17,7 +17,7 @@ var censor = map[string]Censorship{
 var globalCensor = Censorship{
 	"anyone",
 	[]Explained{
-		Explained{"retard", "an ableist slur"},
+		Explained{"retard", "an ableist slur", ""},
 		Explained{"nigg", "a racist slur", "685255238571130891"}, 
 	},
 }
@@ -29,7 +29,7 @@ var bannedNicks = []string{
 func setup(strs ...string) []Explained {
 	ret := make([]Explained, 0)
 	for _, str := range strs {
-		ret = append(ret, Explained{str, "\"" + str + "\""})
+		ret = append(ret, Explained{str, "\"" + str + "\"", ""})
 	}
 	return ret
 }
