@@ -18,6 +18,7 @@ var globalCensor = Censorship{
 	"anyone",
 	[]Explained{
 		Explained{"retard", "an ableist slur"},
+		Explained{"nigg", "a racist slur", "685255238571130891"}, 
 	},
 }
 
@@ -64,6 +65,9 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 	
 	for _, censorship := range []Censorship{censor[msg.Author.ID], globalCensor} {
 		for _, bannedWord := range censorship.bannedWords {
+			if includes(msg.Author.Roles, bannedWord.onlyIfTheyDontHave) {
+				continue
+			}
 			if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord.str)) {
 				session.ChannelMessageDelete(msg.ChannelID, msg.ID)
 				resp(msg.ChannelID, "Note: a message containing "+bannedWord.explain+" from "+censorship.name+" was deleted")
@@ -76,6 +80,7 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 type Explained struct {
 	str string
 	explain string
+	onlyIfTheyDontHave string
 }
 
 type Censorship struct {
