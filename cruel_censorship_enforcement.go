@@ -25,10 +25,10 @@ var bannedNicks = []string{
 	"loli",
 }
 
-func setup(strs ...string) []Censorable {
-	ret := make([]Censorable, 0)
+func setup(strs ...string) []Explained {
+	ret := make([]Explained, 0)
 	for str := range strs {
-		ret = append(ret, Censorable(str))
+		ret = append(ret, Explained{str, "\"" + str + "\""})
 	}
 	return ret
 }
@@ -73,33 +73,12 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 	}
 }
 
-type Censorable interface {
-	String() string
-	Explanation() string
-}
-
-func (s string) String() string {
-	return s
-}
-
-func (s string) Explanation() string {
-	return "\"" + s + "\""
-}
-
 type Explained struct {
 	str string
 	explain string
 }
 
-func (e Explained) String() string {
-	return e.str
-}
-
-func (e Explained) Explanation() string {
-	return e.explain
-}
-
 type Censorship struct {
 	name        string
-	bannedWords []Censorable
+	bannedWords []Explained
 }
