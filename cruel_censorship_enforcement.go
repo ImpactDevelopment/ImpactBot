@@ -8,7 +8,6 @@ import (
 )
 
 var censor = map[string]Censorship{
-	"563138570953687061": {"Bella", setup("kami", "blue", "力ミ", "ブル")},
 	"209785549010108416": {"Arisa", setup("loli", "smh")},
 	"207833493651193856": {"XPHonza", setup("boomer")},
 	"297773911158816769": {"leijurv", setup("not allowed to say this")},
@@ -16,10 +15,12 @@ var censor = map[string]Censorship{
 
 var globalCensor = Censorship{
 	"anyone",
-	[]Explained{
+	append([]Explained{
 		Explained{"retard", "an ableist slur", ""},
 		Explained{"nigg", "a racist slur", "685255238571130891"}, 
-	},
+		Explained{"fabritone is better than baritone", "something no one is allowed to say", ""},
+		Explained{"impact is better than future", "something no one is allowed to say", ""},
+	}, setup("kami", "blue", "力ミ", "ブル")...),
 }
 
 var bannedNicks = []string{
