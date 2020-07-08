@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"strings"
+	"sync"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -25,6 +26,20 @@ var globalCensor = Censorship{
 
 var bannedNicks = []string{
 	"loli",
+}
+
+var censorCounts = make(map[string]int)
+var censorCountsLock sync.Mutex
+
+func init() {
+	ticker := time.NewTicker(10 * time.Minute)
+	go func() {
+		for range ticker.C {
+			censorCountsLock.Lock()
+			censorCounts = make(map[string]int)
+			censorCountsLock.Unlock()
+		}
+	}()
 }
 
 func setup(strs ...string) []Explained {
@@ -59,6 +74,21 @@ func enforceNickname(m *discordgo.Member) {
 	}
 }
 
+func incrementCensorCounts(authorID string, msg *discordgo.Message, reason string) int {
+	censorCountsLock.Lock()
+	defer censorCountsLock.Unlock()
+	censorCounts[authorID] = censorCounts[authorID] + 1
+	if censorCounts[authorID] < 5 {
+		return censorCounts[authorID]
+	}
+	me, err := GetMember(myselfID)
+	if err != nil {
+		return
+	}
+	muteHandler(me, msg, []string{"tempmute", "<@" + authorID + ">", reason})
+	return censorCounts[authorID]
+}
+
 func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault {
 		return // wtf
@@ -77,7 +107,12 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 					}
 				}
 				session.ChannelMessageDelete(msg.ChannelID, msg.ID)
-				resp(msg.ChannelID, "Note: a message containing "+bannedWord.explain+" from "+censorship.name+" was deleted")
+				ret := "Note: a message containing "+bannedWord.explain+" from "+censorship.name+" was deleted."
+				cnt := incrementCensorCounts(msg.Author.ID, msg, ret)
+				if cnt > 2 {
+					ret += " This has happened "+string(cnt)+ "times in the last 10 minutes. Watch out!"
+				}
+				resp(msg.ChannelID, ret)
 				return
 			}
 		}
