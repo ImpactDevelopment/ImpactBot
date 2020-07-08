@@ -65,10 +65,16 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 	
 	for _, censorship := range []Censorship{censor[msg.Author.ID], globalCensor} {
 		for _, bannedWord := range censorship.bannedWords {
-			if includes(msg.Author.Roles, bannedWord.onlyIfTheyDontHave) {
-				continue
-			}
 			if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord.str)) {
+				if bannedWord.onlyIfTheyDontHave != null {
+					user, err := GetMember(msg.Author.ID)
+					if err != nil {
+						return
+					}
+					if includes(user.Roles, bannedWord.onlyIfTheyDontHave) {
+						continue
+					}
+				}
 				session.ChannelMessageDelete(msg.ChannelID, msg.ID)
 				resp(msg.ChannelID, "Note: a message containing "+bannedWord.explain+" from "+censorship.name+" was deleted")
 				return
