@@ -116,7 +116,7 @@ var replies = []Reply{
 	{
 		pattern:         `dumb|retard|idiot`,
 		message:         "Like the <@&612744883467190275>s?",
-		onlyRoles:       []Role{fucking weeb},
+		onlyRoles:       []Role{Role{"612744883467190275", "fucking weeb"}},
 	},
 	{
 		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
