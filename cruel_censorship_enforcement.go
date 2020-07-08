@@ -112,7 +112,7 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 				ret := "Note: a message containing "+bannedWord.explain+" from "+censorship.name+" was deleted."
 				cnt := incrementCensorCounts(msg.Author.ID, msg, ret)
 				if cnt > 2 {
-					ret += " This has happened "+strconv.Itoa(cnt)+ "times in the last 10 minutes. Watch out!"
+					ret += " This has happened "+strconv.Itoa(cnt)+ " times in the last 10 minutes. Watch out!"
 				}
 				resp(msg.ChannelID, ret)
 				return
