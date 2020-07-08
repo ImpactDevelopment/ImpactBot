@@ -83,7 +83,7 @@ func incrementCensorCounts(authorID string, msg *discordgo.Message, reason strin
 	}
 	me, err := GetMember(myselfID)
 	if err != nil {
-		return
+		return censorCounts[authorID]
 	}
 	muteHandler(me, msg, []string{"tempmute", "<@" + authorID + ">", reason})
 	return censorCounts[authorID]
