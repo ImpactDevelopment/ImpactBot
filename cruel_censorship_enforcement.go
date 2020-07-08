@@ -16,7 +16,7 @@ var censor = map[string]Censorship{
 
 var globalCensor = Censorship{
 	"anyone",
-	[]Censorable{
+	[]Explained{
 		Explained{"retard", "an ableist slur"},
 	},
 }
@@ -27,7 +27,7 @@ var bannedNicks = []string{
 
 func setup(strs ...string) []Explained {
 	ret := make([]Explained, 0)
-	for str := range strs {
+	for _, str := range strs {
 		ret = append(ret, Explained{str, "\"" + str + "\""})
 	}
 	return ret
@@ -62,13 +62,13 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 		return // wtf
 	}
 	
-	censorship := censor[msg.Author.ID]
-	censorship = append(censorship, globalCensor)
-	for _, bannedWord := range censorship.bannedWords {
-		if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord.String())) {
-			session.ChannelMessageDelete(msg.ChannelID, msg.ID)
-			resp(msg.ChannelID, "Note: a message containing "+bannedWord.Explanation()+" from "+censorship.name+" was deleted")
-			return
+	for _, censorship := range []Censorship{censor[msg.Author.ID], globalCensor} {
+		for _, bannedWord := range censorship.bannedWords {
+			if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord.str)) {
+				session.ChannelMessageDelete(msg.ChannelID, msg.ID)
+				resp(msg.ChannelID, "Note: a message containing "+bannedWord.explain+" from "+censorship.name+" was deleted")
+				return
+			}
 		}
 	}
 }
