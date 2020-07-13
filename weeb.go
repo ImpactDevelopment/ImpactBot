@@ -5,7 +5,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func giveaway(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
+func weeb(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
 	err := discord.GuildMemberRoleAdd(impactServer, caller.User.ID, "612744883467190275")
 	if err != nil {
 		return err
