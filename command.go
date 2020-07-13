@@ -108,6 +108,12 @@ var Commands = []Command{
 		Usage:       []string{""},
 		Handler:     giveaway,
 	},
+	{
+		Name:        "weeb",
+		Description: "gives you the fucking weeb role",
+		Usage:       []string{""},
+		Handler:     weeb,
+	},
 }
 
 func init() {
