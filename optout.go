@@ -10,7 +10,7 @@ import (
 
 func optOutHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) (err error) {
 	if len(args) < 2 || strings.ToLower(strings.Join(args[1:], " ")) != "i am sure" {
-		return fmt.Errorf("Please run `%s%s %s`", prefix, args[0], "i am sure")
+		return fmt.Errorf("You will be **permanently removed from this server (ie, banned)** by continuing. Are you sure? `%s%s %s`", prefix, args[0], "i am sure")
 	}
 
 	if DB == nil {
