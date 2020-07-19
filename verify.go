@@ -212,7 +212,7 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 func DFS(edges map[int][]int, start int, end int) []int {
 	for _, str := range edges[start] {
 		if str == end {
-			return []string{start, end}
+			return []string{str, end}
 		}
 		path := DFS(edges, str, end)
 		if path != nil {
