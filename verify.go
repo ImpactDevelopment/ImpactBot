@@ -4,6 +4,8 @@ import (
 	"log"
 	"strconv"
 	"time"
+	"fmt"
+	"errors"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -111,6 +113,112 @@ func memberSanityCheck(member *discordgo.Member) {
 		}
 	}
 	enforceNickname(member)
+}
+
+func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
+	reply := discordgo.MessageEmbed{
+		Color: prettyembedcolor,
+	}
+
+	switch len(args) {
+	case 1:
+		reply.Title = "no"
+		reply.Description = "give number you want"
+	case 2:
+		want, err := strconv.Atoi(args[1])
+		if err != nil {
+			return err
+		}
+		sentBy := msg.Author.ID
+
+		var curr int 
+		err = DB.QueryRow("SELECT nick FROM nicks WHERE id = ?", sentBy).Scan(&curr)
+		if err != nil {
+			return err
+		}
+		if curr == want {
+			return errors.New("No")
+		}
+		var already string
+		err = DB.QueryRow("SELECT id FROM nicks WHERE nick = ?", want).Scan(&already)
+		if err != nil {
+			return err
+		}
+		// already held by already
+		_, err = DB.Exec("INSERT INTO nicktrade (id, desirednick) VALUES (?, ?) ON CONFLICT (id, desirednick) DO NOTHING")
+		if err != nil {
+			return err
+		}
+		rows, err := DB.Query("SELECT nicktrade.desirednick AS desired, nicks.nick AS curr FROM nicks INNER JOIN nicktrade ON nicktrade.id = nicks.id")
+		if err != nil {
+			return err
+		}
+		defer rows.Close()
+		edges := make(map[int][]int)
+		for rows.Next() {
+			var desired int
+			var curr int
+			err = rows.Scan(&desired, &curr)
+			if err != nil {
+				return err
+			}
+			edges[curr]=append(edges[curr], desired)
+		}
+		err = rows.Err()
+		if err != nil {
+			return err
+		}
+		path := DFS(edges, curr, curr)
+		if path == nil {
+			return errors.New("okay i added your request to the database but i cannot satisfy it at the moment")
+		}
+		reply.Title="yes"
+		reply.Description=fmt.Sprintf("Based cycle", path)
+		IDs := make([]string,0)
+		for i := range path {
+			oldNick := path[i]
+			//newNick := path[(i+1)%len(path)]
+			var person string
+			err = DB.QueryRow("SELECT id FROM nicks WHERE nick = ?", oldNick).Scan(&person)
+			if err != nil {
+				return err
+			}
+			IDs = append(IDs, person)
+		}
+		for i := range path {
+			//oldNick := path[i]
+			newNick := path[(i+1)%len(path)]
+			person := IDs[i]
+
+			_, err := DB.Exec("UPDATE nicks SET nick = ? WHERE id = ?", newNick, person)
+			if err != nil {
+				return err
+			}
+
+			_, err = DB.Exec("DELETE FROM nicktrade WHERE desirednick = ? AND id = ?", newNick, person)
+			if err != nil {
+				return err
+			}
+		}
+	default:
+		return errors.New("incorrect number of arguments")
+	}
+
+	_, err := discord.ChannelMessageSendEmbed(msg.ChannelID, &reply)
+	return err
+}
+
+func DFS(edges map[int][]int, start int, end int) []int {
+	if start == end {
+		return []int{start}
+	}
+	for _, str := range edges[start] {
+		path := DFS(edges, str, end)
+		if path != nil {
+			return append([]int{start}, path...)
+		}
+	}
+	return nil
 }
 
 func accountCreatedMoreThanSixMonthsAgo(discordID string) bool {

@@ -79,6 +79,19 @@ func schema() (err error) {
 		panic(err)
 	}
 
+	_, err = DB.Exec(`
+		CREATE TABLE IF NOT EXISTS nicktrade (
+			id   TEXT,
+			desirednick INTEGER,
+
+			UNIQUE(id, desirednick)
+		)
+	`)
+	if err != nil {
+		log.Println("Unable to create nicktrade table")
+		panic(err)
+	}
+
 
 
 	return
