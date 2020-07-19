@@ -178,7 +178,7 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		}
 		path=path[:len(path)-1]
 		reply.Title="yes"
-		reply.Description=fmt.Sprintf("Based cycle", path)
+		reply.Description=fmt.Sprintf("Based cycle BTW MY CODE IS SHIT SO THIS CLEARS ALL i!wants", path)
 		IDs := make([]string,0)
 		for i := range path {
 			oldNick := path[i]
@@ -200,13 +200,12 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 				return err
 			}
 
-			_, err = DB.Exec("DELETE FROM nicktrade WHERE desirednick = $1 AND id = $2", newNick, person)
+			meme(newNick, person)
+		}
+		_, err = DB.Exec("DELETE FROM nicktrade")
 			if err != nil {
 				return err
 			}
-
-			meme(newNick, person)
-		}
 	default:
 		return errors.New("incorrect number of arguments")
 	}
