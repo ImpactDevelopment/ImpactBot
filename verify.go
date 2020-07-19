@@ -66,19 +66,23 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 						panic(err)
 					}
 				}
-				str := strconv.Itoa(num)
+				meme(num,id)
+			}
+		}
+	}()
+}
+
+func meme(num int, id string){
+	str := strconv.Itoa(num)
 				for len(str) < 2 {
 					str = "0" + str
 				}
 				nick := "Volunteer "+str
-				err = discord.GuildMemberNickname(impactServer, id, nick)
+				err := discord.GuildMemberNickname(impactServer, id, nick)
 				if err != nil {
 					log.Println(err)
 				}
 				nicknameENFORCEMENT[id] = nick
-			}
-		}
-	}()
 }
 
 func onGuildMemberUpdate(discord *discordgo.Session, guildMemberUpdate *discordgo.GuildMemberUpdate) {
@@ -200,6 +204,8 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			if err != nil {
 				return err
 			}
+
+			meme(newNick, person)
 		}
 	default:
 		return errors.New("incorrect number of arguments")
