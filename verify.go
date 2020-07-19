@@ -145,7 +145,7 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			return err
 		}
 		// already held by already
-		_, err = DB.Exec("INSERT INTO nicktrade (id, desirednick) VALUES ($1, $2) ON CONFLICT (id, desirednick) DO NOTHING")
+		_, err = DB.Exec("INSERT INTO nicktrade (id, desirednick) VALUES ($1, $2) ON CONFLICT (id, desirednick) DO NOTHING", sentBy, want)
 		if err != nil {
 			return err
 		}
