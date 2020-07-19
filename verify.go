@@ -169,9 +169,10 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			return err
 		}
 		path := DFS(edges, curr, curr)
-		if path == nil {
+		if len(path) < 2 {
 			return errors.New("okay i added your request to the database but i cannot satisfy it at the moment")
 		}
+		path=path[:len(path)-1]
 		reply.Title="yes"
 		reply.Description=fmt.Sprintf("Based cycle", path)
 		IDs := make([]string,0)
@@ -209,10 +210,10 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 }
 
 func DFS(edges map[int][]int, start int, end int) []int {
-	if start == end {
-		return []int{start}
-	}
 	for _, str := range edges[start] {
+		if str == end {
+			return []string{start, end}
+		}
 		path := DFS(edges, str, end)
 		if path != nil {
 			return append([]int{start}, path...)
