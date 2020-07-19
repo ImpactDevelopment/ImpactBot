@@ -132,7 +132,7 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		sentBy := msg.Author.ID
 
 		var curr int 
-		err = DB.QueryRow("SELECT nick FROM nicks WHERE id = ?", sentBy).Scan(&curr)
+		err = DB.QueryRow("SELECT nick FROM nicks WHERE id = $1", sentBy).Scan(&curr)
 		if err != nil {
 			return err
 		}
@@ -140,12 +140,12 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			return errors.New("No")
 		}
 		var already string
-		err = DB.QueryRow("SELECT id FROM nicks WHERE nick = ?", want).Scan(&already)
+		err = DB.QueryRow("SELECT id FROM nicks WHERE nick = $1", want).Scan(&already)
 		if err != nil {
 			return err
 		}
 		// already held by already
-		_, err = DB.Exec("INSERT INTO nicktrade (id, desirednick) VALUES (?, ?) ON CONFLICT (id, desirednick) DO NOTHING")
+		_, err = DB.Exec("INSERT INTO nicktrade (id, desirednick) VALUES ($1, $2) ON CONFLICT (id, desirednick) DO NOTHING")
 		if err != nil {
 			return err
 		}
@@ -179,7 +179,7 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			oldNick := path[i]
 			//newNick := path[(i+1)%len(path)]
 			var person string
-			err = DB.QueryRow("SELECT id FROM nicks WHERE nick = ?", oldNick).Scan(&person)
+			err = DB.QueryRow("SELECT id FROM nicks WHERE nick = $1", oldNick).Scan(&person)
 			if err != nil {
 				return err
 			}
@@ -190,12 +190,12 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			newNick := path[(i+1)%len(path)]
 			person := IDs[i]
 
-			_, err := DB.Exec("UPDATE nicks SET nick = ? WHERE id = ?", newNick, person)
+			_, err := DB.Exec("UPDATE nicks SET nick = $1 WHERE id = $2", newNick, person)
 			if err != nil {
 				return err
 			}
 
-			_, err = DB.Exec("DELETE FROM nicktrade WHERE desirednick = ? AND id = ?", newNick, person)
+			_, err = DB.Exec("DELETE FROM nicktrade WHERE desirednick = $1 AND id = $2", newNick, person)
 			if err != nil {
 				return err
 			}
