@@ -123,6 +123,12 @@ var Commands = []Command{
 		Usage:       []string{""},
 		Handler:     weeb,
 	},
+	{
+		Name:        "unweeb",
+		Description: "yeets you from the server",
+		Usage:       []string{""},
+		Handler:     unweeb,
+	},
 }
 
 func init() {

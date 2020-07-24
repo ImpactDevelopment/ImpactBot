@@ -6,7 +6,7 @@ import (
 )
 
 func unweeb(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	err := discord.GuildMemberRoleDelete(impactServer, caller.User.ID, "612744883467190275")
+	err := GuildMemberDelete(impactServer, caller.User.ID)
 	if err != nil {
 		return err
 	}
