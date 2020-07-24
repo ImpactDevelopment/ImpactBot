@@ -124,10 +124,10 @@ var Commands = []Command{
 		Handler:     weeb,
 	},
 	{
-		Name:        "unweeb",
-		Description: "yeets you from the server",
+		Name:        "ungiveaway",
+		Description: "no more giveaway role for you",
 		Usage:       []string{""},
-		Handler:     unweeb,
+		Handler:     ungiveaway,
 	},
 }
 
