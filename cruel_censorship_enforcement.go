@@ -22,7 +22,7 @@ var globalCensor = Censorship{
 		Explained{"nigg", "a racist slur", "685255238571130891"}, 
 		Explained{"fabritone is better than baritone", "something no one is allowed to say", ""},
 		Explained{"impact is better than future", "something no one is allowed to say", ""},
-	}, setup("kami", "力ミ", "ブル", "salhack")...),
+	}, setup("力ミ", "ブル", "salhack")...),
 }
 
 var bannedNicks = []string{
