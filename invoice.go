@@ -9,9 +9,9 @@ func onVoiceStateUpdate(session *discordgo.Session, m *discordgo.VoiceStateUpdat
 		return
 	}
 	if m.ChannelID == "" || m.Deaf || m.SelfDeaf {
-		session.GuildMemberRoleRemove(impactServer, m.UserID, InVoice.ID)
+		_ = session.GuildMemberRoleRemove(impactServer, m.UserID, InVoice.ID)
 	} else {
-		session.GuildMemberRoleAdd(impactServer, m.UserID, InVoice.ID)
+		_ = session.GuildMemberRoleAdd(impactServer, m.UserID, InVoice.ID)
 	}
 }
 

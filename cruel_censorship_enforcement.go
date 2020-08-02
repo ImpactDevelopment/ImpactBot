@@ -2,10 +2,10 @@ package main
 
 import (
 	"log"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
-	"strconv"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -19,9 +19,9 @@ var censor = map[string]Censorship{
 var globalCensor = Censorship{
 	"anyone",
 	append([]Explained{
-		Explained{"nigg", "a racist slur", "685255238571130891"}, 
-		Explained{"fabritone is better than baritone", "something no one is allowed to say", ""},
-		Explained{"impact is better than future", "something no one is allowed to say", ""},
+		{"nigg", "a racist slur", "685255238571130891"},
+		{"fabritone is better than baritone", "something no one is allowed to say", ""},
+		{"impact is better than future", "something no one is allowed to say", ""},
 	}, setup("力ミ", "ブル", "salhack")...),
 }
 
@@ -61,12 +61,15 @@ func onMessageUpdate(session *discordgo.Session, m *discordgo.MessageUpdate) {
 
 func enforceNickname(m *discordgo.Member) {
 	if nick, ok := nicknameENFORCEMENT[m.User.ID]; ok && m.Nick != nick {
-		discord.GuildMemberNickname(impactServer, m.User.ID, nick)
+		err := discord.GuildMemberNickname(impactServer, m.User.ID, nick)
+		if err != nil {
+			log.Println(err)
+		}
 		return
 	}
 	for _, badNick := range bannedNicks {
 		if strings.Contains(strings.ToLower(m.Nick), strings.ToLower(badNick)) {
-			resp(impactBotLog, "Note: User "+m.User.Username+" tried to change their nick to \""+m.Nick+"\", which is ILLEGAL")
+			_ = resp(impactBotLog, "Note: User "+m.User.Username+" tried to change their nick to \""+m.Nick+"\", which is ILLEGAL")
 			err := discord.GuildMemberNickname(impactServer, m.User.ID, trash)
 			if err != nil {
 				log.Println(err)
@@ -86,7 +89,7 @@ func incrementCensorCounts(authorID string, msg *discordgo.Message, reason strin
 	if err != nil {
 		return censorCounts[authorID]
 	}
-	muteHandler(me, msg, []string{"tempmute", "<@" + authorID + ">", reason})
+	_ = muteHandler(me, msg, []string{"tempmute", "<@" + authorID + ">", reason})
 	return censorCounts[authorID]
 }
 
@@ -94,7 +97,7 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault {
 		return // wtf
 	}
-	
+
 	for _, censorship := range []Censorship{censor[msg.Author.ID], globalCensor} {
 		for _, bannedWord := range censorship.bannedWords {
 			if strings.Contains(strings.ToLower(msg.Content), strings.ToLower(bannedWord.str)) {
@@ -108,12 +111,12 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 					}
 				}
 				session.ChannelMessageDelete(msg.ChannelID, msg.ID)
-				ret := "Note: a message containing "+bannedWord.explain+" from "+censorship.name+" was deleted."
+				ret := "Note: a message containing " + bannedWord.explain + " from " + censorship.name + " was deleted."
 				cnt := incrementCensorCounts(msg.Author.ID, msg, ret)
 				if cnt > 2 {
-					ret += " This has happened "+strconv.Itoa(cnt)+ " times in the last 10 minutes. Watch out!"
+					ret += " This has happened " + strconv.Itoa(cnt) + " times in the last 10 minutes. Watch out!"
 				}
-				resp(msg.ChannelID, ret)
+				_ = resp(msg.ChannelID, ret)
 				return
 			}
 		}
@@ -121,8 +124,8 @@ func enforcement(session *discordgo.Session, msg *discordgo.Message) {
 }
 
 type Explained struct {
-	str string
-	explain string
+	str                string
+	explain            string
 	onlyIfTheyDontHave string
 }
 

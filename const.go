@@ -1,5 +1,6 @@
 package main
 
+//noinspection GoUnusedConst
 const (
 	impactServer     = "208753003996512258"
 	brady            = "205718273696858113"

@@ -14,9 +14,9 @@ import (
 )
 
 const (
-	RATELIMIT         = 5 * time.Minute
-	TEMPMUTE_DURATION = 3 * time.Hour
-	UNMUTE_INTERVAL   = 10 * time.Second
+	RateLimit        = 5 * time.Minute
+	TempmuteDuration = 3 * time.Hour
+	UnmuteInterval   = 10 * time.Second
 )
 
 var ratelimit = make(map[string]int64)
@@ -30,7 +30,7 @@ func evalRatelimit(author string) bool {
 
 	until := ratelimit[author]
 	if until < time.Now().UnixNano() { // defaults to 0 so this works properly
-		ratelimit[author] = time.Now().Add(RATELIMIT).UnixNano()
+		ratelimit[author] = time.Now().Add(RateLimit).UnixNano()
 		return true
 	}
 
@@ -213,7 +213,7 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 	}
 	var expiration *time.Time
 	if strings.ToLower(args[0]) == "tempmute" {
-		exp := time.Now().Add(TEMPMUTE_DURATION) // go doesn't let you do this in one line
+		exp := time.Now().Add(TempmuteDuration) // go doesn't let you do this in one line
 		expiration = &exp
 	}
 
@@ -527,7 +527,7 @@ func init() {
 		fmt.Println("WARNING: No DB when initialising tempmutes callback, either rekt.go was initialised before db.go or there is no DB")
 	}
 	go func() {
-		ticker := time.NewTicker(UNMUTE_INTERVAL)
+		ticker := time.NewTicker(UnmuteInterval)
 		for range ticker.C {
 			unmuteCallback()
 		}

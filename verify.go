@@ -1,11 +1,10 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"strconv"
 	"time"
-	"fmt"
-	"errors"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -66,23 +65,23 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 						panic(err)
 					}
 				}
-				meme(num,id)
+				meme(num, id)
 			}
 		}
 	}()
 }
 
-func meme(num int, id string){
+func meme(num int, id string) {
 	str := strconv.Itoa(num)
-				for len(str) < 2 {
-					str = "0" + str
-				}
-				nick := "Volunteer "+str
-				err := discord.GuildMemberNickname(impactServer, id, nick)
-				if err != nil {
-					log.Println(err)
-				}
-				nicknameENFORCEMENT[id] = nick
+	for len(str) < 2 {
+		str = "0" + str
+	}
+	nick := "Volunteer " + str
+	err := discord.GuildMemberNickname(impactServer, id, nick)
+	if err != nil {
+		log.Println(err)
+	}
+	nicknameENFORCEMENT[id] = nick
 }
 
 func onGuildMemberUpdate(discord *discordgo.Session, guildMemberUpdate *discordgo.GuildMemberUpdate) {
@@ -135,7 +134,7 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		}
 		sentBy := msg.Author.ID
 
-		var curr int 
+		var curr int
 		err = DB.QueryRow("SELECT nick FROM nicks WHERE id = $1", sentBy).Scan(&curr)
 		if err != nil {
 			return err
@@ -166,7 +165,7 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 			if err != nil {
 				return err
 			}
-			edges[curr]=append(edges[curr], desired)
+			edges[curr] = append(edges[curr], desired)
 		}
 		err = rows.Err()
 		if err != nil {
@@ -176,10 +175,10 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 		if len(path) < 2 {
 			return errors.New("okay i added your request to the database but i cannot satisfy it at the moment")
 		}
-		path=path[:len(path)-1]
-		reply.Title="yes"
-		reply.Description=fmt.Sprintf("Based cycle BTW MY CODE IS SHIT SO THIS CLEARS ALL i!wants", path)
-		IDs := make([]string,0)
+		path = path[:len(path)-1]
+		reply.Title = "yes"
+		reply.Description = "Based cycle BTW MY CODE IS SHIT SO THIS CLEARS ALL i!wants"
+		IDs := make([]string, 0)
 		for i := range path {
 			oldNick := path[i]
 			//newNick := path[(i+1)%len(path)]
@@ -202,10 +201,11 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 
 			meme(newNick, person)
 		}
+		//noinspection SqlWithoutWhere
 		_, err = DB.Exec("DELETE FROM nicktrade")
-			if err != nil {
-				return err
-			}
+		if err != nil {
+			return err
+		}
 	default:
 		return errors.New("incorrect number of arguments")
 	}

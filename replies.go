@@ -114,9 +114,9 @@ var replies = []Reply{
 		message: "Please do not discuss hacks in this Discord.",
 	},
 	{
-		pattern:         `dumb|retard|idiot`,
-		message:         "Like the <@&612744883467190275>s?",
-		onlyRoles:       []Role{Role{"612744883467190275", "fucking weeb"}},
+		pattern:   `dumb|retard|idiot`,
+		message:   "Like the <@&612744883467190275>s?",
+		onlyRoles: []Role{{"612744883467190275", "fucking weeb"}},
 	},
 	{
 		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
@@ -135,13 +135,13 @@ var replies = []Reply{
 		onlyRoles: []Role{Donator},
 	},
 	{
-		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
-		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.",
+		pattern:      `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
+		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.",
 		excludeRoles: []Role{Donator},
 	},
 	{
-		pattern:      `schematics?`,
-		message:      "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
+		pattern: `schematics?`,
+		message: "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
 	},
 	{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
@@ -162,10 +162,9 @@ var replies = []Reply{
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
 		message: "No ETA on 1.16 Impact release, a message will be posted in <#" + announcements + "> when development starts & nightly builds.",
-	},	
+	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
 		message: "Impact for older versions is no longer availible to comply with Mojang's EULA.",
 	},
-	
 }
