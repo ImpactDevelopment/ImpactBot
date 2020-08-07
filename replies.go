@@ -84,87 +84,102 @@ var replies = []Reply{
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + help + "> channel!",
-		excludeRoles:    []Role{Donator},
+		excludeRoles:    []Role{Donator, Blacklist},
 		excludeChannels: []string{help, betterHelp},
 	},
 	{
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + betterHelp + "> channel!",
 		onlyRoles:       []Role{Donator},
+		excludeRoles:    []Role{Blacklist},
 		excludeChannels: []string{help, betterHelp},
 	},
 	{
 		pattern: `what(\sdoes|\sis|s|'s)?\s+franky`,
 		message: "[It does exactly what you think it does.](https://youtu.be/_FzInOheiRw)",
+		excludeRoles:    []Role{Blacklist},
 	},
 	{
 		pattern: `opti\s*fine`,
 		message: "Use the installer to add OptiFine to Impact! [Text instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
+		excludeRoles:    []Role{Blacklist},
 	},
 	{
 		pattern: `macros?`,
 		message: "Macros are in-game chat commands, they can be accessed in-game by clicking on the Impact button then Macros.",
+		excludeRoles:    []Role{Blacklist},
 	},
 	{
 		pattern: `change(\s*logs?|s)`,
 		message: "[Changelog](https://impactclient.net/changelog)",
+		excludeRoles:    []Role{Blacklist},
 	},
 	{
 		pattern: `hack(s|ing|er|client)?`,
 		message: "Please do not discuss hacks in this Discord.",
+		excludeRoles:    []Role{Blacklist},
 	},
 	{
 		pattern:   `dumb|retard|idiot`,
 		message:   "Like the <@&612744883467190275>s?",
 		onlyRoles: []Role{{"612744883467190275", "fucking weeb"}},
+		excludeRoles:    []Role{Blacklist},
 	},
 	{
 		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:       `just|forgot|how\s*long|i\s*donated|hours?|wait`,
 		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.15.2 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
-		excludeRoles: []Role{Donator},
+		excludeRoles: []Role{Donator, Blacklist},
 	},
 	{
 		pattern:      `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
 		message:      "1.15.2 support is now out! Download the newest installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
-		excludeRoles: []Role{Donator},
+		excludeRoles: []Role{Donator, Blacklist},
 	},
 	{
 		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
 		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ")",
 		onlyRoles: []Role{Donator},
+		excludeRoles: []Role{Blacklist},
 	},
 	{
 		pattern:      `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
 		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.",
-		excludeRoles: []Role{Donator},
+		excludeRoles: []Role{Donator, Blacklist},
 	},
 	{
 		pattern: `schematics?`,
 		message: "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
+		excludeRoles: []Role{Blacklist},
 	},
 	{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
 		message: "Impact does not support cracked launchers. You can attempt to use the unstable Forge version, but no further support will be provided.",
+		excludeRoles: []Role{Blacklist},
 	},
 	{
 		pattern: `(impact|install|use).*(wiki|spammer|multimc)`,
 		message: "Impact Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
+		excludeRoles: []Role{Blacklist},
 	},
 	{
 		pattern: `java.*(download|runtime|environment)`,
 		message: "Java download: https://www.java.com/download/",
+		excludeRoles: []Role{Blacklist},
 	},
 	{
 		pattern: `how.+(mine|auto\s*mine)`,
 		message: "You can mine a specific type of block(s) by typing `#mine <ID> [<ID>]` in chat.\nYou can find a list of block ID names [here](https://www.digminecraft.com/lists/)",
+		excludeRoles: []Role{Blacklist},
 	},
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
 		message: "No ETA on 1.16 Impact release, a message will be posted in <#" + announcements + "> when development starts & nightly builds.",
+		excludeRoles: []Role{Blacklist},
 	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
 		message: "Impact for older versions is no longer availible to comply with Mojang's EULA.",
+		excludeRoles: []Role{Blacklist},
 	},
 }
