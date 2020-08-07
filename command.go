@@ -123,6 +123,18 @@ var Commands = []Command{
 		Usage:       []string{""},
 		Handler:     weeb,
 	},
+	{
+		Name:        "blacklist",
+		Description: "Blacklist yourself from the bot's automatic replies",
+		Usage:       []string{""},
+		Handler:     blacklist,
+	},
+	{
+		Name:        "unblacklist",
+		Description: "Unblacklist yourself from the bot's automatic replies",
+		Usage:       []string{""},
+		Handler:     unblacklist,
+	},
 }
 
 func init() {
