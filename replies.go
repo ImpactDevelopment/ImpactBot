@@ -161,10 +161,10 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
-		message: "No ETA on 1.16 Impact release, a message will be posted in <#" + announcements + "> when development starts & nightly builds.",
+		message: "No ETA on 1.16 Impact release, a message will be posted in <#" + announcements + "> when development starts & nightly builds. And please: https://cdn.discordapp.com/attachments/617140506069303306/741921114145685544/stfu30.gif",
 	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
-		message: "Impact for older versions is no longer availible to comply with Mojang's EULA.",
+		message: "Impact for older versions is no longer availible to comply with Mojang's EULA. You can still download them from: https://snorlax.cc/impact.html",
 	},
 }
