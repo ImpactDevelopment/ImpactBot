@@ -129,6 +129,18 @@ var Commands = []Command{
 		Usage:       []string{""},
 		Handler:     ungiveaway,
 	},
+	{
+		Name:        "stupid",
+		Description: "makes you so stupid impcat bot will ignore you",
+		Usage:       []string{""},
+		Handler:     stupid,
+	},
+	{
+		Name:        "unstupid",
+		Description: "no more stupid",
+		Usage:       []string{""},
+		Handler:     unstupid,
+	},
 }
 
 func init() {
