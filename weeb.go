@@ -12,7 +12,7 @@ func weeb(caller *discordgo.Member, msg *discordgo.Message, args []string) error
     }
 
     else {
-    	err := discord.GuildMemberRoleAdd(impactServer, caller.User.ID, "612744883467190275")
+    	err := discord.GuildMemberRoleRemove(impactServer, caller.User.ID, "612744883467190275")
     }
     
 	if err != nil {
