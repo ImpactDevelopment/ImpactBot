@@ -3,6 +3,7 @@ package main
 
 import (
 	"github.com/bwmarrin/discordgo"
+	"utils.go"
 )
 
 func weeb(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
