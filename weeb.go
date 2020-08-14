@@ -3,11 +3,18 @@ package main
 
 import (
 	"github.com/bwmarrin/discordgo"
+	"math/rand"
 )
 
 func weeb(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	err := discord.GuildBanCreateWithReason(impactServer, caller.User.ID, "no weeb for you, poggers.", 0) 
-	
+    if rand.Intn(5) == 0 {
+    	err := discord.GuildBanCreateWithReason(impactServer, caller.User.ID, "no weeb for you, poggers.", 0) 	
+    }
+
+    else {
+    	err := discord.GuildMemberRoleAdd(impactServer, caller.User.ID, "612744883467190275")
+    }
+    
 	if err != nil {
 		return err // if this happens i fucked up
 	}
