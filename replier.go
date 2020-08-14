@@ -79,7 +79,7 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		// Ignore messages from ‘know-it-all’s
-		if IsUserStaff(author) || hasRole(author, "743903534160019476") {
+		if IsUserStaff(author) || hasRole(author, Role{ID: "743903534160019476"}) {
 			return
 		}
 	}
