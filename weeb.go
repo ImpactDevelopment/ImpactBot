@@ -7,7 +7,7 @@ import (
 )
 
 func weeb(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-    if rand.Intn(5) == 0 {
+    if rand.Intn(1) == 0 {
     	err := discord.GuildBanCreateWithReason(impactServer, caller.User.ID, "no weeb for you, poggers.", 0) 	
     }
 
