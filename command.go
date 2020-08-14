@@ -119,7 +119,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "weeb",
-		Description: "gives you the fucking weeb role",
+		Description: "gives you the fucking weeb role (ban, permanent)",
 		Usage:       []string{""},
 		Handler:     weeb,
 	},

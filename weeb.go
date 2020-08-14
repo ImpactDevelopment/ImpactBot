@@ -6,9 +6,11 @@ import (
 )
 
 func weeb(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	err := discord.GuildMemberRoleAdd(impactServer, caller.User.ID, "612744883467190275")
+	err := discord.GuildBanCreateWithReason(impactServer, caller.User.ID, "no weeb for you, poggers.", 0) 
+	
 	if err != nil {
-		return err
+		return err // if this happens i fucked up
 	}
+	
 	return discord.MessageReactionAdd(msg.ChannelID, msg.ID, "✅")
 }
