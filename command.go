@@ -119,7 +119,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "weeb",
-		Description: "informs us you are a weeb, this **will immediately and permanently ban you** from the server",
+		Description: "informs us you are a weeb, enhances your impact weeb experience by customizing the impact discord for you. note that this might change things up just a little, so be prepared.",
 		Usage:       []string{""},
 		Handler:     weeb,
 	},
