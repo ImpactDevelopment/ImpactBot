@@ -44,6 +44,7 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 	if !isMessageSender(reaction.UserID, reaction.MessageID) && !IsUserStaff(user) {
 		return
 	}
+	reaction.UserID
 
 	// Delete the reply
 	// sometimes errors since it was already trashcanned, dont spam logs with this error its too common
