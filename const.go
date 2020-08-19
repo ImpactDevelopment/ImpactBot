@@ -7,6 +7,7 @@ const (
 	prettyembedcolor = 0x3498DB
 
 	trash = "🗑"
+	check = "✅"
 
 	announcements = "378645175947362320"
 	general       = "208753003996512258"
@@ -34,6 +35,8 @@ var (
 	Donator   = Role{"210114021641289728", "Donator"}
 	Verified  = Role{"671048798654562354", "Verified"}
 	InVoice   = Role{"677329885680762904", "In Voice"}
+	Stupid    = Role{"743903534160019476", "Stupid"}
+	Givaway   = Role{"698619050833477633", "Givaway Ping"}
 )
 
 type Role struct {

@@ -44,7 +44,6 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 	if !isMessageSender(reaction.UserID, reaction.MessageID) && !IsUserStaff(user) {
 		return
 	}
-	reaction.UserID
 
 	// Delete the reply
 	// sometimes errors since it was already trashcanned, dont spam logs with this error its too common
@@ -80,7 +79,7 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		// Ignore messages from ‘know-it-all’s
-		if IsUserStaff(author) || hasRole(author, Role{ID: "743903534160019476"}) {
+		if IsUserStaff(author) || hasRole(author, Stupid) {
 			return
 		}
 	}
