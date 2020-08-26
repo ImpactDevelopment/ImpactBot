@@ -9,8 +9,8 @@ import (
 )
 
 func optOutHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) (err error) {
-	if len(args) < 2 || strings.ToLower(strings.Join(args[1:], " ")) != "i am sure" {
-		return fmt.Errorf("You will be **permanently banned from this server** by informing us that you are a weeb. Are you sure? `%s%s %s`", prefix, args[0], "i am sure")
+	if len(args) < 2 || strings.ToLower(strings.Join(args[1:], " ")) != "yes" {
+		return fmt.Errorf("You will be **permanently banned from this server** by informing us that you are a weeb. Are you sure? `%s%s %s`", prefix, args[0], "yes")
 	}
 	// Check if they're muted
 	var muted bool
