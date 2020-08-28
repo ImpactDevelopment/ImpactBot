@@ -55,34 +55,6 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 		if DB == nil {
 			return
 		}
-		for i := 1; i < 5; i++ {
-			for _, id := range staffIDs[i] {
-				var num int
-				err := DB.QueryRow("SELECT nick FROM nicks WHERE id = $1", id).Scan(&num)
-				if err != nil {
-					err = DB.QueryRow("INSERT INTO nicks(id) VALUES ($1) RETURNING (nick)", id).Scan(&num)
-					if err != nil {
-						panic(err)
-					}
-				}
-				meme(num, id)
-			}
-		}
-	}()
-}
-
-func meme(num int, id string) {
-	str := strconv.Itoa(num)
-	for len(str) < 2 {
-		str = "0" + str
-	}
-	nick := "Volunteer " + str
-	err := discord.GuildMemberNickname(impactServer, id, nick)
-	if err != nil {
-		log.Println(err)
-	}
-	nicknameENFORCEMENT[id] = nick
-}
 
 func onGuildMemberUpdate(discord *discordgo.Session, guildMemberUpdate *discordgo.GuildMemberUpdate) {
 	memberSanityCheck(guildMemberUpdate.Member)
@@ -188,18 +160,6 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 				return err
 			}
 			IDs = append(IDs, person)
-		}
-		for i := range path {
-			//oldNick := path[i]
-			newNick := path[(i+1)%len(path)]
-			person := IDs[i]
-
-			_, err := DB.Exec("UPDATE nicks SET nick = $1 WHERE id = $2", newNick, person)
-			if err != nil {
-				return err
-			}
-
-			meme(newNick, person)
 		}
 		//noinspection SqlWithoutWhere
 		_, err = DB.Exec("DELETE FROM nicktrade")
