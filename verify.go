@@ -55,6 +55,8 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 		if DB == nil {
 			return
 		}
+	}()
+}
 
 func onGuildMemberUpdate(discord *discordgo.Session, guildMemberUpdate *discordgo.GuildMemberUpdate) {
 	memberSanityCheck(guildMemberUpdate.Member)
