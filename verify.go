@@ -77,6 +77,7 @@ func meme(num int, id string) {
 		str = "0" + str
 	}
 	nick := "Volunteer " + str
+	nick = ""
 	err := discord.GuildMemberNickname(impactServer, id, nick)
 	if err != nil {
 		log.Println(err)
