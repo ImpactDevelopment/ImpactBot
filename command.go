@@ -17,6 +17,7 @@ var (
 
 type Command struct {
 	Name        string
+	Aliases     []string
 	Description string
 	Usage       []string
 	RoleNeeded  *Role
@@ -68,6 +69,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "rules",
+		Aliases:     []string{"rule"},
 		Description: "display the rules",
 		Usage: []string{
 			"",
@@ -81,8 +83,8 @@ var Commands = []Command{
 		Usage: []string{
 			"<number>",
 		},
-		RoleNeeded:  &Support,
-		Handler: wantHandler,
+		RoleNeeded: &Support,
+		Handler:    wantHandler,
 	},
 	{
 		Name:        "cringe",
@@ -198,6 +200,11 @@ func findCommand(command string) *Command {
 		if command == it.Name {
 			return &it
 		}
+		for _, alias := range it.Aliases {
+			if command == alias {
+				return &it
+			}
+		}
 	}
 	return nil
 }
@@ -205,8 +212,7 @@ func findCommand(command string) *Command {
 var helpCommand = Command{
 	Name:        "help",
 	Description: "display this help message",
-	Usage:       nil,
-	RoleNeeded:  nil,
+	Aliases:     []string{"?"},
 	Handler: func(caller *discordgo.Member, message *discordgo.Message, args []string) error {
 		embed := discordgo.MessageEmbed{
 			Color:  0,
@@ -245,6 +251,20 @@ var helpCommand = Command{
 
 func (c Command) helpText() string {
 	var desc strings.Builder
+	// Print aliases first
+	if len(c.Aliases) > 0 {
+		desc.WriteString("\n_Alias")
+		if len(c.Aliases) > 1 {
+			// plural meme
+			desc.WriteString("es")
+		}
+		desc.WriteString(": ")
+		for _, alias := range c.Aliases {
+			desc.WriteString(fmt.Sprintf("**%s** ", alias))
+		}
+		desc.WriteString("_\n")
+	}
+	// Then usages
 	if len(c.Usage) > 0 {
 		desc.WriteString("```\n")
 		for _, usage := range c.Usage {
@@ -252,10 +272,12 @@ func (c Command) helpText() string {
 		}
 		desc.WriteString("```")
 	}
+	// Then description
 	desc.WriteString(c.Description)
 	if !strings.HasSuffix(c.Description, ".") {
 		desc.WriteString(".")
 	}
+	// Then, finally, required permissions
 	if c.RoleNeeded != nil {
 		desc.WriteString(fmt.Sprintf("\nRequires `%s` or higher", c.RoleNeeded.Name))
 	}
