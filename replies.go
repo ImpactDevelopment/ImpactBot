@@ -131,12 +131,12 @@ var replies = []Reply{
 	},
 	{
 		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
-		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ")",
+		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ").\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		onlyRoles: []Role{Donator},
 	},
 	{
 		pattern:      `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
-		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.",
+		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		excludeRoles: []Role{Donator},
 	},
 	{
