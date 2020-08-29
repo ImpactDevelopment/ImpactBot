@@ -115,8 +115,8 @@ var replies = []Reply{
 	},
 	{
 		pattern:   `dumb|retard|idiot`,
-		message:   "Like the <@&612744883467190275>s?",
-		onlyRoles: []Role{{"612744883467190275", "fucking weeb"}},
+		message:   "Like the " + Weeb.Mention() + "s?",
+		onlyRoles: []Role{Weeb},
 	},
 	{
 		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,

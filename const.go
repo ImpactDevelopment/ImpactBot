@@ -36,6 +36,7 @@ var (
 	Verified  = Role{"671048798654562354", "Verified"}
 	InVoice   = Role{"677329885680762904", "In Voice"}
 	Stupid    = Role{"743903534160019476", "Stupid"}
+	Weeb      = Role{"612744883467190275", "weeb"}
 	Givaway   = Role{"698619050833477633", "Givaway Ping"}
 )
 
@@ -66,4 +67,8 @@ var muteRoles = map[string]string{
 	na:            "669632725644214283",
 	oldguys:       "669632828371107881",
 	development:   "669632988686057472",
+}
+
+func (r Role) Mention() string {
+	return "<@&" + r.ID + ">"
 }
