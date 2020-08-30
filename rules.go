@@ -44,33 +44,45 @@ func rulesHandler(caller *discordgo.Member, msg *discordgo.Message, args []strin
 		Color: prettyembedcolor,
 	}
 
-	switch len(args) {
-	case 1:
+	if len(args) == 1 {
 		reply.Title = "Rules"
 		reply.Description = buildRules()
-	case 2:
+	} else {
 		index, err := strconv.Atoi(args[1])
+		if len(args) > 2 || err != nil {
+			index, err = findRuleFromStrings(strings.Join(args[1:], " "))
+		} else {
+			index-- // Rule numbers are one higher than index
+		}
 		if err != nil {
 			return err
 		}
-		index-- // Rule numbers are one higher than index
 		if index >= len(rules) {
-			return errors.New("There are only " + strconv.Itoa(len(rules)) + " rules, " + args[1] + " is too high.")
+			return errors.New("There are only " + strconv.Itoa(len(rules)) + " rules, " + strconv.Itoa(index+1) + " is too high.")
 		}
 		if index < 0 {
-			return errors.New("Rules are counted from 1, " + args[1] + " is too low")
+			return errors.New("Rules are counted from 1, " + strconv.Itoa(index+1) + " is too low")
 		}
 		reply.Title = "Rule " + strconv.Itoa(index+1)
 		reply.Description = rules[index]
 		reply.Footer = &discordgo.MessageEmbedFooter{
 			Text: fmt.Sprintf("Run %s%s for more", prefix, args[0]),
 		}
-	default:
-		return errors.New("incorrect number of arguments")
 	}
 
 	_, err := discord.ChannelMessageSendEmbed(msg.ChannelID, &reply)
 	return err
+}
+
+func findRuleFromStrings(phrase ...string) (int, error) {
+	for _, word := range phrase {
+		for i, rule := range rules {
+			if strings.Contains(strings.ToLower(rule), strings.ToLower(word)) {
+				return i, nil
+			}
+		}
+	}
+	return -1, errors.New("unable to find rule matching \"" + strings.Join(phrase, " ") + "\"")
 }
 
 func updateRules() {

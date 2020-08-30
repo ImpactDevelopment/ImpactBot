@@ -74,6 +74,7 @@ var Commands = []Command{
 		Usage: []string{
 			"",
 			"<number>",
+			"<search term>",
 		},
 		Handler: rulesHandler,
 	},
