@@ -116,7 +116,6 @@ func memberSanityCheck(member *discordgo.Member) {
 			log.Println(err)
 		}
 	}
-	enforceNickname(member)
 }
 
 func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
