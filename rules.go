@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	stripmd "github.com/writeas/go-strip-markdown"
 	"log"
 	"strconv"
 	"strings"
@@ -78,7 +79,7 @@ func rulesHandler(caller *discordgo.Member, msg *discordgo.Message, args []strin
 func findRuleFromStrings(phrase ...string) (int, error) {
 	for _, word := range phrase {
 		for i, rule := range rules {
-			if strings.Contains(strings.ToLower(rule), strings.ToLower(word)) {
+			if strings.Contains(strings.ToLower(stripmd.Strip(rule)), strings.ToLower(stripmd.Strip(word))) {
 				return i, nil
 			}
 		}
