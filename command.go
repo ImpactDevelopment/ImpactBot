@@ -214,22 +214,35 @@ func findCommand(command string) *Command {
 
 var helpCommand = Command{
 	Name:        "help",
-	Description: "display this help message",
+	Description: "display this help message. Specify `all` to include commands you don't have permission to run. Specify a command's name or alias to see help for only that specific command.",
 	Aliases:     []string{"?"},
+	Usage: []string{
+		"",
+		"all",
+		"<command>",
+	},
 	Handler: func(caller *discordgo.Member, message *discordgo.Message, args []string) error {
 		embed := discordgo.MessageEmbed{
 			Color:  0,
 			Fields: []*discordgo.MessageEmbedField{},
 		}
-		if len(args) < 2 {
+		// all is true if the user asked for commands they don't have permission for
+		all := len(args) == 2 && strings.ToLower(args[1]) == "all"
+		if len(args) < 2 || all {
 			// All commands
 			embed.Title = "ImpactBot help"
 			embed.Description = "Available commands:"
+			if all {
+				embed.Description = "All commands:"
+			}
 			for _, command := range Commands {
-				embed.Fields = append(embed.Fields, &discordgo.MessageEmbedField{
-					Name:  command.Name,
-					Value: command.helpText(),
-				})
+				// Include this command if the user has permission to run it or they asked for "all" commands
+				if all || command.RoleNeeded == nil || IsUserAtLeast(caller, *command.RoleNeeded) {
+					embed.Fields = append(embed.Fields, &discordgo.MessageEmbedField{
+						Name:  command.Name,
+						Value: command.helpText(),
+					})
+				}
 			}
 		} else {
 			// Specified commands
