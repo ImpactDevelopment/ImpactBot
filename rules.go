@@ -14,12 +14,13 @@ const rulesChannel = "667494326372139008"
 const rulesMessage = "667497572264312832"
 
 var rules = []string{
-	"Discord ToS",
+	"Follow [Discord's ToS](https://discord.com/terms).",
 	"Moderators have the final say. Do not argue with them.",
-	"Use the correct channels in this server. Do not DM anyone. Ask questions in <#" + help + ">, report bugs on github, etc",
-	"Channel specific rules or topics can be found in the channel description",
-	"No trolling, unnecessary pinging / @-ing, spamming, advertising, non-English conversation, NSFW content, bullying, or blatant rudeness",
-	"Don't \"ask to ask\". This means no messages that just say something like \"Can I ask a question?\", or \"Can someone help me?\", or, worst of all, \"hello??\". The answer is yes, in <#" + help + ">).",
+	"Use the correct channel for the topic you are discussing. _Ask questions in <#" + help + ">, report bugs on [GitHub](https://github.com/ImpactDevelopment/ImpactIssues/issues), etc._",
+	"No trolling, unnecessary pinging / @-ing / DMing, spamming, advertising, non-English conversation, bullying, or blatant rudeness.",
+	"No NSFW content. _This includes messages, images, gifs, videos, audio, links, usernames, nicknames, statuses, profile pictures, etc._",
+	"Don't “ask to ask”. _This means no messages that just say something like “Can I ask a question?”, or “Can someone help me?”, or, worst of all, “hello??”. The answer is yes, in <#" + help + ">)._",
+	"Channel specific rules or topics can be found in the channel description. _They may extend upon or overrule these blanket rules._",
 }
 
 var extraRules = []*discordgo.MessageEmbedField{

@@ -28,7 +28,7 @@ type Command struct {
 var Commands = []Command{
 	{
 		Name:        "optout",
-		Description: "opt-out of out ToS and leave the server permanently",
+		Description: "opt out of our terms and leave the server permanently",
 		Usage:       []string{"i am sure"},
 		Handler:     optOutHandler,
 	},
