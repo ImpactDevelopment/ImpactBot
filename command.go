@@ -70,7 +70,7 @@ var Commands = []Command{
 	{
 		Name:        "rules",
 		Aliases:     []string{"rule"},
-		Description: "display the rules",
+		Description: "Display the rules or a specific rule. Optionally @mention a user to tag them in the response.",
 		Usage: []string{
 			"",
 			"<number>",

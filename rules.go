@@ -5,6 +5,7 @@ import (
 	"fmt"
 	stripmd "github.com/writeas/go-strip-markdown"
 	"log"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -46,25 +47,45 @@ func rulesHandler(caller *discordgo.Member, msg *discordgo.Message, args []strin
 		Color: prettyembedcolor,
 	}
 
-	if len(args) == 1 {
+	// Separate @mentions from args
+	var b strings.Builder
+	if len(args) > 0 {
+		for _, word := range args[1:] {
+			if match, err := regexp.MatchString("^<@!?[0-9]+>$", word); err != nil {
+				return err
+			} else if !match {
+				b.WriteString(word + " ")
+			}
+		}
+	}
+
+	// Try to parse an index or a search term
+	search := strings.TrimSpace(b.String())
+	index, _ := strconv.Atoi(search)
+
+	if search == "" {
 		reply.Title = "Rules"
 		reply.Description = buildRules()
 	} else {
-		index, err := strconv.Atoi(args[1])
-		if len(args) > 2 || err != nil {
-			index, err = findRuleFromStrings(strings.Join(args[1:], " "))
-		} else {
+		// If search matches index, then they specified a rule number
+		// otherwise they provided a search term
+		if search == strconv.Itoa(index) {
 			index-- // Rule numbers are one higher than index
+		} else {
+			var err error
+			index, err = findRuleFromStrings(strings.TrimSpace(search))
+			if err != nil {
+				return err
+			}
 		}
-		if err != nil {
-			return err
-		}
+
 		if index >= len(rules) {
 			return errors.New("There are only " + strconv.Itoa(len(rules)) + " rules, " + strconv.Itoa(index+1) + " is too high.")
 		}
 		if index < 0 {
 			return errors.New("Rules are counted from 1, " + strconv.Itoa(index+1) + " is too low")
 		}
+
 		reply.Title = "Rule " + strconv.Itoa(index+1)
 		reply.Description = rules[index]
 		reply.Footer = &discordgo.MessageEmbedFooter{
@@ -72,7 +93,17 @@ func rulesHandler(caller *discordgo.Member, msg *discordgo.Message, args []strin
 		}
 	}
 
-	_, err := discord.ChannelMessageSendEmbed(msg.ChannelID, &reply)
+	// Mention any users mentioned by the caller
+	var mentions string
+	for _, user := range msg.Mentions {
+		mentions += user.Mention() + " "
+	}
+
+	_, err := discord.ChannelMessageSendComplex(msg.ChannelID, &discordgo.MessageSend{
+		Content: mentions,
+		Embed:   &reply,
+	})
+
 	return err
 }
 
