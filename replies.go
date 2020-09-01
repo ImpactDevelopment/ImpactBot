@@ -55,7 +55,7 @@ var replies = []Reply{
 		message: "[How to take a screenshot in Minecraft](https://www.minecraft.net/en-us/article/screenshotting-guide)",
 	},
 	{
-		pattern: `use\sbaritone|baritone\susage|baritone\scommand|\.b|goal|goto|path`,
+		pattern: `use\sbaritone|baritone\susage|baritone\scommand|[^u]\.b|goal|goto|path`,
 		message: "[Baritone usage guide](https://github.com/cabaletta/baritone/blob/master/USAGE.md)",
 	},
 	{
