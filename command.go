@@ -123,12 +123,6 @@ var Commands = []Command{
 		Handler:     giveaway,
 	},
 	{
-		Name:        "weeb",
-		Description: "informs us you are a weeb, this **will immediately and permanently ban you** from the server",
-		Usage:       []string{""},
-		Handler:     weeb,
-	},
-	{
 		Name:        "ungiveaway",
 		Description: "no more giveaway role for you",
 		Usage:       []string{""},
