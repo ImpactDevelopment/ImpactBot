@@ -28,41 +28,41 @@ type Command struct {
 var Commands = []Command{
 	{
 		Name:        "optout",
-		Description: "opt out of our terms and leave the server permanently",
+		Description: "Opt out of our terms and leave the server permanently",
 		Usage:       []string{"i am sure"},
 		Handler:     optOutHandler,
 	},
 	{
 		Name:        "tempmute",
-		Description: "mute someone temporarily, optionally from a specific channel",
+		Description: "Mute someone temporarily, optionally from a specific channel",
 		Usage:       []string{"@user reason", "@user #channel reason", "#channel @user reason"},
 		RoleNeeded:  &Support,
 		Handler:     muteHandler,
 	},
 	{
 		Name:        "mute",
-		Description: "mute someone permanently, optionally from a specific channel",
+		Description: "Mute someone permanently, optionally from a specific channel",
 		Usage:       []string{"@user reason", "@user #channel reason", "#channel @user reason"},
 		RoleNeeded:  &Moderator,
 		Handler:     muteHandler,
 	},
 	{
 		Name:        "unmute",
-		Description: "unmute someone, either server-wide, from a specific channel, or remove all mutes",
+		Description: "Unmute someone, either server-wide, from a specific channel, or remove all mutes",
 		Usage:       []string{"@user", "@user #channel", "@user all"},
 		RoleNeeded:  &Moderator,
 		Handler:     unmuteHandler,
 	},
 	{
 		Name:        "kick",
-		Description: "kick someone from the server",
+		Description: "Kick someone from the server",
 		Usage:       []string{"@user reason"},
 		RoleNeeded:  &Moderator,
 		Handler:     rektHandler,
 	},
 	{
 		Name:        "ban",
-		Description: "ban someone from the server",
+		Description: "Ban someone from the server",
 		Usage:       []string{"@user reason"},
 		RoleNeeded:  &Moderator,
 		Handler:     rektHandler,
@@ -91,40 +91,40 @@ var Commands = []Command{
 	*/
 	{
 		Name:        "cringe",
-		Description: "generates a random cringe image",
+		Description: "Generates a random cringe image",
 		Usage:       []string{""},
 		Handler:     handleCringe,
 	},
 	{
 		Name:        "addcringe",
-		Description: "adds a cringe photo to the collection",
+		Description: "Adds a cringe photo to the collection",
 		Usage:       []string{"", "url"},
 		RoleNeeded:  &Support,
 		Handler:     handleAddCringe,
 	},
 	{
 		Name:        "delcringe",
-		Description: "removes a cringe photo from the collection",
+		Description: "Removes a cringe photo from the collection",
 		Usage:       []string{"", "url"},
 		RoleNeeded:  &Moderator,
 		Handler:     handleDelCringe,
 	},
 	{
 		Name:        "genkey",
-		Description: "generates an Impact premium key",
+		Description: "Generates an Impact premium key",
 		Usage:       []string{"", "role [...roles]"},
 		RoleNeeded:  &SeniorMod,
 		Handler:     genkey,
 	},
 	{
 		Name:        "giveaway",
-		Description: "gives you the giveaway role",
+		Description: "Gives you the giveaway role",
 		Usage:       []string{""},
 		Handler:     giveaway,
 	},
 	{
 		Name:        "ungiveaway",
-		Description: "no more giveaway role for you",
+		Description: "Removes the giveaway role",
 		Usage:       []string{""},
 		Handler:     ungiveaway,
 	},
@@ -208,7 +208,7 @@ func findCommand(command string) *Command {
 
 var helpCommand = Command{
 	Name:        "help",
-	Description: "display this help message. Specify `all` to include commands you don't have permission to run. Specify a command's name or alias to see help for only that specific command.",
+	Description: "Display this help message. Specify `all` to include commands you don't have permission to run. Specify a command's name or alias to see help for only that specific command.",
 	Aliases:     []string{"?"},
 	Usage: []string{
 		"",
