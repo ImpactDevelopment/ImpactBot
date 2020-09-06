@@ -43,7 +43,7 @@ func init() {
 	myselfID = user.ID
 	log.Println("I am", myselfID)
 
-	discordgo.MakeIntent(discordgo.IntentsGuildBans | discordgo.IntentsAllWithoutPrivileged)
+	discordgo.MakeIntent(discordgo.IntentsGuildMembers | discordgo.IntentsAllWithoutPrivileged)
 
 	discord.AddHandler(onUserJoin)
 	discord.AddHandler(onMessageSent)
