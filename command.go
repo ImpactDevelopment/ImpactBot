@@ -217,7 +217,7 @@ var helpCommand = Command{
 	},
 	Handler: func(caller *discordgo.Member, message *discordgo.Message, args []string) error {
 		embed := discordgo.MessageEmbed{
-			Color:  0,
+			Color:  prettyembedcolor,
 			Fields: []*discordgo.MessageEmbedField{},
 		}
 		// all is true if the user asked for commands they don't have permission for
