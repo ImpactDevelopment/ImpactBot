@@ -4,7 +4,7 @@ package main
 const (
 	impactServer     = "208753003996512258"
 	brady            = "205718273696858113"
-	prettyembedcolor = 0x3498DB
+	prettyembedcolor = 0xAD7EC2
 
 	trash = "🗑"
 	check = "✅"
