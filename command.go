@@ -62,6 +62,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "ban",
+		Aliases:     []string{"golang"},
 		Description: "Ban someone from the server",
 		Usage:       []string{"@user reason"},
 		RoleNeeded:  &Moderator,
