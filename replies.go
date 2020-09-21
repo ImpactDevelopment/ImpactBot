@@ -119,11 +119,6 @@ var replies = []Reply{
 		onlyRoles: []Role{Weeb},
 	},
 	{
-		pattern:   `nigger|cunt`,
-		message:   "Please refrain from using strong language.",
-		excludeRoles: []Role{Support},[]Role{Oldfriend},[]Role{Trooper},
-	},
-	{
 		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:       `just|forgot|how\s*long|i\s*donated|hours?|wait`,
 		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.15.2 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
@@ -145,7 +140,7 @@ var replies = []Reply{
 		excludeRoles: []Role{Donator},
 	},
 	{
-		pattern: `schematics`,
+		pattern: `schematics?`,
 		message: "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
 	},
 	{
@@ -154,7 +149,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(impact|install|use).*(wiki|spammer|multimc)`,
-		message: "For how to use Impact, please read the Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
+		message: "[Impact Wiki](https://github.com/ImpactDevelopment/ImpactIssues/wiki)",
 	},
 	{
 		pattern: `java.*(download|runtime|environment)`,
@@ -166,7 +161,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
-		message: "Progress has strarted on the 1.16 relase, but there is currently no ETA. A message will be posted in <#" + announcements + "> when nightly builds are available.",
+		message: "Limited progress has strarted on the 1.16 relase, but there is currently no ETA. A message will be posted in <#" + announcements + "> when nightly builds are available.",
 	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
@@ -174,6 +169,6 @@ var replies = []Reply{
 	},
 	{
 		pattern: `modpack|mods`,
-		message: "Impact does is generally incompatible with modpacks.",
+		message: "Impact is generally incompatible with modpacks.",
 	},
 }
