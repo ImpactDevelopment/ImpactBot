@@ -35,12 +35,12 @@ var replies = []Reply{
 		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)",
 	},
 	{
-		pattern: `faq`,
+		pattern: `faq|question`,
 		message: "[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)",
 	},
 	{
-		pattern: `defender|virus|mcafee|norton`,
-		message: "https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
+		pattern: `defender|virus|mcafee|norton|trojan`,
+		message: "[Please read this thread regarding Impact being flagged by anitviruses](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
 		pattern: `tutorial`,
@@ -51,12 +51,12 @@ var replies = []Reply{
 		message: "[Baritone settings list and documentation](https://baritone.leijurv.com/baritone/api/Settings.html#field.detail)",
 	},
 	{
-		pattern: `(take\sa?\s?)?screenshot`,
+		pattern: `screenshot`,
 		message: "[How to take a screenshot in Minecraft](https://www.minecraft.net/en-us/article/screenshotting-guide)",
 	},
 	{
 		pattern: `use\sbaritone|baritone\susage|baritone\scommand|[^u]\.b|goal|goto|path`,
-		message: "[Baritone usage guide](https://github.com/cabaletta/baritone/blob/master/USAGE.md)",
+		message: "Please read the [Baritone usage guide](https://github.com/cabaletta/baritone/blob/master/USAGE.md)",
 	},
 	{
 		pattern:      `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
@@ -119,6 +119,11 @@ var replies = []Reply{
 		onlyRoles: []Role{Weeb},
 	},
 	{
+		pattern:   `nigger|cunt`,
+		message:   "Please refrain from using strong language.",
+		excludeRoles: []Role{Support},[]Role{Oldfriend},[]Role{Trooper},
+	},
+	{
 		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:       `just|forgot|how\s*long|i\s*donated|hours?|wait`,
 		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.15.2 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
@@ -140,7 +145,7 @@ var replies = []Reply{
 		excludeRoles: []Role{Donator},
 	},
 	{
-		pattern: `schematics?`,
+		pattern: `schematics`,
 		message: "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
 	},
 	{
@@ -149,7 +154,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(impact|install|use).*(wiki|spammer|multimc)`,
-		message: "Impact Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
+		message: "For how to use Impact, please read the Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
 	},
 	{
 		pattern: `java.*(download|runtime|environment)`,
@@ -161,10 +166,14 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
-		message: "No ETA on 1.16 Impact release, a message will be posted in <#" + announcements + "> when development starts & nightly builds.",
+		message: "Progress has strarted on the 1.16 relase, but there is currently no ETA. A message will be posted in <#" + announcements + "> when nightly builds are available.",
 	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
 		message: "Impact for older versions is no longer availible to comply with Mojang's EULA.",
+	},
+	{
+		pattern: `modpack|mods`,
+		message: "Impact does is generally incompatible with modpacks.",
 	},
 }
