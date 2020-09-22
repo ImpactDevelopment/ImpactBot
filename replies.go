@@ -111,7 +111,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `hack(s|ing|er|client)?`,
-		message: "The discussion of hacks in this Discord is prohibited to comply with the [Discord Community Guidlines](https://discord.com/guidelines)",
+		message: "The discussion of hacks in this Discord is prohibited to comply with the [Discord Community Guidelines](https://discord.com/guidelines)",
 	},
 	{
 		pattern:   `dumb|retard|idiot`,
@@ -153,7 +153,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `java.*(download|runtime|environment)`,
-		message: "[Downloads for Java Run](https://www.java.com/download/)",
+		message: "[Downloads for Java Runtime Environment](https://www.java.com/download/)",
 	},
 	{
 		pattern: `how.+(mine|auto\s*mine)`,
