@@ -32,15 +32,15 @@ var nightlies = "https://impactclient.net/ImpactInstaller.<EXT>?nightlies=true"
 var replies = []Reply{
 	{
 		pattern: `forge`,
-		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)",
+		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)\nBaritone 1.16 for Forge can be downloaded from [here](https://github.com/cabaletta/baritone/releases/download/v1.6.1/baritone-standalone-forge-1.6.1.jar)",
 	},
 	{
 		pattern: `faq|question`,
 		message: "[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)",
 	},
 	{
-		pattern: `defender|virus|mcafee|norton|trojan`,
-		message: "[Please read this thread regarding Impact being flagged by anitviruses](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
+		pattern: `defender|virus|mcafee|norton|trojan|rat`,
+		message: "[Please read this thread regarding Impact being flagged by antiviruses](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
 		pattern: `tutorial`,
@@ -62,7 +62,7 @@ var replies = []Reply{
 		pattern:      `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
 		unless:       `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)|multimc`,
 		excludeRoles: []Role{Donator},
-		message:      "[Direct download link after adfly](https://impactclient.net/?brady-money-grubbing-completed=true)",
+		message:      "[Direct download link after AdFly](https://impactclient.net/?brady-money-grubbing-completed=true)",
 	},
 	{
 		pattern:   `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
@@ -99,11 +99,11 @@ var replies = []Reply{
 	},
 	{
 		pattern: `opti\s*fine`,
-		message: "Use the installer to add OptiFine to Impact! [Text instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
+		message: "Use the installer to add OptiFine to Impact: [Instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
 	},
 	{
 		pattern: `macros?`,
-		message: "Macros are in-game chat commands, they can be accessed in-game by clicking on the Impact button then Macros.",
+		message: "Macros are in-game chat commands, they can be accessed in-game by clicking on the Impact button, then Macros.",
 	},
 	{
 		pattern: `change(\s*logs?|s)`,
@@ -111,7 +111,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `hack(s|ing|er|client)?`,
-		message: "Please do not discuss hacks in this Discord.",
+		message: "The discussion of hacks in this Discord is prohibited to comply with the [Discord Community Guidlines](https://discord.com/guidelines)",
 	},
 	{
 		pattern:   `dumb|retard|idiot`,
@@ -126,7 +126,7 @@ var replies = []Reply{
 	},
 	{
 		pattern:      `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
-		message:      "1.15.2 support is now out! Download the newest installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
+		message:      "1.15.2 has been released! Download the newest installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		excludeRoles: []Role{Donator},
 	},
 	{
@@ -153,7 +153,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `java.*(download|runtime|environment)`,
-		message: "Java download: https://www.java.com/download/",
+		message: "[Downloads for Java Run](https://www.java.com/download/)",
 	},
 	{
 		pattern: `how.+(mine|auto\s*mine)`,
@@ -161,14 +161,14 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
-		message: "Limited progress has strarted on the 1.16 relase, but there is currently no ETA. A message will be posted in <#" + announcements + "> when nightly builds are available.",
+		message: "Limited progress has started on the 1.16 release, but there is currently no ETA. A message will be posted in <#" + announcements + "> when nightly builds are available.",
 	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
 		message: "Impact for older versions is no longer availible to comply with Mojang's EULA.",
 	},
 	{
-		pattern: `modpack|mods`,
-		message: "Impact is generally incompatible with modpacks.",
+		pattern: `modpack`,
+		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them.",
 	},
 }
