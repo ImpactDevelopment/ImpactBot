@@ -39,7 +39,7 @@ var replies = []Reply{
 		message: "[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)",
 	},
 	{
-		pattern: `defender|virus|mcafee|norton|trojan|rat`,
+		pattern: `defender|virus|mcafee|norton|trojan|\srat`,
 		message: "[Please read this thread regarding Impact being flagged by antiviruses](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
