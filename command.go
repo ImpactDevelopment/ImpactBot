@@ -140,6 +140,12 @@ var Commands = []Command{
 		Usage:       []string{""},
 		Handler:     unstupid,
 	},
+	{
+		Name:        "funny",
+		Description: "didnt laugh",
+		Usage:       []string{""},
+		Handler:     handleFunny,
+	},
 }
 
 func init() {
