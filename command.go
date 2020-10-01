@@ -142,6 +142,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "funny",
+		Aliases:     []string{"unfunny"},
 		Description: "didnt laugh",
 		Usage:       []string{""},
 		Handler:     handleFunny,
