@@ -171,4 +171,8 @@ var replies = []Reply{
 		pattern: `modpack`,
 		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them.",
 	},
+	{
+		pattern: `branta|cool|sexy|big dick`,
+		message: "Hell yeah Branta's sexy as fuck we trade feet pics all the time, his dicks also fucking huge his really cool github is [this](https://github.com/AfkBranta)",
+	},
 }
