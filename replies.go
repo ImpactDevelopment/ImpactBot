@@ -43,7 +43,7 @@ var replies = []Reply{
 		message: "[Please read this thread regarding Impact being flagged by antiviruses](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
-		pattern: `tutorial`,
+		pattern: `tutorial|(impact|install|download).*(on|for) (windows|linux|mac)`,
 		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 	},
 	{
