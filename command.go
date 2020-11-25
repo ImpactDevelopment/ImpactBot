@@ -34,6 +34,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "tempmute",
+		Aliases:     []string{"tm"},
 		Description: "Mute someone temporarily, optionally from a specific channel",
 		Usage:       []string{"@user reason", "@user #channel reason", "#channel @user reason"},
 		RoleNeeded:  &Support,
@@ -41,6 +42,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "mute",
+		Aliases:     []string{"m"},
 		Description: "Mute someone permanently, optionally from a specific channel",
 		Usage:       []string{"@user reason", "@user #channel reason", "#channel @user reason"},
 		RoleNeeded:  &Moderator,
@@ -48,6 +50,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "unmute",
+		Aliases:     []string{"um"},
 		Description: "Unmute someone, either server-wide, from a specific channel, or remove all mutes",
 		Usage:       []string{"@user", "@user #channel", "@user all"},
 		RoleNeeded:  &Moderator,
@@ -69,7 +72,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "rules",
-		Aliases:     []string{"rule"},
+		Aliases:     []string{"rule", "r"},
 		Description: "Display the rules or a specific rule. Optionally @mention a user to tag them in the response.",
 		Usage: []string{
 			"",
@@ -91,12 +94,14 @@ var Commands = []Command{
 	*/
 	{
 		Name:        "cringe",
+		Aliases:     []string{"c"},
 		Description: "Generates a random cringe image",
 		Usage:       []string{""},
 		Handler:     handleCringe,
 	},
 	{
 		Name:        "addcringe",
+		Aliases:     []string{"ac"},
 		Description: "Adds a cringe photo to the collection",
 		Usage:       []string{"", "url"},
 		RoleNeeded:  &Support,
@@ -104,6 +109,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "delcringe",
+		Aliases:     []string{"dc"},
 		Description: "Removes a cringe photo from the collection",
 		Usage:       []string{"", "url"},
 		RoleNeeded:  &Moderator,
@@ -111,6 +117,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "genkey",
+		Aliases:     []string{"gk"},
 		Description: "Generates an Impact premium key",
 		Usage:       []string{"", "role [...roles]"},
 		RoleNeeded:  &SeniorMod,
