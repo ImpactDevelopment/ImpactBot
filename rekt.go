@@ -30,7 +30,13 @@ func evalRatelimit(author string) bool {
 
 	until := ratelimit[author]
 	if until < time.Now().UnixNano() { // defaults to 0 so this works properly
-		ratelimit[author] = time.Now().Add(RateLimit).UnixNano()
+		rateLimitDuration := RateLimit
+		if author == "162848980647018496" {
+			// berrely is pee pee poo poo
+			rateLimitDuration = 2 * time.Hour
+			// can only tempmute every 2 hours instead of every 5 minutes
+		}
+		ratelimit[author] = time.Now().Add(rateLimitDuration).UnixNano()
 		return true
 	}
 
