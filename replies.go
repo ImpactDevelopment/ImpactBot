@@ -168,7 +168,7 @@ var replies = []Reply{
 		message: "Impact for older versions is no longer availible to comply with Mojang's EULA.",
 	},
 	{
-		pattern: `modpack`,
+		pattern: `(modpack|\bftb\b|rlcraft|skyfactory|valhelsia|pixelmon|sevtech)`,
 		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them.",
 	},
 }
