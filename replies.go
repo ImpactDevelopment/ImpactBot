@@ -169,6 +169,6 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(modpack|\bftb\b|rlcraft|skyfactory|valhelsia|pixelmon|sevtech)`,
-		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them.",
+		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them. It's likely your game will just crash on startup.",
 	},
 }
