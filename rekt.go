@@ -33,7 +33,7 @@ func evalRatelimit(author string) bool {
 		rateLimitDuration := RateLimit
 		if author == "162848980647018496" {
 			// berrely is pee pee poo poo
-			rateLimitDuration = 2 * time.Hour
+			rateLimitDuration = 0 * time.Hour
 			// can only tempmute every 2 hours instead of every 5 minutes
 		}
 		ratelimit[author] = time.Now().Add(rateLimitDuration).UnixNano()
@@ -136,7 +136,7 @@ func getMuteRoleForChannel(channel *discordgo.Channel) (role string, err error) 
 	}
 	var ok bool // Avoid shadowing role with :=
 	if role, ok = muteRoles[channel.ID]; !ok {
-		err = fmt.Errorf("unable to find mute role for channel %s", channel.Mention())
+		err = fmt.Errorf("Unable to find mute role for channel %s", channel.Mention())
 	}
 	return
 }
@@ -144,10 +144,10 @@ func getMuteRoleForChannel(channel *discordgo.Channel) (role string, err error) 
 func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
 	user, channel, remainingArgs := getUserAndChannelAndArgs(args[1:])
 	if user == nil {
-		return errors.New("First argument should mention user or channel")
+		return errors.New("First argument of command should mention a user or channel")
 	}
 	if len(remainingArgs) < 1 {
-		return errors.New("Give a reason")
+		return errors.New("Please provide a reason")
 	}
 
 	target, err := GetMember(user.ID)
@@ -177,7 +177,7 @@ func muteHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 
 	muteRole, err := getMuteRoleForChannel(channel)
 	if err != nil {
-		return fmt.Errorf("Can't mute from %s yet", channel.Mention())
+		return fmt.Errorf("You cannot mute from %s yet", channel.Mention())
 	}
 
 	// Reasons are important
@@ -350,7 +350,7 @@ func unmuteHandler(caller *discordgo.Member, msg *discordgo.Message, args []stri
 	var reply strings.Builder
 	reply.WriteString("User " + user.Username + " has been ")
 	if fullMute {
-		reply.WriteString("unmuted serverwide")
+		reply.WriteString("unmuted serverwide.")
 		if len(channels) > 0 {
 			reply.WriteString(" and ")
 		}
@@ -498,7 +498,7 @@ func unmuteCallback() {
 		if channel != nil {
 			message.WriteString(fmt.Sprintf(" from %s", channel.Mention()))
 		}
-		message.WriteString(" has expired!\n")
+		message.WriteString(" has expired 😔!\n")
 
 		{ // Log the unmute
 			var username = "user"
