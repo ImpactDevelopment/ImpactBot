@@ -171,4 +171,9 @@ var replies = []Reply{
 		pattern: `(modpack|\bftb\b|rlcraft|skyfactory|valhelsia|pixelmon|sevtech)`,
 		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them. It's likely your game will just crash on startup.",
 	},
+	{
+		pattern: `debian\s(10|buster)`,
+		message: "Impact requires Java 8 to function, which Debian removed from their repos in Debian 10 Buster. Another way to install Java 8 is on [the wiki](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Common-Issues-FAQ).",
+		onlyChannels: []string{help, betterHelp}, // cause debian probably gets discussed more than this problem is asked about
+	},
 }
