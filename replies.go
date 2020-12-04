@@ -173,7 +173,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `debian\s(10|buster)`,
-		message: "Impact requires Java 8 to function, which Debian removed from their repos in Debian 10 Buster. Another way to install Java 8 is on [the wiki](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Common-Issues-FAQ).",
+		message: "Impact requires Java 8 to function, which Debian removed from their repos in Debian 10 Buster. Another way to install Java 8 is on [the wiki](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Common-Issues-FAQ#my-game-crashes-with-exit-code-0).",
 		onlyChannels: []string{help, betterHelp}, // cause debian probably gets discussed more than this problem is asked about
 	},
 }
