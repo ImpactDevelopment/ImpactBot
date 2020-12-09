@@ -144,7 +144,7 @@ var replies = []Reply{
 		message: "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
 	},
 	{
-		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
+		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|\s)launcher))`,
 		message: "Impact does not support cracked launchers. You can attempt to use the unstable Forge version, but no further support will be provided.",
 	},
 	{
