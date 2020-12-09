@@ -172,7 +172,7 @@ var replies = []Reply{
 		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them. It's likely your game will just crash on startup.",
 	},
 	{
-		pattern: `((good)\s*(bots?|human))`,
+		pattern: `(good\s*(bot|human))`,
 		message: "thank you \*nuzzles*",
 	},
 }
