@@ -173,6 +173,6 @@ var replies = []Reply{
 	},
 	{
 		pattern: `good bot`,
-		message: "thank you *nuzzles*",
+		message: "tnyak yow *nuwzzwes yoww necky wecky*",
 	},
 }
