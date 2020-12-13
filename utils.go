@@ -69,6 +69,11 @@ func outranks(user1, user2 *discordgo.Member) bool {
 	if role == nil {
 		return IsUserStaff(user1)
 	}
+	
+	if user1 == "96711543202254848" {
+		// pepsi is poo poo and outranks nobody
+		return false
+	}
 
 	return IsUserHigherThan(user1, *role)
 }
