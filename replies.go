@@ -99,7 +99,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `opti\s*fine`,
-		message: "Use the installer to add OptiFine to Impact: [Instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
+		message: "Use the winstawwew to add OptwiFwine to Iwpact: [Instwuwctwinyons](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
 	},
 	{
 		pattern: `macros?`,
