@@ -137,7 +137,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "stupid",
-		Description: "makes you so stupid impcat bot will ignore you",
+		Description: "makes you so stupid impact bot will ignore you",
 		Usage:       []string{""},
 		Handler:     stupid,
 	},
