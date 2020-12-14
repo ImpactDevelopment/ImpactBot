@@ -65,8 +65,7 @@ func onReady2(discord *discordgo.Session, ready *discordgo.Ready) {
 						panic(err)
 					}
 				}
-				// Disable the numbers meme for now
-				//meme(num, id)
+				meme(num, id)
 			}
 		}
 	}()
@@ -199,8 +198,7 @@ func wantHandler(caller *discordgo.Member, msg *discordgo.Message, args []string
 				return err
 			}
 
-			// Disable the numbers meme for now
-			//meme(newNick, person)
+			meme(newNick, person)
 		}
 		//noinspection SqlWithoutWhere
 		_, err = DB.Exec("DELETE FROM nicktrade")
