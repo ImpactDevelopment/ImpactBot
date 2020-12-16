@@ -4,7 +4,7 @@ const client = new Discord.Client();
 					client.on(
 							'message',
 		msg => {
-if   ( message.author.bot    )  {
+if   ( msg.author.bot    )  {
 	return;
 
 					}   else {
