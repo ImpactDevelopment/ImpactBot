@@ -66,8 +66,17 @@ var replies = []Reply{
 	},
 	{
 		pattern:   `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
+		// this unless is so it doesnt trigger twice if it matches in both this regex and the next
+		unless:    `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		onlyRoles: []Role{Donator},
 		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ").\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
+	},
+	{
+		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
+		// second part of unless (after col 72) is so it doesnt trigger twice if it matches in both this regex and the previous
+		unless:       `(just|forgot|how\s*long|i\s*donated|hours?|wait)|(installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect)`,
+		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds when they are available (**eventually including 1.16.3 nightly builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
+		excludeRoles: []Role{Donator},
 	},
 	{
 		pattern: `lite\s*loader`,
@@ -117,12 +126,6 @@ var replies = []Reply{
 		pattern:   `dumb|retard|idiot`,
 		message:   "Like the " + Weeb.Mention() + "s?",
 		onlyRoles: []Role{Weeb},
-	},
-	{
-		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
-		unless:       `just|forgot|how\s*long|i\s*donated|hours?|wait`,
-		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds when they are available (**eventually including 1.16.3 nightly builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
-		excludeRoles: []Role{Donator},
 	},
 	{
 		pattern:      `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
