@@ -130,12 +130,12 @@ var replies = []Reply{
 		excludeRoles: []Role{Donator},
 	},
 	{
-		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
+		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]16)`,
 		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ").\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		onlyRoles: []Role{Donator},
 	},
 	{
-		pattern:      `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
+		pattern:      `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]16)`,
 		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		excludeRoles: []Role{Donator},
 	},
@@ -161,7 +161,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
-		message: "Limited progress has started on the 1.16 release, but there is currently no ETA. A message will be posted in <#" + announcements + "> when nightly builds are available.",
+		message: "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
 	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
