@@ -32,18 +32,18 @@ var nightlies = "https://impactclient.net/ImpactInstaller.<EXT>?nightlies=true"
 var replies = []Reply{
 	{
 		pattern: `forge`,
-		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)\nBaritone 1.16 for Forge can be downloaded from [here](https://github.com/cabaletta/baritone/releases/download/v1.6.1/baritone-standalone-forge-1.6.1.jar)",
+		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)",
 	},
 	{
-		pattern: `faq|question`,
+		pattern: `faq`,
 		message: "[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)",
 	},
 	{
-		pattern: `defender|virus|mcafee|norton|trojan|\brat\b`,
-		message: "[Please read this thread regarding Impact being flagged by antiviruses](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
+		pattern: `defender|virus|mcafee|norton`,
+		message: "https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
-		pattern: `tutorial|(impact|install|download).*(on|for) (windows|linux|mac)`,
+		pattern: `tutorial`,
 		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 	},
 	{
@@ -51,23 +51,23 @@ var replies = []Reply{
 		message: "[Baritone settings list and documentation](https://baritone.leijurv.com/baritone/api/Settings.html#field.detail)",
 	},
 	{
-		pattern: `screenshot`,
+		pattern: `(take\sa?\s?)?screenshot`,
 		message: "[How to take a screenshot in Minecraft](https://www.minecraft.net/en-us/article/screenshotting-guide)",
 	},
 	{
-		pattern: `use\sbaritone|baritone\susage|baritone\scommand|[^u]\.b|goal|goto|path`,
-		message: "Please read the [Baritone usage guide](https://github.com/cabaletta/baritone/blob/master/USAGE.md)",
+		pattern: `use\sbaritone|baritone\susage|baritone\scommand|\.b|goal|goto|path`,
+		message: "[Baritone usage guide](https://github.com/cabaletta/baritone/blob/master/USAGE.md)",
 	},
 	{
 		pattern:      `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
 		unless:       `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)|multimc`,
 		excludeRoles: []Role{Donator},
-		message:      "[Direct download link after AdFly](https://impactclient.net/?brady-money-grubbing-completed=true)",
+		message:      "[Direct download link after adfly](https://impactclient.net/?brady-money-grubbing-completed=true)",
 	},
 	{
 		pattern:   `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
 		onlyRoles: []Role{Donator},
-		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ").\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
+		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ")",
 	},
 	{
 		pattern: `lite\s*loader`,
@@ -99,11 +99,11 @@ var replies = []Reply{
 	},
 	{
 		pattern: `opti\s*fine`,
-		message: "Use the installer to add OptiFine to Impact: [Instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
+		message: "Use the installer to add OptiFine to Impact! [Text instructions](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-OptiFine)",
 	},
 	{
 		pattern: `macros?`,
-		message: "Macros are in-game chat commands, they can be accessed in-game by clicking on the Impact button, then Macros.",
+		message: "Macros are in-game chat commands, they can be accessed in-game by clicking on the Impact button then Macros.",
 	},
 	{
 		pattern: `change(\s*logs?|s)`,
@@ -111,32 +111,32 @@ var replies = []Reply{
 	},
 	{
 		pattern: `hack(s|ing|er|client)?`,
-		message: "The discussion of hacks in this Discord is prohibited to comply with the [Discord Community Guidelines](https://discord.com/guidelines)",
+		message: "Please do not discuss hacks in this Discord.",
 	},
 	{
 		pattern:   `dumb|retard|idiot`,
-		message:   "Like the " + Weeb.Mention() + "s?",
-		onlyRoles: []Role{Weeb},
+		message:   "Like the <@&612744883467190275>s?",
+		onlyRoles: []Role{{"612744883467190275", "fucking weeb"}},
 	},
 	{
 		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		unless:       `just|forgot|how\s*long|i\s*donated|hours?|wait`,
-		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds when they are available (**eventually including 1.16.3 nightly builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
+		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds (**now including 1.15.2 builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
 		excludeRoles: []Role{Donator},
 	},
 	{
 		pattern:      `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
-		message:      "1.15.2 has been released! Download the newest installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
+		message:      "1.15.2 support is now out! Download the newest installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		excludeRoles: []Role{Donator},
 	},
 	{
 		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
-		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ").\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
+		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ")",
 		onlyRoles: []Role{Donator},
 	},
 	{
 		pattern:      `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)`,
-		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.\nYou can download the normal installer [here](https://impactclient.net/?brady-money-grubbing-completed=true).",
+		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.",
 		excludeRoles: []Role{Donator},
 	},
 	{
@@ -149,30 +149,22 @@ var replies = []Reply{
 	},
 	{
 		pattern: `(impact|install|use).*(wiki|spammer|multimc)`,
-		message: "[Impact Wiki](https://github.com/ImpactDevelopment/ImpactIssues/wiki)",
+		message: "Impact Wiki: https://github.com/ImpactDevelopment/ImpactIssues/wiki",
 	},
 	{
 		pattern: `java.*(download|runtime|environment)`,
-		message: "[Downloads for Java Runtime Environment](https://www.java.com/download/)",
+		message: "Java download: https://www.java.com/download/",
 	},
 	{
 		pattern: `how.+(mine|auto\s*mine)`,
-		message: "You can mine a specific type of block(s) by typing `#mine [number of blocks to mine] <ID> [<ID>]` in chat.\nYou can find a list of block ID names [here](https://www.digminecraft.com/lists/)",
+		message: "You can mine a specific type of block(s) by typing `#mine <ID> [<ID>]` in chat.\nYou can find a list of block ID names [here](https://www.digminecraft.com/lists/)",
 	},
 	{
 		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
-		message: "Limited progress has started on the 1.16 release, but there is currently no ETA. A message will be posted in <#" + announcements + "> when nightly builds are available.",
+		message: "1.16 has been released to donors! Donators can install 1.16 builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.",
 	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
 		message: "Impact for older versions is no longer availible to comply with Mojang's EULA.",
-	},
-	{
-		pattern: `(modpack|\bftb\b|rlcraft|skyfactory|valhelsia|pixelmon|sevtech)`,
-		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them. It's likely your game will just crash on startup.",
-	},
-	{
-		pattern: `good bot`,
-		message: "tnyak yow *nuwzzwes yoww necky wecky*",
 	},
 }
