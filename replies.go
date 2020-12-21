@@ -40,11 +40,11 @@ var replies = []Reply{
 	},
 	{
 		pattern: `defender|virus|mcafee|norton|trojan|\brat\b`,
-		message: "[Please read this thread regarding Impact being flagged by antiviruses](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
+		message: "[FAQ: My anitvirus says the installer is a virus! Is it a virus?](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after AdFly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
 		pattern: `tutorial|(impact|install|download).*(on|for) (windows|linux|mac)`,
-		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
+		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=9IV_NC377pg)\n[macOS](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 	},
 	{
 		pattern: `baritone\ssetting`,
@@ -60,7 +60,7 @@ var replies = []Reply{
 	},
 	{
 		pattern:      `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
-		unless:       `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]15)|multimc`,
+		unless:       `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]16)|multimc`,
 		excludeRoles: []Role{Donator},
 		message:      "[Direct download link after AdFly](https://impactclient.net/?brady-money-grubbing-completed=true)",
 	},
@@ -75,7 +75,7 @@ var replies = []Reply{
 		pattern:      `premium|donat|become\s*a?\s+don(at)?or|what\*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		// second part of unless (after col 72) is so it doesnt trigger twice if it matches in both this regex and the previous
 		unless:       `(just|forgot|how\s*long|i\s*donated|hours?|wait)|(installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect)`,
-		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds when they are available (**eventually including 1.16.3 nightly builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
+		message:      "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds when they are available (**now including 1.16.4 nightly builds!**), 1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or [login](https://impactclient.net/account) to get access to all the promised features",
 		excludeRoles: []Role{Donator},
 	},
 	{
