@@ -120,7 +120,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `hack(s|ing|er|client)?`,
-		message: "The discussion of hacks in this Discord is prohibited to comply with the [Discord Community Guidelines](https://discord.com/guidelines)",
+		message: "The discussion of \"hacks\" in this Discord server is prohibited to comply with the [Discord Community Guidelines](https://discord.com/guidelines)",
 	},
 	{
 		pattern:   `dumb|retard|idiot`,
@@ -129,17 +129,17 @@ var replies = []Reply{
 	},
 	{
 		pattern:      `(1\.15.*?(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support)|(fucking|get|where|need|asap|update|coming|support|release|impact|version|eta|when|out|support).*?1\.15)`,
-		message:      "1.15.2 has been released! [Download the newest installer](https://impactclient.net/?brady-money-grubbing-completed=true).",
+		message:      "1.15.2 has been released! [Download the latest installer](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		excludeRoles: []Role{Donator},
 	},
 	{
-		pattern:   `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]16)`,
+		pattern:   `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
 		message:   "You can install nightly builds of Impact using the **Impact Nightly Installer**: [EXE for Windows](" + strings.Replace(nightlies, "<EXT>", "exe", 1) + ") or [JAR for other platforms](" + strings.Replace(nightlies, "<EXT>", "jar", 1) + ").\n[Download the normal installer](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		onlyRoles: []Role{Donator},
 	},
 	{
-		pattern:      `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]16)`,
-		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.\n[Download the normal installer](https://impactclient.net/?brady-money-grubbing-completed=true).",
+		pattern:      `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
+		message:      "You can install nightly builds of Impact using the **Impact Nightly Installer*, available to donators. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.\n[Download the normal installer](https://impactclient.net/?brady-money-grubbing-completed=true).",
 		excludeRoles: []Role{Donator},
 	},
 	{
@@ -161,10 +161,6 @@ var replies = []Reply{
 	{
 		pattern: `how.+(mine|auto\s*mine)`,
 		message: "You can mine a specific type of block(s) by typing `#mine [number of blocks to mine] <ID> [<ID>]` in chat.\n[List of block ID names](https://www.digminecraft.com/lists/)",
-	},
-	{
-		pattern: `(1\.16.*?(update|coming|support|release|impact|version|eta|when|out|support)|(update|coming|support|release|impact|version|eta|when|out|support).*?1\.16)`,
-		message: "You can install nightly builds of Impact using the **Impact Nightly Installer**. Login into the [dashboard](https://impactclient.net/account) then download the nightly installer.\n[Download the normal installer](https://impactclient.net/?brady-money-grubbing-completed=true).",
 	},
 	{
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
