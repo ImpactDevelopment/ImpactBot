@@ -176,7 +176,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `good\s*bot`,
-		message: "I am a bot, and am devoid of feeling any emotions. Your response means nothing to me.",
+		message: "tnyak yow *nuwzzwes yoww necky wecky*",
 	},
 	{
 		pattern: `((anti(-|\s*)(kb|knockback))|velocity)`,
