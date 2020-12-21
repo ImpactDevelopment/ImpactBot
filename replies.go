@@ -180,7 +180,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `((anti(-|\s*)(kb|knockback))|velocity)`,
-		message: "**Velocity**, also known as **Anti-knockback**, is a module under "Movement" that prevents the player from taking knockback.",
+		message: "**Velocity**, also known as **Anti-knockback**, is a module under \"Movement\" that prevents the player from taking knockback.",
 	},
 	{
 		pattern: `(gui|r(-|\s)shift|module|(open|close|show|hide)\s*impact)`,
