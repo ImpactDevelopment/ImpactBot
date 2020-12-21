@@ -144,7 +144,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `schematics?`,
-		message: "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
+		message: "Schematic file **MUST** be made in a 1.12.2 world or prior.\n1) Place the .schematic file into `.minecraft/schematics`.\n2) Ensure all the blocks are in your hotbar.\n3) Type `#build name.schematic`.",
 	},
 	{
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
