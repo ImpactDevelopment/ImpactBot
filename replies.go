@@ -175,7 +175,16 @@ var replies = []Reply{
 		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them. It's likely your game will just crash on startup.",
 	},
 	{
-		pattern: `good bot`,
+		pattern: `good\s*bot`,
 		message: "tnyak yow *nuwzzwes yoww necky wecky*",
 	},
+	{
+		pattern: `((anti(-|\s*)(kb|knockback))|velocity)`,
+		message: "**Velocity**, also known as **Anti-knockback**, is a module under \"Movement\" that prevents the player from taking knockback.",
+	},
+	{
+		pattern: `(gui|r(-|\s)shift|module|(open|close|show|hide)\s*impact)`,
+		message: "To open or close the Impact GUI, press the `rshift` key, located below `enter`.",
+	},
 }
+
