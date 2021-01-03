@@ -32,7 +32,7 @@ var nightlies = "https://impactclient.net/ImpactInstaller.<EXT>?nightlies=true"
 var replies = []Reply{
 	{
 		pattern: `forge`,
-		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)\nDownload standalone Baritone from [GitHub](https://github.com/cabaletta/baritone/releases).",
+		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)\nStandalone Baritone supports Forge on various versions - Download from [GitHub](https://github.com/cabaletta/baritone/releases).",
 	},
 	{
 		pattern: `faq|question`,
@@ -44,7 +44,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `tutorial|(impact|install|download).*(on|for) (windows|linux|mac)`,
-		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=9IV_NC377pg)\n[macOS](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
+		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=9IV_NC377pg)\n[macOS](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[GNU/Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 	},
 	{
 		pattern: `baritone\ssetting`,
