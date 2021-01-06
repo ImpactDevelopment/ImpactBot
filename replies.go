@@ -91,72 +91,72 @@ var replies = []Reply{
 		pattern: `lite\s*loader`,
 		message: "[LiteLoader tutorial](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Adding-LiteLoader)",
 	},
-	{
+	{ // Links to Impactt website
 		pattern: `(web\s?)?(site|page)`,
 		message: "[Impact Website](https://impactclient.net)",
 	},
-	{
+	{ // GitHub repo for issues
 		pattern: `issue|bug|crash|error|suggest(ion)?s?|feature|enhancement`,
 		message: "Use the [GitHub repo](https://github.com/ImpactDevelopment/ImpactIssues/issues) to report issues/suggestions!",
 	},
-	{
+	{ // Non-donator help redirect
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + help + "> channel!",
 		excludeRoles:    []Role{Donator},
 		excludeChannels: []string{help, betterHelp},
 	},
-	{
+	{ // Donator help redirect
 		pattern:         `help|support`,
 		message:         "Switch to the <#" + betterHelp + "> channel!",
 		onlyRoles:       []Role{Donator},
 		excludeChannels: []string{help, betterHelp},
 	},
-	{
+	{ // What does Franky do????
 		pattern: `what(\sdoes|\sis|s|'s)?\s+franky`,
 		message: "[It does exactly what you think it does.](https://youtu.be/_FzInOheiRw)",
 	},
-	{
+	{ // Information on macros
 		pattern: `macros?`,
 		message: "Macros are in-game chat commands, they can be accessed in-game by clicking on the Impact button, then Macros.",
 	},
-	{
+	{ // Links to the Impact changelogs
 		pattern: `change(\s*logs?|s)`,
 		message: "[Changelog](https://impactclient.net/changelog)",
 	},
-	{
+	{ // Notice about "hacking"
 		pattern: `hack(s|ing|er|client)?`,
-		message: "The discussion of hacks in this Discord is prohibited to comply with the [Discord Community Guidelines](https://discord.com/guidelines)",
+		message: "**Impact is not a hacked client**, it is designed as an utility mod for anarchy servers. Support will not be provided to users who utilise Impact on servers that do not allow it. Please also note that the discussion of hacks in this Discord is prohibited to comply with the [Discord Community Guidelines](https://discord.com/guidelines)",
 	},
-	{
+	{ // Weeb moment
 		pattern:   `dumb|retard|idiot`,
 		message:   "Like the " + Weeb.Mention() + "s?",
 		onlyRoles: []Role{Weeb},
 	},
-	{
+	{ // Info on using schematics
 		pattern: `schematics?`,
 		message: "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
 	},
-	{
+	{ // Info on using cracked launchers
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
 		message: "Impact does not support cracked launchers. You can attempt to use the unstable Forge version, but no further support will be provided.",
 	},
-	{
+	{ // Link to the Impact wiki
 		pattern: `\b(impact\s*wiki|(setup|use)\s*spam(mer)?|faq)\b`,
 		message: "[Impact Wiki](https://github.com/ImpactDevelopment/ImpactIssues/wiki)",
 	},
-	{
+	{ // Downloads for JRE
 		pattern: `java.*(download|runtime|environment)`,
 		message: "[Downloads for Java Runtime Environment](https://www.java.com/download/)",
 	},
-	{
+	{ // How to use Impact's automine function
 		pattern: `how.+(mine|auto\s*mine)`,
 		message: "You can mine a specific type of block(s) by typing `#mine [number of blocks to mine] <ID> [<ID>]` in chat.\nYou can find a list of block ID names [here](https://www.digminecraft.com/lists/)",
 	},
-	{
+	{ // Older versions of Impact
 		pattern: `(impact.+(1\.8|1\.7))|((1\.8|1\.7).impact)`,
 		message: "Impact for older versions is no longer availible to comply with Mojang's EULA.",
 	},
-	{
+	{ // Information on using Impact with modpacks
 		pattern: `(modpack|\bftb\b|rlcraft|skyfactory|valhelsia|pixelmon|sevtech)`,
 		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them. It's likely your game will just crash on startup.",
 	},
@@ -173,3 +173,4 @@ var replies = []Reply{
 		message: "To open or close the Impact GUI, press the `rshift` key, located below `enter`.",
 	},
 }
+
