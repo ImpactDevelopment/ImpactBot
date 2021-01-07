@@ -37,11 +37,11 @@ var replies = []Reply{
 	},
 	{
 		pattern: `defender|virus|mcafee|norton|trojan|\brat\b`,
-		message: "[Please read this thread regarding Impact being flagged by antiviruses](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after adfly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
+		message: "[FAQ: My antivirus says the installer is a virus! Is it a virus?](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after AdFly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
 		pattern: `tutorial|(impact|install|download).*(on|for) (windows|linux|mac)`,
-		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=QP6CN-1JYYE)\n[Mac OSX](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
+		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=9IV_NC377pg)\n[macOS](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[GNU/Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 	},
 	{
 		pattern: `baritone\s*setting`,
@@ -60,7 +60,7 @@ var replies = []Reply{
 		// Unless it would be a better fit for another reply (e.g. not asking about premium)
 		unless: `(installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect)`,
 		message: "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds when they are available (**now including 1.16.4 nightly builds!**), " +
-			"1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #Donator-help (with faster and nicer responses). " +
+			"1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). " +
 			"Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or " +
 			"[login](https://impactclient.net/account) to get access to all the promised features",
 		excludeRoles: []Role{Donator},
@@ -85,7 +85,7 @@ var replies = []Reply{
 	},
 	{ // Install info for Forge
 		pattern: `\b(install.*impact.*forge|support.*forge)\b`,
-		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)\nBaritone 1.16 for Forge can be downloaded from [here](https://github.com/cabaletta/baritone/releases/download/v1.6.1/baritone-standalone-forge-1.6.1.jar)",
+		message: "Use the [installer](https://impactclient.net/) to install Forge (1.12.2 only)\nStandalone Baritone supports Forge on various versions - Download from [GitHub](https://github.com/cabaletta/baritone/releases).",
 	},
 	{ // Install info for LiteLoader
 		pattern: `lite\s*loader`,
@@ -125,7 +125,7 @@ var replies = []Reply{
 	},
 	{ // Notice about "hacking"
 		pattern: `hack(s|ing|er|client)?`,
-		message: "**Impact is not a hacked client**, it is designed as an utility mod for anarchy servers. Support will not be provided to users who utilise Impact on servers that do not allow it. Please also note that the discussion of hacks in this Discord is prohibited to comply with the [Discord Community Guidelines](https://discord.com/guidelines)",
+		message: "**Impact is not a hacked client**, it is designed as a utility mod (e.g. for anarchy servers).\nSupport will not be provided to users who utilise Impact on servers that do not allow it.\nPlease also note that the discussion of \"hacks\" in this Discord server is prohibited to comply with the [Discord Community Guidelines](https://discord.com/guidelines)",
 	},
 	{ // Weeb moment
 		pattern:   `dumb|retard|idiot`,
@@ -134,7 +134,7 @@ var replies = []Reply{
 	},
 	{ // Info on using schematics
 		pattern: `schematics?`,
-		message: "0) Schematic file **MUST** be made in a 1.12.2 world or prior. 1) Place the .schematic file into `.minecraft/schematics`. 2) Ensure all the blocks are in your hotbar. 3) Type `#build name.schematic`",
+		message: "Schematic file **MUST** be made in a 1.12.2 world or prior.\n1) Place the .schematic file into `.minecraft/schematics`.\n2) Ensure all the blocks are in your hotbar.\n3) Type `#build name.schematic`.",
 	},
 	{ // Info on using cracked launchers
 		pattern: `((crack|cracked) (launcher|account|game|minecraft))|(terramining|shiginima|(t(-|)launcher))`,
