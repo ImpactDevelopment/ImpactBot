@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"fmt"
 	"regexp"
 	"strings"
 )
@@ -17,14 +19,10 @@ type Reply struct {
 	notRegex        *regexp.Regexp
 }
 
-func init() {
-	for i := range replies {
-		replies[i].regex = regexp.MustCompile(replies[i].pattern)
-
-		if replies[i].unless != "" {
-			replies[i].notRegex = regexp.MustCompile(replies[i].unless)
-		}
-	}
+type currencyinfo struct {
+	Amount      int64  `json:"premium_amount"`
+	DisplayName string `json:"display_name"`
+	Symbol      string `json:"symbol"`
 }
 
 var nightlies = "https://impactclient.net/ImpactInstaller.<EXT>?nightlies=true"
@@ -59,7 +57,7 @@ var replies = []Reply{
 		pattern: `premium|donat|become\s*a?\s+don(at)?or|what\s*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		// Unless it would be a better fit for another reply (e.g. not asking about premium)
 		unless: `(installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect)`,
-		message: "If you donate $5 or more, you will receive early access to upcoming releases through nightly builds when they are available (**now including 1.16.4 nightly builds!**), " +
+		message: "If you donate **<stripe_currency_list>** (or more), you will receive early access to upcoming releases through nightly builds when they are available (**now including 1.16.4 nightly builds!**), " +
 			"1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). " +
 			"Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or " +
 			"[login](https://impactclient.net/account) to get access to all the promised features",
@@ -174,3 +172,61 @@ var replies = []Reply{
 	},
 }
 
+func init() {
+	// Fetch stripe info from Impact API, since we need to know how much users need to donate for premium
+	amountPattern := regexp.MustCompile(`<stripe_currency_list>`)
+	amountList := "<error fetching currency info>"
+	currencies, err := getCurrencyInfo()
+	if err != nil {
+		println("Error getting Stripe info from Impact API: " + err.Error())
+	} else {
+		amountList = getCurrencyAmountString(currencies)
+	}
+
+	// Compile all the regex patterns, and replace any template strings
+	for i := range replies {
+		replies[i].regex = regexp.MustCompile(replies[i].pattern)
+
+		if replies[i].unless != "" {
+			replies[i].notRegex = regexp.MustCompile(replies[i].unless)
+		}
+
+		if amountPattern.MatchString(replies[i].message) {
+			replies[i].message = amountPattern.ReplaceAllLiteralString(replies[i].message, amountList)
+		}
+	}
+}
+
+func getCurrencyAmountString(currencies map[string]currencyinfo) string {
+	const separator = ", "
+	var currencyList = ""
+	for id, currency := range currencies {
+		if currencyList != "" {
+			currencyList += separator
+		}
+		var amount float64
+		amount = float64(currency.Amount) / 100
+		currencyList += fmt.Sprintf("%s%0.2f %s", currency.Symbol, amount, strings.ToUpper(id))
+	}
+	index := strings.LastIndex(currencyList, separator)
+	if index > -1 {
+		currencyList = currencyList[0:index] + " or " + currencyList[index+len(separator):]
+	}
+
+	return currencyList
+}
+
+func getCurrencyInfo() (map[string]currencyinfo, error) {
+	str, err := get("https://api.impactclient.net/v1/stripe/info")
+	if err != nil {
+		return nil, err
+	}
+	var info struct {
+		Currencies map[string]currencyinfo `json:"currencies"`
+	}
+	err = json.Unmarshal([]byte(str), &info)
+	if err != nil {
+		return nil, err
+	}
+	return info.Currencies, nil
+}
