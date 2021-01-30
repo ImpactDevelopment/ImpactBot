@@ -26,7 +26,7 @@ type currencyinfo struct {
 }
 
 var nightlies = "https://impactclient.net/ImpactInstaller.<EXT>?nightlies=true"
-var installer = "https://impactclient.net/?brady-money-grubbing-completed=true"
+var installer = "https://impactclient.net/download"
 
 var replies = []Reply{
 	{
@@ -68,7 +68,7 @@ var replies = []Reply{
 		// Unless it would be a better match for another reply (e.g. asking about premium, optifine or forge)
 		unless:       `nightly|pre[- ]*release|beta|alpha|alfa|((download|get|where).*1[.]16)`,
 		excludeRoles: []Role{Donator},
-		message:      "Download the installer [here](" + installer + ") (direct download link without AdFly)",
+		message:      "Download the installer [here](" + installer + ")",
 	},
 	{ // Installer download for donators
 		pattern:   `installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect`,
