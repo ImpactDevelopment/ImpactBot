@@ -30,7 +30,7 @@ var installer = "https://impactclient.net/download"
 
 var replies = []Reply{
 	{
-		pattern: `faq|question`,
+		pattern: `faq|question|tutorial`,
 		message: "[Setup/Install FAQ](https://github.com/impactdevelopment/impactclient/wiki/Setup-FAQ)\n[Usage FAQ](https://github.com/impactdevelopment/impactclient/wiki/Usage-FAQ)",
 	},
 	{
@@ -38,7 +38,7 @@ var replies = []Reply{
 		message: "[FAQ: My antivirus says the installer is a virus! Is it a virus?](https://github.com/ImpactDevelopment/ImpactIssues/wiki/Setup-FAQ#my-antivirus-says-the-installer-is-a-virus-is-it-a-virus)\n\n[Direct download link after AdFly](https://impactdevelopment.github.io/?brady-money-grubbing-completed=true)",
 	},
 	{
-		pattern: `tutorial|(impact|install|download).*(on|for) (windows|linux|mac)`,
+		pattern: `tutorial|(impact|install|download).*(windows|linux|mac)`,
 		message: "Tutorial videos for downloading and installing the client:\n[Windows](https://www.youtube.com/watch?v=9IV_NC377pg)\n[macOS](https://www.youtube.com/watch?v=BBO0v4eq95k)\n[GNU/Linux](https://www.youtube.com/watch?v=XPLvooJeQEI)\n",
 	},
 	{
