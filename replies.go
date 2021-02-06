@@ -57,7 +57,7 @@ var replies = []Reply{
 		pattern: `premium|donat|become\s*a?\s+don(at)?or|what\s*do\s*(you|i|u)\s*(get|unlock)|perks?`,
 		// Unless it would be a better fit for another reply (e.g. not asking about premium)
 		unless: `(installe?r?|mediafire|dire(c|k)+to?\s+(linko?|url|site|page)|ad\s?f\.?ly|(ad|u)\s?block|download|ERR_CONNECTION_ABORTED|evassmat|update|infect)`,
-		message: "If you donate **<stripe_currency_list>** (or more), you will receive early access to upcoming releases through nightly builds when they are available (**now including 1.16.4 nightly builds!**), " +
+		message: "If you donate **<stripe_currency_list>** (or more), you will receive early access to upcoming releases through nightly builds when they are available (**now including 1.16.5 nightly builds!**), " +
 			"1 premium mod (Ignite), a cape visible to other Impact users, a gold colored name in the Impact Discord Server, and access to #donator-help (with faster and nicer responses). " +
 			"Go on the [website](https://impactclient.net/#donate) to donate. You will also need to [register](https://impactclient.net/register) your account and/or " +
 			"[login](https://impactclient.net/account) to get access to all the promised features",
