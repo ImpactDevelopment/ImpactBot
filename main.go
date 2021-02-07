@@ -35,6 +35,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+	discord.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsGuildMembers | discordgo.IntentsAllWithoutPrivileged)
 	user, err := discord.User("@me")
 	if err != nil {
 		panic(err)
@@ -42,8 +43,6 @@ func init() {
 
 	myselfID = user.ID
 	log.Println("I am", myselfID)
-
-	discordgo.MakeIntent(discordgo.IntentsGuildMembers | discordgo.IntentsAllWithoutPrivileged)
 
 	discord.AddHandler(onUserJoin)
 	discord.AddHandler(onMessageSent)
