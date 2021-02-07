@@ -71,10 +71,10 @@ func main() {
 func onReady(discord *discordgo.Session, ready *discordgo.Ready) {
 	err := discord.UpdateStatusComplex(discordgo.UpdateStatusData{
 		IdleSince: nil,
-		Game: &discordgo.Game{
+		Activities: []*discordgo.Activity{{
 			Name: "the Impact Discord",
-			Type: discordgo.GameTypeWatching,
-		},
+			Type: 3,
+		}},
 		AFK:    false,
 		Status: "",
 	})
