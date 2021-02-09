@@ -52,7 +52,7 @@ func onMessageReactedTo(session *discordgo.Session, reaction *discordgo.MessageR
 
 func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 	msg := m.Message
-	if msg == nil || msg.Author == nil || msg.Type != discordgo.MessageTypeDefault {
+	if msg == nil || msg.Author == nil || (msg.Type != discordgo.MessageTypeDefault && msg.Type != discordgo.MessageTypeReply) {
 		return // wtf
 	}
 
