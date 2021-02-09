@@ -10,7 +10,7 @@ import (
 )
 
 var discordEmote = regexp.MustCompile(`<a?:[a-zA-Z0-9_]+:\d+>`)
-func emojiMsg(m *discordgo.Message, author *discordgo.Member){
+func emojiMsg(m *discordgo.Message){
 	if m.ChannelID != "808248247520985130" {
 		return
 	}
@@ -26,10 +26,6 @@ func emojiMsg(m *discordgo.Message, author *discordgo.Member){
 	log.Println("Stripped:", stripped)
 
 	if stripped != "" {
-		/*if IsUserStaff(author) {
-			resp(m.ChannelID, "you are on thin ice, i would kick you except you are staff")
-			return
-		}*/
 		err := discord.GuildMemberDeleteWithReason(m.GuildID, m.Author.ID, "Sending a non emoji message in the emoji-only channel")
 		if err != nil {
 			resp(m.ChannelID, "ERROR "+err.Error())
@@ -38,3 +34,9 @@ func emojiMsg(m *discordgo.Message, author *discordgo.Member){
 		resp(m.ChannelID, "User <@" + m.Author.ID + "> was kicked for sending https://discord.com/channels/208753003996512258/808248247520985130/"+m.ID+" because it has non emoji characters: `" + stripped + "`")
 	}
 }
+
+
+func onMessageEdited(session *discordgo.Session, m *discordgo.MessageUpdate) {
+	emojiMsg(m.Message)
+}
+

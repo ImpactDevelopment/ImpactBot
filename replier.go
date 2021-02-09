@@ -68,7 +68,7 @@ func onMessageSent(session *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if m.GuildID == impactServer {
 		memberSanityCheck(author)
-		emojiMsg(msg, author)
+		emojiMsg(msg)
 	}
 
 	// Unless we're being spoken to

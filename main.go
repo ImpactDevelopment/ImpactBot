@@ -55,6 +55,7 @@ func init() {
 	discord.AddHandler(onUserJoin3)
 	discord.AddHandler(onReady2)
 	discord.AddHandler(onGuildMemberUpdate)
+	discord.AddHandler(onMessageEdited)
 }
 
 func main() {
