@@ -28,7 +28,6 @@ func emojiMsg(m *discordgo.Message){
 	if stripped != "" {
 		err := discord.GuildMemberDeleteWithReason(m.GuildID, m.Author.ID, "Sending a non emoji message in the emoji-only channel")
 		if err != nil {
-			resp(m.ChannelID, "ERROR "+err.Error())
 			return
 		}
 		resp(m.ChannelID, "User <@" + m.Author.ID + "> was kicked for sending https://discord.com/channels/208753003996512258/808248247520985130/"+m.ID+" because it has non emoji characters: `" + stripped + "`")
