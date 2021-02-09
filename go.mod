@@ -12,8 +12,8 @@ require (
 	github.com/lib/pq v1.2.0
 	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/subosito/gotenv v1.2.0
+	github.com/tmdvs/Go-Emoji-Utils v1.1.0
 	github.com/writeas/go-strip-markdown v2.0.1+incompatible
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
-	golang.org/x/net v0.0.0-20200202094626-16171245cfb2
 	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
 )
