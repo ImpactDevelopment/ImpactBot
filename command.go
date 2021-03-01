@@ -65,6 +65,7 @@ var Commands = []Command{
 	},
 	{
 		Name:        "ban",
+		Aliases:     []string{"rm"},
 		Description: "Ban someone from the server",
 		Usage:       []string{"@user reason"},
 		RoleNeeded:  &Moderator,
