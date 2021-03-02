@@ -158,9 +158,7 @@ var replies = []Reply{
 		pattern: `(modpack|\bftb\b|rlcraft|skyfactory|valhelsia|pixelmon|sevtech)`,
 		message: "Impact is generally incompatible with modpacks and support will not be provided if you encounter bugs with them. It's likely your game will just crash on startup.",
 	},
-	{
 
-	},
 	{
 		pattern: `((anti(-|\s*)(kb|knockback))|velocity)`,
 		message: "**Velocity**, also known as **Anti-knockback**, is a module under \"Movement\" that prevents the player from taking knockback.",
