@@ -204,7 +204,7 @@ func init() {
 		"mmrreeeoooowww~",
 		":3",
 		"uwu~")
-	rand.Seed(time.Now().Unix())
+	fmt.Println(time.Now().UTC().UnixNano())
 }
 
 func getCurrencyAmountString(currencies map[string]currencyinfo) string {
