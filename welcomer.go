@@ -8,6 +8,7 @@ import (
 )
 
 func onUserJoin(s *discordgo.Session, m *discordgo.GuildMemberAdd) {
+	log.Println("On user join")
 	if m.GuildID != impactServer {
 		return
 	}

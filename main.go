@@ -35,6 +35,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+	discord.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsGuildMembers | discordgo.IntentsAllWithoutPrivileged)
 	user, err := discord.User("@me")
 	if err != nil {
 		panic(err)
@@ -42,8 +43,6 @@ func init() {
 
 	myselfID = user.ID
 	log.Println("I am", myselfID)
-
-	discordgo.MakeIntent(discordgo.IntentsGuildMembers | discordgo.IntentsAllWithoutPrivileged)
 
 	discord.AddHandler(onUserJoin)
 	discord.AddHandler(onMessageSent)
@@ -56,6 +55,7 @@ func init() {
 	discord.AddHandler(onUserJoin3)
 	discord.AddHandler(onReady2)
 	discord.AddHandler(onGuildMemberUpdate)
+	discord.AddHandler(onMessageEdited)
 }
 
 func main() {
@@ -71,10 +71,10 @@ func main() {
 func onReady(discord *discordgo.Session, ready *discordgo.Ready) {
 	err := discord.UpdateStatusComplex(discordgo.UpdateStatusData{
 		IdleSince: nil,
-		Game: &discordgo.Game{
+		Activities: []*discordgo.Activity{{
 			Name: "the Impact Discord",
-			Type: discordgo.GameTypeWatching,
-		},
+			Type: 3,
+		}},
 		AFK:    false,
 		Status: "",
 	})

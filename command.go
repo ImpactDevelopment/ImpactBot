@@ -81,17 +81,15 @@ var Commands = []Command{
 		},
 		Handler: rulesHandler,
 	},
-	/*
-		{
-			Name:        "want",
-			Description: "want a nick",
-			Usage: []string{
-				"<number>",
-			},
-			RoleNeeded: &Support,
-			Handler:    wantHandler,
+	{
+		Name:        "want",
+		Description: "want a nick",
+		Usage: []string{
+			"<number>",
 		},
-	*/
+		RoleNeeded: &Support,
+		Handler:    wantHandler,
+	},
 	{
 		Name:        "cringe",
 		Aliases:     []string{"c"},
