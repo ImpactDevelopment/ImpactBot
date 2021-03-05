@@ -1,10 +1,7 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"strings"
-
 	"github.com/bwmarrin/discordgo"
 )
 
