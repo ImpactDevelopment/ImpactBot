@@ -37,7 +37,8 @@ var (
 	InVoice   = Role{"677329885680762904", "In Voice"}
 	Stupid    = Role{"743903534160019476", "Stupid"}
 	Weeb      = Role{"612744883467190275", "weeb"}
-	Givaway   = Role{"698619050833477633", "Givaway Ping"}
+	Giveaway  = Role{"698619050833477633", "Giveaway Ping"}
+	Chess     = Role{"816750980807786546", "Chess"}
 )
 
 type Role struct {
