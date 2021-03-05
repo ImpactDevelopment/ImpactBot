@@ -69,7 +69,6 @@ func outranks(user1, user2 *discordgo.Member) bool {
 	if role == nil {
 		return IsUserStaff(user1)
 	}
-	
 	return IsUserHigherThan(user1, *role)
 }
 
