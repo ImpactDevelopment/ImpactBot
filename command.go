@@ -153,6 +153,18 @@ var Commands = []Command{
 		Usage:       []string{""},
 		Handler:     handleFunny,
 	},
+	{
+		Name:        "chess",
+		Description: "chess mode! gives you chess role",
+		Usage:       []string{""},
+		Handler:     chess,
+	},
+	{
+		Name:        "unchess",
+		Description: "no more chess",
+		Usage:       []string{""},
+		Handler:     unchess,
+	},
 }
 
 func init() {
