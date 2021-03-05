@@ -21,7 +21,6 @@ func unchess(caller *discordgo.Member, msg *discordgo.Message, args []string) er
 	if err != nil {
 		return err
 	}
-	discord.MessageReactionAdd(msg.ChannelID, msg.ID, check)
-
+	
 	return discord.MessageReactionAdd(msg.ChannelID, msg.ID, check)
 }
