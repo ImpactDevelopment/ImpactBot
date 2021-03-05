@@ -10,7 +10,7 @@ func chess(caller *discordgo.Member, msg *discordgo.Message, args []string) erro
 	if err != nil {
 		return err
 	}
-	return discord.MessageReactionAdd(msg.ChannelID, msg.ID, check)
+	discord.MessageReactionAdd(msg.ChannelID, msg.ID, check)
 
 	return resp(msg.ChannelID, fmt.Sprintf("User has been given chess role!", caller.User.Username, caller.User.Discriminator))
 }
