@@ -5,7 +5,7 @@ import (
 )
 
 func giveaway(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	err := discord.GuildMemberRoleAdd(impactServer, caller.User.ID, Givaway.ID)
+	err := discord.GuildMemberRoleAdd(impactServer, caller.User.ID, Giveaway.ID)
 	if err != nil {
 		return err
 	}
@@ -13,7 +13,7 @@ func giveaway(caller *discordgo.Member, msg *discordgo.Message, args []string) e
 }
 
 func ungiveaway(caller *discordgo.Member, msg *discordgo.Message, args []string) error {
-	err := discord.GuildMemberRoleRemove(impactServer, caller.User.ID, Givaway.ID)
+	err := discord.GuildMemberRoleRemove(impactServer, caller.User.ID, Giveaway.ID)
 	if err != nil {
 		return err
 	}
