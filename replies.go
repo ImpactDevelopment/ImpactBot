@@ -3,8 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"regexp"
 	"strings"
+	"time"
 )
 
 type Reply struct {
@@ -160,7 +162,7 @@ var replies = []Reply{
 	},
 	{
 		pattern: `good\s*bot`,
-		message: "tnyak yow *nuwzzwes yoww necky wecky*",
+		message: nya[rand.Intn(len(nya))], //does this work? i have no idea, im lazy to compile it so someone else pls do it for me ty :>
 	},
 	{
 		pattern: `((anti(-|\s*)(kb|knockback))|velocity)`,
@@ -195,6 +197,14 @@ func init() {
 			replies[i].message = amountPattern.ReplaceAllLiteralString(replies[i].message, amountList)
 		}
 	}
+	nya := make([]string, 0)
+	nya = append(nya,
+		"thank you *nuwzzwes yoww necky wecky*",
+		"*purrs*",
+		"mmrreeeoooowww~",
+		":3",
+		"uwu~")
+	fmt.Println(time.Now().UTC().UnixNano())
 }
 
 func getCurrencyAmountString(currencies map[string]currencyinfo) string {
