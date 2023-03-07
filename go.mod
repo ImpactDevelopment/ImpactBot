@@ -14,6 +14,5 @@ require (
 	github.com/subosito/gotenv v1.2.0
 	github.com/tmdvs/Go-Emoji-Utils v1.1.0
 	github.com/writeas/go-strip-markdown v2.0.1+incompatible
-	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad // indirect
-	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
+	golang.org/x/crypto v0.1.0 // indirect
 )
